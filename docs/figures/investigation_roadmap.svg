@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" role="img" aria-labelledby="title desc">
+  <title id="title">Roadmap of the Othello-GPT Investigation</title>
+  <desc id="desc">A vertical roadmap from move history to hidden representation, board-state evidence, causal interventions, information flow, components, and candidate circuit.</desc>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --ink: #172033;
+      --muted: #536171;
+      --stroke: #94a3b8;
+      --accent: #0f766e;
+      --accent-soft: #ccfbf1;
+      --warn: #f59e0b;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111827;
+        --card: #1f2937;
+        --ink: #f8fafc;
+        --muted: #cbd5e1;
+        --stroke: #64748b;
+        --accent: #5eead4;
+        --accent-soft: #134e4a;
+        --warn: #fbbf24;
+      }
+    }
+    .title { font: 700 21px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+    .node { fill: var(--card); stroke: var(--stroke); stroke-width: 1.5; rx: 8; }
+    .node-accent { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; rx: 8; }
+    .label { font: 650 17px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+    .note { font: 500 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--muted); }
+    .claim { font: 600 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--warn); }
+    .arrow { stroke: var(--accent); stroke-width: 3.5; stroke-linecap: round; }
+  </style>
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+  <rect width="760" height="560" fill="var(--bg)" rx="14"/>
+  <text x="380" y="42" text-anchor="middle" class="title">Roadmap of the Investigation</text>
+  <text x="380" y="66" text-anchor="middle" class="claim">Not a claim that this exact circuit has already been established</text>
+
+  <g transform="translate(210 92)">
+    <rect class="node" x="0" y="0" width="340" height="48"/>
+    <text class="label" x="170" y="30" text-anchor="middle">Move history</text>
+
+    <line class="arrow" x1="170" y1="55" x2="170" y2="82" marker-end="url(#arrowhead)"/>
+    <rect class="node-accent" x="0" y="90" width="340" height="58"/>
+    <text class="label" x="170" y="114" text-anchor="middle">Hidden representation</text>
+    <text class="note" x="170" y="134" text-anchor="middle">vectors inside the Transformer</text>
+
+    <line class="arrow" x1="170" y1="155" x2="170" y2="182" marker-end="url(#arrowhead)"/>
+    <rect class="node" x="0" y="190" width="340" height="58"/>
+    <text class="label" x="170" y="214" text-anchor="middle">Board-state evidence</text>
+    <text class="note" x="170" y="234" text-anchor="middle">can we read the board?</text>
+
+    <line class="arrow" x1="170" y1="255" x2="170" y2="282" marker-end="url(#arrowhead)"/>
+    <rect class="node" x="0" y="290" width="340" height="58"/>
+    <text class="label" x="170" y="314" text-anchor="middle">Causal interventions</text>
+    <text class="note" x="170" y="334" text-anchor="middle">does changing it change logits?</text>
+
+    <line class="arrow" x1="170" y1="355" x2="170" y2="382" marker-end="url(#arrowhead)"/>
+    <rect class="node" x="0" y="390" width="340" height="48"/>
+    <text class="label" x="170" y="420" text-anchor="middle">Information flow</text>
+
+    <line class="arrow" x1="170" y1="445" x2="170" y2="472" marker-end="url(#arrowhead)"/>
+    <rect class="node" x="-150" y="480" width="280" height="48"/>
+    <text class="label" x="-10" y="510" text-anchor="middle">Components</text>
+
+    <rect class="node" x="210" y="480" width="280" height="48"/>
+    <text class="label" x="350" y="510" text-anchor="middle">Candidate circuit</text>
+    <line class="arrow" x1="130" y1="504" x2="202" y2="504" marker-end="url(#arrowhead)"/>
+  </g>
+</svg>

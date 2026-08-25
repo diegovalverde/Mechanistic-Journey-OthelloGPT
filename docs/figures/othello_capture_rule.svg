@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" role="img" aria-labelledby="title desc">
+  <title id="title">Othello Capture Rule</title>
+  <desc id="desc">Two small Othello board diagrams showing an empty target square bracketing opponent discs against a friendly disc, then the opponent discs flipped after the move.</desc>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --grid: #2f855a;
+      --board: #d9f2e3;
+      --square: #e9f8ef;
+      --square-alt: #dff1e6;
+      --ink: #172033;
+      --muted: #526071;
+      --accent: #0f766e;
+      --target: #f59e0b;
+      --opponent: #ffffff;
+      --friendly: #111827;
+      --disc-stroke: #172033;
+      --arrow: #0f766e;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111827;
+        --grid: #5eead4;
+        --board: #12352f;
+        --square: #183f37;
+        --square-alt: #153831;
+        --ink: #f8fafc;
+        --muted: #cbd5e1;
+        --accent: #5eead4;
+        --target: #fbbf24;
+        --opponent: #f8fafc;
+        --friendly: #020617;
+        --disc-stroke: #94a3b8;
+        --arrow: #5eead4;
+      }
+    }
+    .label { font: 600 18px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+    .small { font: 500 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--muted); }
+    .tiny { font: 600 12px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+    .board-bg { fill: var(--board); stroke: var(--grid); stroke-width: 2; rx: 8; }
+    .sq { fill: var(--square); stroke: var(--grid); stroke-width: 1; }
+    .sq.alt { fill: var(--square-alt); }
+    .target { fill: none; stroke: var(--target); stroke-width: 4; rx: 5; }
+    .ray { stroke: var(--target); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 7 7; }
+    .disc-friendly { fill: var(--friendly); stroke: var(--disc-stroke); stroke-width: 2; }
+    .disc-opponent { fill: var(--opponent); stroke: var(--disc-stroke); stroke-width: 2; }
+    .flip { stroke: var(--accent); stroke-width: 3; fill: none; stroke-linecap: round; }
+  </style>
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--arrow)" />
+    </marker>
+  </defs>
+  <rect width="760" height="360" fill="var(--bg)" rx="14"/>
+  <text x="190" y="42" text-anchor="middle" class="label">Before the move</text>
+  <text x="570" y="42" text-anchor="middle" class="label">After the move</text>
+
+  <g transform="translate(70 70)">
+    <rect class="board-bg" x="0" y="0" width="240" height="240"/>
+    <rect class="sq" x="0" y="0" width="60" height="60"/>
+    <rect class="sq alt" x="60" y="0" width="60" height="60"/>
+    <rect class="sq" x="120" y="0" width="60" height="60"/>
+    <rect class="sq alt" x="180" y="0" width="60" height="60"/>
+    <rect class="sq alt" x="0" y="60" width="60" height="60"/>
+    <rect class="sq" x="60" y="60" width="60" height="60"/>
+    <rect class="sq alt" x="120" y="60" width="60" height="60"/>
+    <rect class="sq" x="180" y="60" width="60" height="60"/>
+    <rect class="sq" x="0" y="120" width="60" height="60"/>
+    <rect class="sq alt" x="60" y="120" width="60" height="60"/>
+    <rect class="sq" x="120" y="120" width="60" height="60"/>
+    <rect class="sq alt" x="180" y="120" width="60" height="60"/>
+    <rect class="sq alt" x="0" y="180" width="60" height="60"/>
+    <rect class="sq" x="60" y="180" width="60" height="60"/>
+    <rect class="sq alt" x="120" y="180" width="60" height="60"/>
+    <rect class="sq" x="180" y="180" width="60" height="60"/>
+    <rect class="target" x="6" y="126" width="48" height="48"/>
+    <line class="ray" x1="55" y1="150" x2="185" y2="150"/>
+    <circle class="disc-opponent" cx="90" cy="150" r="22"/>
+    <circle class="disc-opponent" cx="150" cy="150" r="22"/>
+    <circle class="disc-friendly" cx="210" cy="150" r="22"/>
+    <text x="30" y="209" text-anchor="middle" class="tiny">target</text>
+    <text x="120" y="209" text-anchor="middle" class="tiny">opponents</text>
+    <text x="210" y="209" text-anchor="middle" class="tiny">friendly</text>
+  </g>
+
+  <line x1="336" y1="190" x2="424" y2="190" stroke="var(--arrow)" stroke-width="5" marker-end="url(#arrowhead)"/>
+  <text x="380" y="172" text-anchor="middle" class="small">place disc</text>
+
+  <g transform="translate(450 70)">
+    <rect class="board-bg" x="0" y="0" width="240" height="240"/>
+    <rect class="sq" x="0" y="0" width="60" height="60"/>
+    <rect class="sq alt" x="60" y="0" width="60" height="60"/>
+    <rect class="sq" x="120" y="0" width="60" height="60"/>
+    <rect class="sq alt" x="180" y="0" width="60" height="60"/>
+    <rect class="sq alt" x="0" y="60" width="60" height="60"/>
+    <rect class="sq" x="60" y="60" width="60" height="60"/>
+    <rect class="sq alt" x="120" y="60" width="60" height="60"/>
+    <rect class="sq" x="180" y="60" width="60" height="60"/>
+    <rect class="sq" x="0" y="120" width="60" height="60"/>
+    <rect class="sq alt" x="60" y="120" width="60" height="60"/>
+    <rect class="sq" x="120" y="120" width="60" height="60"/>
+    <rect class="sq alt" x="180" y="120" width="60" height="60"/>
+    <rect class="sq alt" x="0" y="180" width="60" height="60"/>
+    <rect class="sq" x="60" y="180" width="60" height="60"/>
+    <rect class="sq alt" x="120" y="180" width="60" height="60"/>
+    <rect class="sq" x="180" y="180" width="60" height="60"/>
+    <rect class="target" x="6" y="126" width="48" height="48"/>
+    <circle class="disc-friendly" cx="30" cy="150" r="22"/>
+    <circle class="disc-friendly" cx="90" cy="150" r="22"/>
+    <circle class="disc-friendly" cx="150" cy="150" r="22"/>
+    <circle class="disc-friendly" cx="210" cy="150" r="22"/>
+    <path class="flip" d="M80 119 C100 101 140 101 160 119" marker-end="url(#arrowhead)"/>
+    <text x="120" y="209" text-anchor="middle" class="tiny">captured discs flip</text>
+  </g>
+
+  <text x="380" y="334" text-anchor="middle" class="small">A legal move brackets at least one opponent run against a friendly terminator.</text>
+</svg>
