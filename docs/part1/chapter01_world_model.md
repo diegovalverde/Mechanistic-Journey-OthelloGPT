@@ -37,6 +37,31 @@ This is the first mystery of the book. A Transformer trained only on move sequen
 !!! question "Pause and think"
     If a model can predict legal Othello moves from move history alone, what are the simplest strategies it might use? Which of those strategies would require tracking the board?
 
+## Reading a Transcript Into a Board
+
+Before we ask what the Transformer might represent internally, it helps to know what a human or simulator does with a move transcript.
+
+A move such as `C4` names one square. The letter gives the column, from `A` through `H`. The number gives the row, from `1` through `8`. So `C4` means: go to column C, row 4, and place the next player's disc there. Then the players alternate: the first move belongs to one player, the second move to the other player, the third move to the first player again, and so on.
+
+To turn a transcript into a board, start from the standard four center discs. Then replay the moves in order:
+
+```text
+C4  -> place the first player's disc on C4, then flip any bracketed discs
+C3  -> place the second player's disc on C3, then flip any bracketed discs
+D3  -> place the first player's disc on D3, then flip any bracketed discs
+```
+
+The transcript is not a list of board states. It is a recipe for reconstructing them. At each step, the same token can mean something different because it is interpreted against the current board. A coordinate tells us where a disc is placed; the rules tell us what else changes.
+
+<figure markdown>
+![Reading an Othello move transcript into a board](../figures/move_transcript_to_board.svg)
+<figcaption>
+Reading a move transcript means replaying the coordinates from the initial board. In this example, the first three moves are placed on C4, C3, and D3, with colors alternating by turn and captured discs updated after each move.
+</figcaption>
+</figure>
+
+This is exactly the hidden-state problem in miniature. The model sees `C4 C3 D3`. The simulator can expand those three symbols into a concrete board. If the model is going to use board facts to predict future moves, it must get those facts from the transcript alone.
+
 ## The Board Behind the Sequence
 
 Othello, also called Reversi, is a two-player game played on an 8 by 8 board. Each square is either empty or contains a disc belonging to one of the two players. The game begins with four discs in the center. Players take turns placing a disc of their own color on an empty square.

@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 520" role="img" aria-labelledby="title desc">
+  <title id="title">Reading a Move Transcript Into an Othello Board</title>
+  <desc id="desc">A transcript C4 C3 D3 points to coordinates on an 8 by 8 Othello board. The first and third moves are dark discs, the second move is a light disc, and the board shown is the result after replaying the moves from the standard opening position.</desc>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --board: #d9f2e3;
+      --square-a: #e9f8ef;
+      --square-b: #dff1e6;
+      --grid: #2f855a;
+      --ink: #172033;
+      --muted: #536171;
+      --accent: #0f766e;
+      --accent-soft: #ccfbf1;
+      --target: #f59e0b;
+      --dark-disc: #111827;
+      --light-disc: #ffffff;
+      --disc-stroke: #172033;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111827;
+        --panel: #1f2937;
+        --board: #12352f;
+        --square-a: #183f37;
+        --square-b: #153831;
+        --grid: #5eead4;
+        --ink: #f8fafc;
+        --muted: #cbd5e1;
+        --accent: #5eead4;
+        --accent-soft: #134e4a;
+        --target: #fbbf24;
+        --dark-disc: #020617;
+        --light-disc: #f8fafc;
+        --disc-stroke: #94a3b8;
+      }
+    }
+    .title { font: 700 21px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+    .label { font: 650 15px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+    .small { font: 500 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--muted); }
+    .coord { font: 700 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+    .token { fill: var(--panel); stroke: var(--accent); stroke-width: 2; rx: 8; }
+    .token-text { font: 750 18px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: var(--ink); }
+    .sq-a { fill: var(--square-a); stroke: var(--grid); stroke-width: 1; }
+    .sq-b { fill: var(--square-b); stroke: var(--grid); stroke-width: 1; }
+    .board-bg { fill: var(--board); stroke: var(--grid); stroke-width: 2; rx: 8; }
+    .dark { fill: var(--dark-disc); stroke: var(--disc-stroke); stroke-width: 2; }
+    .light { fill: var(--light-disc); stroke: var(--disc-stroke); stroke-width: 2; }
+    .move-ring { fill: none; stroke: var(--target); stroke-width: 4; }
+    .num-dark { font: 800 14px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #ffffff; }
+    .num-light { font: 800 14px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #111827; }
+    .arrow { stroke: var(--accent); stroke-width: 3.5; stroke-linecap: round; fill: none; }
+  </style>
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)" />
+    </marker>
+  </defs>
+
+  <rect width="820" height="520" fill="var(--bg)" rx="14"/>
+  <text x="410" y="38" text-anchor="middle" class="title">From transcript tokens to board state</text>
+  <text x="410" y="62" text-anchor="middle" class="small">Read each coordinate, alternate players, place the disc, then apply the flip rule.</text>
+
+  <g transform="translate(56 105)">
+    <text x="0" y="-18" class="label">Transcript prefix</text>
+    <rect class="token" x="0" y="0" width="72" height="44"/>
+    <text class="token-text" x="36" y="28" text-anchor="middle">C4</text>
+    <rect class="token" x="88" y="0" width="72" height="44"/>
+    <text class="token-text" x="124" y="28" text-anchor="middle">C3</text>
+    <rect class="token" x="176" y="0" width="72" height="44"/>
+    <text class="token-text" x="212" y="28" text-anchor="middle">D3</text>
+    <text x="264" y="28" class="token-text">...</text>
+
+    <line class="arrow" x1="36" y1="58" x2="246" y2="157" marker-end="url(#arrowhead)"/>
+    <line class="arrow" x1="124" y1="58" x2="246" y2="197" marker-end="url(#arrowhead)"/>
+    <line class="arrow" x1="212" y1="58" x2="286" y2="197" marker-end="url(#arrowhead)"/>
+
+    <g transform="translate(0 225)">
+      <text x="0" y="0" class="label">Replay rule</text>
+      <text x="0" y="29" class="small">1. Start with the four center discs.</text>
+      <text x="0" y="53" class="small">2. Interpret each token as column + row.</text>
+      <text x="0" y="77" class="small">3. Place the next player's disc.</text>
+      <text x="0" y="101" class="small">4. Flip every bracketed opponent line.</text>
+    </g>
+  </g>
+
+  <g transform="translate(388 92)">
+    <text x="178" y="-20" text-anchor="middle" class="label">Board after replaying C4 C3 D3</text>
+    <rect class="board-bg" x="28" y="28" width="320" height="320"/>
+
+    <text class="coord" x="48" y="18" text-anchor="middle">A</text>
+    <text class="coord" x="88" y="18" text-anchor="middle">B</text>
+    <text class="coord" x="128" y="18" text-anchor="middle">C</text>
+    <text class="coord" x="168" y="18" text-anchor="middle">D</text>
+    <text class="coord" x="208" y="18" text-anchor="middle">E</text>
+    <text class="coord" x="248" y="18" text-anchor="middle">F</text>
+    <text class="coord" x="288" y="18" text-anchor="middle">G</text>
+    <text class="coord" x="328" y="18" text-anchor="middle">H</text>
+
+    <text class="coord" x="14" y="53" text-anchor="middle">8</text>
+    <text class="coord" x="14" y="93" text-anchor="middle">7</text>
+    <text class="coord" x="14" y="133" text-anchor="middle">6</text>
+    <text class="coord" x="14" y="173" text-anchor="middle">5</text>
+    <text class="coord" x="14" y="213" text-anchor="middle">4</text>
+    <text class="coord" x="14" y="253" text-anchor="middle">3</text>
+    <text class="coord" x="14" y="293" text-anchor="middle">2</text>
+    <text class="coord" x="14" y="333" text-anchor="middle">1</text>
+
+    <g transform="translate(28 28)">
+      <rect class="sq-a" x="0" y="0" width="40" height="40"/>
+      <rect class="sq-b" x="40" y="0" width="40" height="40"/>
+      <rect class="sq-a" x="80" y="0" width="40" height="40"/>
+      <rect class="sq-b" x="120" y="0" width="40" height="40"/>
+      <rect class="sq-a" x="160" y="0" width="40" height="40"/>
+      <rect class="sq-b" x="200" y="0" width="40" height="40"/>
+      <rect class="sq-a" x="240" y="0" width="40" height="40"/>
+      <rect class="sq-b" x="280" y="0" width="40" height="40"/>
+      <rect class="sq-b" x="0" y="40" width="40" height="40"/>
+      <rect class="sq-a" x="40" y="40" width="40" height="40"/>
+      <rect class="sq-b" x="80" y="40" width="40" height="40"/>
+      <rect class="sq-a" x="120" y="40" width="40" height="40"/>
+      <rect class="sq-b" x="160" y="40" width="40" height="40"/>
+      <rect class="sq-a" x="200" y="40" width="40" height="40"/>
+      <rect class="sq-b" x="240" y="40" width="40" height="40"/>
+      <rect class="sq-a" x="280" y="40" width="40" height="40"/>
+      <rect class="sq-a" x="0" y="80" width="40" height="40"/>
+      <rect class="sq-b" x="40" y="80" width="40" height="40"/>
+      <rect class="sq-a" x="80" y="80" width="40" height="40"/>
+      <rect class="sq-b" x="120" y="80" width="40" height="40"/>
+      <rect class="sq-a" x="160" y="80" width="40" height="40"/>
+      <rect class="sq-b" x="200" y="80" width="40" height="40"/>
+      <rect class="sq-a" x="240" y="80" width="40" height="40"/>
+      <rect class="sq-b" x="280" y="80" width="40" height="40"/>
+      <rect class="sq-b" x="0" y="120" width="40" height="40"/>
+      <rect class="sq-a" x="40" y="120" width="40" height="40"/>
+      <rect class="sq-b" x="80" y="120" width="40" height="40"/>
+      <rect class="sq-a" x="120" y="120" width="40" height="40"/>
+      <rect class="sq-b" x="160" y="120" width="40" height="40"/>
+      <rect class="sq-a" x="200" y="120" width="40" height="40"/>
+      <rect class="sq-b" x="240" y="120" width="40" height="40"/>
+      <rect class="sq-a" x="280" y="120" width="40" height="40"/>
+      <rect class="sq-a" x="0" y="160" width="40" height="40"/>
+      <rect class="sq-b" x="40" y="160" width="40" height="40"/>
+      <rect class="sq-a" x="80" y="160" width="40" height="40"/>
+      <rect class="sq-b" x="120" y="160" width="40" height="40"/>
+      <rect class="sq-a" x="160" y="160" width="40" height="40"/>
+      <rect class="sq-b" x="200" y="160" width="40" height="40"/>
+      <rect class="sq-a" x="240" y="160" width="40" height="40"/>
+      <rect class="sq-b" x="280" y="160" width="40" height="40"/>
+      <rect class="sq-b" x="0" y="200" width="40" height="40"/>
+      <rect class="sq-a" x="40" y="200" width="40" height="40"/>
+      <rect class="sq-b" x="80" y="200" width="40" height="40"/>
+      <rect class="sq-a" x="120" y="200" width="40" height="40"/>
+      <rect class="sq-b" x="160" y="200" width="40" height="40"/>
+      <rect class="sq-a" x="200" y="200" width="40" height="40"/>
+      <rect class="sq-b" x="240" y="200" width="40" height="40"/>
+      <rect class="sq-a" x="280" y="200" width="40" height="40"/>
+      <rect class="sq-a" x="0" y="240" width="40" height="40"/>
+      <rect class="sq-b" x="40" y="240" width="40" height="40"/>
+      <rect class="sq-a" x="80" y="240" width="40" height="40"/>
+      <rect class="sq-b" x="120" y="240" width="40" height="40"/>
+      <rect class="sq-a" x="160" y="240" width="40" height="40"/>
+      <rect class="sq-b" x="200" y="240" width="40" height="40"/>
+      <rect class="sq-a" x="240" y="240" width="40" height="40"/>
+      <rect class="sq-b" x="280" y="240" width="40" height="40"/>
+      <rect class="sq-b" x="0" y="280" width="40" height="40"/>
+      <rect class="sq-a" x="40" y="280" width="40" height="40"/>
+      <rect class="sq-b" x="80" y="280" width="40" height="40"/>
+      <rect class="sq-a" x="120" y="280" width="40" height="40"/>
+      <rect class="sq-b" x="160" y="280" width="40" height="40"/>
+      <rect class="sq-a" x="200" y="280" width="40" height="40"/>
+      <rect class="sq-b" x="240" y="280" width="40" height="40"/>
+      <rect class="sq-a" x="280" y="280" width="40" height="40"/>
+
+      <circle class="dark" cx="100" cy="180" r="15"/>
+      <circle class="dark" cx="140" cy="140" r="15"/>
+      <circle class="dark" cx="140" cy="180" r="15"/>
+      <circle class="dark" cx="140" cy="220" r="15"/>
+      <circle class="dark" cx="180" cy="180" r="15"/>
+      <circle class="light" cx="100" cy="220" r="15"/>
+      <circle class="light" cx="180" cy="140" r="15"/>
+
+      <circle class="move-ring" cx="100" cy="180" r="19"/>
+      <text class="num-dark" x="100" y="185" text-anchor="middle">1</text>
+      <circle class="move-ring" cx="100" cy="220" r="19"/>
+      <text class="num-light" x="100" y="225" text-anchor="middle">2</text>
+      <circle class="move-ring" cx="140" cy="220" r="19"/>
+      <text class="num-dark" x="140" y="225" text-anchor="middle">3</text>
+    </g>
+  </g>
+
+  <g transform="translate(420 440)">
+    <circle class="dark" cx="0" cy="0" r="9"/>
+    <text class="small" x="18" y="5">first player</text>
+    <circle class="light" cx="128" cy="0" r="9"/>
+    <text class="small" x="146" y="5">second player</text>
+    <circle class="move-ring" cx="277" cy="0" r="12"/>
+    <text class="small" x="296" y="5">numbered transcript moves</text>
+  </g>
+</svg>
