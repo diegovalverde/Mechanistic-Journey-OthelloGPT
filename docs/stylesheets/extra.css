@@ -1,0 +1,28 @@
+.md-typeset {
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.md-typeset p,
+.md-typeset ul,
+.md-typeset ol {
+  margin-bottom: 1em;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 0.25rem;
+}
+
+.md-typeset .arithmatex {
+  margin: 1.25em 0;
+}
+
+.md-typeset figure {
+  margin: 1.5em auto;
+}
+
+.md-content__inner {
+  max-width: 46rem;
+}
+

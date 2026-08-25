@@ -1,0 +1,84 @@
+site_name: Mechanistic Journey Through Othello-GPT
+site_description: From Hidden Board States to Rule Circuits
+repo_url: https://github.com/diegovalverde/Mechanistic-Journey-OthelloGPT
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+extra_css:
+  - stylesheets/extra.css
+plugins:
+  - search
+nav:
+  - Home: index.md
+  - About: about.md
+  - Part I - The Mystery:
+      - "1. Can a Transformer Build a World Model?": part1/chapter01_world_model.md
+      - "2. Learning to See the Invisible Board": part1/chapter02_invisible_board.md
+      - "3. Why Probing Isn't Enough": part1/chapter03_probing_isnt_enough.md
+  - Part II - Following Information:
+      - "4. Jacobians: Listening to the Network's Thoughts": part2/chapter04_jacobians.md
+      - "5. J-Space": part2/chapter05_jspace.md
+      - "6. Information Flow Through a Transformer": part2/chapter06_information_flow.md
+  - Part III - From Representation to Reasoning:
+      - "7. The Mystery of Layer 7": part3/chapter07_layer7.md
+      - "8. MLP7": part3/chapter08_mlp7.md
+      - "9. Hunting Rule Circuits": part3/chapter09_rule_circuits.md
+  - Part IV - Bigger Picture:
+      - "10. Beyond Othello": part4/chapter10_beyond_othello.md
+  - Research:
+      - Research Log: research/research_log.md
+      - Findings Snapshot: research/findings_snapshot.md
+      - Open Questions: research/open_questions.md
+      - Experiment Index: research/experiment_index.md
+  - Appendix:
+      - Math Background: appendix/math_background.md
+      - Transformer Background: appendix/transformer_background.md
+      - TransformerLens: appendix/transformer_lens.md
+      - Notebook Walkthrough: appendix/notebook_walkthrough.md
+      - Glossary: appendix/glossary.md
+      - Figure Conventions: figures/README.md
+      - References: references.md
