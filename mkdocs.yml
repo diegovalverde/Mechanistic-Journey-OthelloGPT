@@ -71,6 +71,7 @@ nav:
       - "10. Beyond Othello": part4/chapter10_beyond_othello.md
   - Research:
       - Research Log: research/research_log.md
+      - Research Provenance: research/provenance.md
       - Findings Snapshot: research/findings_snapshot.md
       - Open Questions: research/open_questions.md
       - Experiment Index: research/experiment_index.md
