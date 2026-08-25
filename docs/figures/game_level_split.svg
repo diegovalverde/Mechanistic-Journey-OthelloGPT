@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="520" viewBox="0 0 980 520" role="img" aria-labelledby="title desc">
+  <title id="title">Position-level split versus game-level split</title>
+  <desc id="desc">A diagram contrasting leakage-prone position-level splitting, where adjacent positions from the same game appear in train and validation, with stricter game-level splitting where train and validation games are disjoint.</desc>
+  <defs>
+    <style>
+      :root { --bg:#ffffff; --ink:#172033; --muted:#475569; --stroke:#94a3b8; --bad:#dc2626; --bad-soft:#fee2e2; --good:#0f766e; --good-soft:#ccfbf1; --train:#2563eb; --val:#f59e0b; }
+      @media (prefers-color-scheme: dark) { :root { --bg:#111827; --ink:#f8fafc; --muted:#cbd5e1; --stroke:#64748b; --bad:#f87171; --bad-soft:#3f1d24; --good:#5eead4; --good-soft:#134e4a; --train:#60a5fa; --val:#fbbf24; } }
+      .title { font: 700 22px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .heading { font: 700 18px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .label { font: 600 14px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .small { font: 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--muted); }
+      .tiny { font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: var(--muted); }
+      .onTrain { font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #ffffff; }
+      .onVal { font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #111827; }
+      .panel { fill: var(--bg); stroke: var(--stroke); stroke-width: 1.5; rx: 10; }
+      .badbox { fill: var(--bad-soft); stroke: var(--bad); stroke-width: 1.8; rx: 8; }
+      .goodbox { fill: var(--good-soft); stroke: var(--good); stroke-width: 1.8; rx: 8; }
+      .game { fill: transparent; stroke: var(--stroke); stroke-width: 1.5; rx: 8; }
+      .train { fill: var(--train); }
+      .val { fill: var(--val); }
+      .arrow-bad { stroke: var(--bad); stroke-width: 2.5; fill: none; marker-end: url(#badArrow); }
+      .arrow-good { stroke: var(--good); stroke-width: 2.5; fill: none; marker-end: url(#goodArrow); }
+      .link { stroke: var(--bad); stroke-width: 2; stroke-dasharray: 5 5; fill: none; }
+    </style>
+    <marker id="badArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--bad)"/></marker>
+    <marker id="goodArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--good)"/></marker>
+  </defs>
+  <rect width="980" height="520" fill="var(--bg)" rx="12"/>
+  <text x="490" y="38" text-anchor="middle" class="title">Why the Validation Split Matters</text>
+
+  <rect x="34" y="70" width="436" height="388" class="panel"/>
+  <text x="252" y="104" text-anchor="middle" class="heading">Position-level split: leakage risk</text>
+  <rect x="66" y="126" width="368" height="46" class="badbox"/>
+  <text x="250" y="155" text-anchor="middle" class="label">Adjacent states from the same trajectory are strongly correlated</text>
+
+  <g transform="translate(78 206)">
+    <text x="0" y="-18" class="label">Game A</text>
+    <rect x="0" y="0" width="312" height="44" class="game"/>
+    <circle cx="40" cy="22" r="12" fill="transparent" stroke="var(--stroke)"/>
+    <circle cx="92" cy="22" r="12" fill="transparent" stroke="var(--stroke)"/>
+    <circle cx="144" cy="22" r="12" fill="transparent" stroke="var(--stroke)"/>
+    <circle cx="196" cy="22" r="15" class="train"/>
+    <text x="196" y="27" text-anchor="middle" class="onTrain">t=20</text>
+    <circle cx="248" cy="22" r="15" class="val"/>
+    <text x="248" y="27" text-anchor="middle" class="onVal">t=21</text>
+    <path d="M211 22 L233 22" class="link"/>
+    <text x="196" y="68" text-anchor="middle" class="small">train</text>
+    <text x="248" y="68" text-anchor="middle" class="small">validation</text>
+  </g>
+
+  <g transform="translate(78 324)">
+    <text x="0" y="-18" class="label">Game B</text>
+    <rect x="0" y="0" width="312" height="44" class="game"/>
+    <circle cx="40" cy="22" r="12" fill="transparent" stroke="var(--stroke)"/>
+    <circle cx="92" cy="22" r="12" fill="transparent" stroke="var(--stroke)"/>
+    <circle cx="144" cy="22" r="12" fill="transparent" stroke="var(--stroke)"/>
+    <circle cx="196" cy="22" r="15" class="train"/>
+    <text x="196" y="27" text-anchor="middle" class="onTrain">t=30</text>
+    <circle cx="248" cy="22" r="15" class="val"/>
+    <text x="248" y="27" text-anchor="middle" class="onVal">t=31</text>
+    <path d="M211 22 L233 22" class="link"/>
+    <text x="196" y="68" text-anchor="middle" class="small">train</text>
+    <text x="248" y="68" text-anchor="middle" class="small">validation</text>
+  </g>
+
+  <rect x="510" y="70" width="436" height="388" class="panel"/>
+  <text x="728" y="104" text-anchor="middle" class="heading">Game-level split: stronger generalization test</text>
+  <rect x="542" y="126" width="368" height="46" class="goodbox"/>
+  <text x="726" y="155" text-anchor="middle" class="label">No game appears in both sets</text>
+
+  <g transform="translate(548 205)">
+    <text x="0" y="-18" class="label">Train games</text>
+    <rect x="0" y="0" width="160" height="58" class="game"/>
+    <text x="80" y="36" text-anchor="middle" class="heading">A / B / C</text>
+    <path d="M166 29 C218 29, 225 29, 276 29" class="arrow-good"/>
+    <rect x="286" y="0" width="100" height="58" class="goodbox"/>
+    <text x="336" y="36" text-anchor="middle" class="label">train</text>
+  </g>
+
+  <g transform="translate(548 321)">
+    <text x="0" y="-18" class="label">Validation games</text>
+    <rect x="0" y="0" width="160" height="58" class="game"/>
+    <text x="80" y="36" text-anchor="middle" class="heading">X / Y / Z</text>
+    <path d="M166 29 C218 29, 225 29, 276 29" class="arrow-good"/>
+    <rect x="286" y="0" width="100" height="58" class="goodbox"/>
+    <text x="336" y="36" text-anchor="middle" class="label">validation</text>
+  </g>
+
+  <g transform="translate(382 478)">
+    <circle cx="0" cy="0" r="7" class="train"/><text x="14" y="5" class="small">train sample</text>
+    <circle cx="126" cy="0" r="7" class="val"/><text x="140" y="5" class="small">validation sample</text>
+  </g>
+</svg>

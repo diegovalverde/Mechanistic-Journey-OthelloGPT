@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+  <title id="title">Decodable does not necessarily mean used</title>
+  <desc id="desc">A conceptual diagram showing four possible relationships between a decodable board feature and the Transformer's downstream computation: used feature, correlated passenger, redundant representation, and misaligned readout.</desc>
+  <defs>
+    <style>
+      :root { --bg:#ffffff; --ink:#172033; --muted:#475569; --stroke:#94a3b8; --blue:#2563eb; --teal:#0f766e; --red:#dc2626; --amber:#d97706; --purple:#7c3aed; --soft:#f8fafc; }
+      @media (prefers-color-scheme: dark) { :root { --bg:#111827; --ink:#f8fafc; --muted:#cbd5e1; --stroke:#64748b; --blue:#60a5fa; --teal:#5eead4; --red:#f87171; --amber:#fbbf24; --purple:#c084fc; --soft:#1f2937; } }
+      .title { font: 700 23px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .heading { font: 700 17px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .label { font: 600 13.5px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--muted); }
+      .panel { fill: var(--soft); stroke: var(--stroke); stroke-width: 1.4; rx: 8; }
+      .node { fill: var(--bg); stroke: var(--stroke); stroke-width: 1.4; rx: 7; }
+      .arrow { stroke: var(--teal); stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .weak { stroke: var(--red); stroke-width: 2.3; stroke-dasharray: 6 5; fill: none; }
+      .alt { stroke: var(--purple); stroke-width: 3; fill: none; marker-end: url(#arrowPurple); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--teal)"/></marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--purple)"/></marker>
+  </defs>
+  <rect width="960" height="520" fill="var(--bg)" rx="12"/>
+  <text x="480" y="40" text-anchor="middle" class="title">Decodable Does Not Necessarily Mean Used</text>
+  <text x="480" y="68" text-anchor="middle" class="label">Conceptual possibilities after a successful linear probe</text>
+
+  <g transform="translate(44 104)">
+    <rect width="410" height="156" class="panel"/>
+    <text x="205" y="34" text-anchor="middle" class="heading">A. Used feature</text>
+    <rect x="36" y="68" width="116" height="48" class="node"/><text x="94" y="97" text-anchor="middle" class="label">board feature</text>
+    <rect x="256" y="68" width="116" height="48" class="node"/><text x="314" y="97" text-anchor="middle" class="label">logits</text>
+    <path d="M158 92 L250 92" class="arrow"/>
+    <text x="205" y="138" text-anchor="middle" class="label">The readout aligns with a feature downstream computation relies on.</text>
+  </g>
+
+  <g transform="translate(506 104)">
+    <rect width="410" height="156" class="panel"/>
+    <text x="205" y="34" text-anchor="middle" class="heading">B. Correlated passenger</text>
+    <rect x="28" y="68" width="118" height="48" class="node"/><text x="87" y="97" text-anchor="middle" class="label">board feature</text>
+    <rect x="146" y="68" width="118" height="48" class="node"/><text x="205" y="97" text-anchor="middle" class="label">history cue</text>
+    <rect x="280" y="68" width="94" height="48" class="node"/><text x="327" y="97" text-anchor="middle" class="label">logits</text>
+    <path d="M152 92 L264 92" class="weak"/>
+    <path d="M268 92 L274 92" class="arrow"/>
+    <text x="205" y="138" text-anchor="middle" class="label">The model may use another correlated feature instead.</text>
+  </g>
+
+  <g transform="translate(44 302)">
+    <rect width="410" height="156" class="panel"/>
+    <text x="205" y="34" text-anchor="middle" class="heading">C. Redundant representation</text>
+    <rect x="26" y="57" width="132" height="42" class="node"/><text x="92" y="83" text-anchor="middle" class="label">readout direction</text>
+    <rect x="26" y="105" width="132" height="42" class="node"/><text x="92" y="131" text-anchor="middle" class="label">parallel encoding</text>
+    <rect x="270" y="82" width="104" height="48" class="node"/><text x="322" y="111" text-anchor="middle" class="label">logits</text>
+    <path d="M164 78 L264 101" class="weak"/>
+    <path d="M164 126 L264 111" class="alt"/>
+    <text x="205" y="36" text-anchor="middle" class="label"></text>
+  </g>
+
+  <g transform="translate(506 302)">
+    <rect width="410" height="156" class="panel"/>
+    <text x="205" y="34" text-anchor="middle" class="heading">D. Misaligned readout</text>
+    <rect x="36" y="74" width="128" height="48" class="node"/><text x="100" y="103" text-anchor="middle" class="label">probe boundary</text>
+    <rect x="248" y="74" width="128" height="48" class="node"/><text x="312" y="103" text-anchor="middle" class="label">causal basis</text>
+    <path d="M166 98 C202 54, 238 54, 274 92" class="weak"/>
+    <text x="205" y="146" text-anchor="middle" class="label">A useful classifier direction need not match the model's own coordinates.</text>
+  </g>
+</svg>

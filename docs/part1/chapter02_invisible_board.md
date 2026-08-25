@@ -20,7 +20,13 @@ Suppose we pause Othello-GPT after a prefix such as:
 C4 C3 D3 E3 B2
 ```
 
-Inside the model, the prefix has become a collection of activation vectors. One of those vectors lives in the residual stream at a particular layer and token position. It does not come labeled with useful names. It is just a point in a 512-dimensional space.
+Inside the model, the prefix has become a collection of activation vectors. In the TransformerLens notebook, the vector we use is read from:
+
+```text
+blocks.4.hook_resid_post
+```
+
+This is the residual stream after Transformer block 4. It does not come labeled with useful names. It is just a point in the model's 512-dimensional internal space.
 
 Outside the model, the same prefix has a precise board state. We can run an Othello simulator, apply the moves one by one, and label every square as empty, belonging to the next player to move, or belonging to the opponent.
 
@@ -50,13 +56,71 @@ A conceptual view of the board-probe experiment. The model receives only a move 
 
 ## The Intuition
 
-Imagine each activation vector as a complicated summary of the game so far. The probe asks whether some directions in that vector space line up with board facts.
+Imagine each activation vector as a complicated running summary of the game so far. The word "residual" is not meant to be mysterious. In a decoder-only Transformer, each token position carries a vector forward through the stack. Attention and MLP blocks add updates into that running vector. TransformerLens calls this running vector the residual stream, and exposes it with hook names such as `hook_resid_pre` and `hook_resid_post`.
+
+For this experiment, we take the residual stream after layer 4 at the final prefix token. In code, the notebook caches:
+
+```text
+blocks.4.hook_resid_post[:, -1, :]
+```
+
+That slice has one 512-dimensional vector per position in the probe dataset. It is not the model's final answer. It is an intermediate internal state that the later layers still have to process.
+
+This is different from a move logit. A model logit is an output score over the 61 Othello move tokens after the model has run to the end. In the notebook, those appear when the model is called with:
+
+```text
+return_type="logits"
+```
+
+So the distinction is:
+
+```text
+residual stream
+    internal 512-dimensional vector at a layer and token position
+
+model move logits
+    final output scores over the 61 move tokens
+```
+
+The Chapter 2 probe does not start from the final move logits. It starts from the layer-4 residual vector and asks whether board labels are readable there.
 
 For example, perhaps moving in one direction makes the probe more likely to say "C4 is mine" rather than "C4 is theirs." Another direction might separate occupied squares from empty squares. These directions are not guaranteed to be the model's own variables. They are directions discovered by an external readout.
 
 Still, linearity is important. A linear probe is deliberately limited. It cannot run a fresh Othello simulator internally. It cannot apply a deep nonlinear computation to reconstruct the board from scratch. For each square and class, it can only take a weighted sum of the activation coordinates.
 
-So high linear-probe accuracy is evidence that the board information is arranged in a relatively accessible way. It does not mean the representation is human-like. It does not mean each square has a single neuron. It means a simple affine readout can recover the square states.
+Those weighted sums are what "weights" means here. The weights are not hidden symbolic rules. They are the learned coefficients of a separate linear layer trained after Othello-GPT was already trained. So high linear-probe accuracy is evidence that the board information is arranged in a relatively accessible way. It does not mean the representation is human-like. It does not mean each square has a single neuron. It means a simple affine readout can recover the square states.
+
+Concretely, one training example looks like this:
+
+```text
+input to probe:
+    one cached residual vector h_t
+    shape: [512]
+
+target for probe:
+    simulator-computed board labels
+    shape: [64]
+    each entry is 0, 1, or 2
+```
+
+The probe turns the single 512-dimensional vector into 192 scores:
+
+```text
+64 squares x 3 possible labels = 192 scores
+```
+
+Then those 192 scores are reshaped into a table:
+
+```text
+shape: [64, 3]
+
+row 0: scores for A1 being empty / mine / theirs
+row 1: scores for B1 being empty / mine / theirs
+...
+row 63: scores for H8 being empty / mine / theirs
+```
+
+For each square, the probe predicts the label with the largest score. Training adjusts the linear layer so the correct simulator label gets the largest score as often as possible.
 
 ## The Mathematics
 
@@ -88,9 +152,9 @@ $$
 h_t \in \mathbb{R}^{512}.
 $$
 
-In the executed experiment, \(h_t\) is the layer-4 residual-stream activation at the final token of the prefix.
+In the executed experiment, \(h_t\) is the layer-4 residual-stream activation at the final token of the prefix. In TransformerLens terms, it comes from `blocks.4.hook_resid_post[:, -1, :]`. The model configuration printed by the notebook has `d_model: 512`, which is why \(h_t\) has 512 coordinates.
 
-The probe is a linear map from that vector to logits for all square-state labels:
+The probe is a linear map from that vector to scores for all square-state labels:
 
 $$
 \text{probe}(h_t) \in \mathbb{R}^{64 \times 3}.
@@ -102,7 +166,38 @@ $$
 s(q,\text{empty}), \quad s(q,\text{mine}), \quad s(q,\text{theirs}).
 $$
 
-The predicted label is the largest of those three scores. The probe is trained with ordinary cross-entropy over all 64 squares.
+The notebook code calls these values `logits_batch` because they are pre-softmax classifier scores. To avoid confusion, call them probe logits: they are the external probe's scores over board labels, not Othello-GPT's move logits over the 61 move tokens. The predicted label is the largest of the three probe logits for that square. The probe is trained with ordinary cross-entropy over all 64 squares.
+
+The linear map has the form:
+
+$$
+s(q,c) = W_{q,c} \cdot h_t + b_{q,c}.
+$$
+
+Here \(W_{q,c}\) is a 512-dimensional vector of learned probe weights for square \(q\) and class \(c\). The dot product says: multiply each coordinate of the residual vector by the corresponding learned coefficient, add the results, then add a bias. That is the whole probe computation.
+
+The notebook implementation is exactly this:
+
+```python
+board_probe = nn.Linear(D_MODEL, 64 * 3)
+logits_batch = board_probe(x_batch).view(-1, 64, 3)
+loss = F.cross_entropy(logits_batch.reshape(-1, 3), y_batch.reshape(-1))
+```
+
+Here `x_batch` is a batch of cached residual vectors with shape `[batch, 512]`. The linear layer produces `[batch, 192]`, and `.view(-1, 64, 3)` reshapes that into `[batch, square, class]`. The loss then flattens the first two axes, so training treats the batch as many square-label classification problems:
+
+```text
+batch positions x 64 squares
+```
+
+At validation time, prediction is just:
+
+```python
+probe_val_logits = board_probe(X_val).view(-1, 64, 3)
+probe_val_pred = probe_val_logits.argmax(dim=-1)
+```
+
+The `argmax` chooses one of the three labels for each square. Accuracy is the fraction of all square labels where `probe_val_pred` matches the simulator target `Y_val`.
 
 In code terms, the probe's weight tensor is reshaped as:
 
@@ -135,6 +230,13 @@ v_{q,\text{occupied-vs-empty}}
 - W_{q,\text{empty}}.
 $$
 
+<figure markdown>
+![Semantic probe direction cartoon](../figures/semantic_probe_direction.svg)
+<figcaption>
+A conceptual 2D cartoon of the true 512-dimensional residual space. The probe's weight difference \(W_{q,\text{mine}} - W_{q,\text{theirs}}\) defines an operational direction that separates "mine-like" from "theirs-like" activations for a square.
+</figcaption>
+</figure>
+
 These directions will matter later. For now, they should be read cautiously: they are directions defined by a trained probe, not proof that the model itself stores a named variable for each square.
 
 ## The Experiment
@@ -164,6 +266,13 @@ The split is important. An earlier style of probe experiment could split individ
 
 The executed notebook instead splits whole games first. It generates 150 unique random-play games, assigns 120 games to training and 30 games to validation, and only then extracts prefixes. It also removes train prefixes that overlap with validation prefixes. The executed output reports:
 
+<figure markdown>
+![Position-level split versus game-level split](../figures/game_level_split.svg)
+<figcaption>
+A position-level split can place adjacent states from the same game on opposite sides of the train/validation boundary. The executed probe experiment uses a stricter game-level split, so validation positions come from games unseen during probe training.
+</figcaption>
+</figure>
+
 ```text
 train games: 120
 validation games: 30
@@ -191,6 +300,32 @@ validation activations: (330, 512)
 
 The probe is a single linear layer trained for 20 epochs with AdamW. It is intentionally simple: all the Othello-specific work is in the labels, not in the probe architecture.
 
+!!! example "Experiment - Can we decode the board?"
+
+    Input:
+    Layer-4 residual activation, dimension 512
+
+    Target:
+    64 board squares x {empty, mine, theirs}
+
+    Probe:
+    Linear
+
+    Split:
+    Held-out games
+
+    Validation positions:
+    330
+
+    Overall accuracy:
+    97.96%
+
+    Conclusion:
+    Board state is highly linearly decodable.
+
+    Limitation:
+    This does not establish causal use.
+
 ## The Result
 
 The held-out result is strong:
@@ -206,6 +341,13 @@ Per-square validation accuracy (min / mean / max): 0.9364 / 0.9796 / 0.9970
 This means the probe correctly predicts about 98% of square labels over 330 validation positions, where each position contributes 64 square labels.
 
 The class counts also tell us something useful. Empty squares are easiest, with 0.9976 accuracy. Current-player and opponent squares are harder, with 0.9561 and 0.9703 accuracy. That pattern is not surprising. Most squares in an Othello position are often empty, especially in earlier prefixes, while distinguishing ownership requires more detailed state tracking.
+
+<figure markdown>
+![Board probe validation accuracy](../figures/board_probe_accuracy.svg)
+<figcaption>
+Strict game-level held-out validation. Source: Othello_GPT_Jacobian_Lens.ipynb, section 7.
+</figcaption>
+</figure>
 
 But the ownership accuracies are still high. The probe is not merely learning that many squares are empty. It is recovering a large amount of player-relative occupancy information from the residual stream.
 
@@ -254,7 +396,7 @@ The model is not seeing a board in the human sense. It is not given a diagram. I
 
 That narrower claim is actually more useful. It gives us a handle. Once a probe has found mine-vs-theirs and occupied-vs-empty directions, we can ask follow-up questions:
 
-- Do those directions have predictable effects on logits?
+- Do those directions have predictable effects on model move logits?
 - Are the effects local to particular positions and moves?
 - Which layers transform those directions?
 - Which components are most responsible for legality-relevant changes?
@@ -296,7 +438,7 @@ Chapter 3 is about that gap. It asks why probing is not enough, and what kinds o
 1. Reproduce the legality check for a short prefix such as `C4 C3 D3 E3 B2` using the notebook's simulator convention. After each move, list the legal next moves.
 2. Modify the probe experiment to train on only early prefixes, such as lengths 5 through 25, and validate on later prefixes. Does accuracy fall more for mine/theirs than for empty?
 3. Train separate probes for absolute black/white ownership and for relative mine/theirs ownership. Which target seems more natural for next-move prediction, and why?
-4. Pick one square and inspect the probe's three logits across a few validation prefixes. When does it confuse mine and theirs? Are the mistakes concentrated in particular game phases?
+4. Pick one square and inspect the probe's three label scores across a few validation prefixes. When does it confuse mine and theirs? Are the mistakes concentrated in particular game phases?
 
 ## References
 

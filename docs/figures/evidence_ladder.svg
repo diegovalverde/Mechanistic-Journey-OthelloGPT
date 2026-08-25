@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="700" viewBox="0 0 760 700" role="img" aria-labelledby="title desc">
+  <title id="title">Evidence ladder for mechanistic claims</title>
+  <desc id="desc">A vertical pedagogical ladder from behavior to decodability, local causal intervention, component localization, path or mediation evidence, and mechanistic explanation.</desc>
+  <defs>
+    <style>
+      :root { --bg:#ffffff; --ink:#172033; --muted:#475569; --stroke:#94a3b8; --accent:#0f766e; --soft:#f8fafc; }
+      @media (prefers-color-scheme: dark) { :root { --bg:#111827; --ink:#f8fafc; --muted:#cbd5e1; --stroke:#64748b; --accent:#5eead4; --soft:#1f2937; } }
+      .title { font: 700 23px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .rung { fill: var(--soft); stroke: var(--stroke); stroke-width: 1.5; rx: 8; }
+      .label { font: 700 17px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .small { font: 14px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--muted); }
+      .rail { stroke: var(--accent); stroke-width: 3; stroke-linecap: round; }
+      .arrow { stroke: var(--accent); stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--accent)"/></marker>
+  </defs>
+  <rect width="760" height="700" fill="var(--bg)" rx="12"/>
+  <text x="380" y="42" text-anchor="middle" class="title">A Pedagogical Evidence Ladder</text>
+  <text x="380" y="68" text-anchor="middle" class="small">Useful for this investigation, not a universal formal taxonomy.</text>
+
+  <line x1="132" y1="120" x2="132" y2="610" class="rail"/>
+  <line x1="628" y1="120" x2="628" y2="610" class="rail"/>
+
+  <g transform="translate(164 100)">
+    <rect width="432" height="68" class="rung"/>
+    <text x="216" y="28" text-anchor="middle" class="label">Behavior</text>
+    <text x="216" y="51" text-anchor="middle" class="small">The model predicts legal moves.</text>
+  </g>
+  <path d="M380 174 L380 209" class="arrow"/>
+
+  <g transform="translate(164 218)">
+    <rect width="432" height="68" class="rung"/>
+    <text x="216" y="28" text-anchor="middle" class="label">Decodability</text>
+    <text x="216" y="51" text-anchor="middle" class="small">Board information can be read.</text>
+  </g>
+  <path d="M380 292 L380 327" class="arrow"/>
+
+  <g transform="translate(164 336)">
+    <rect width="432" height="68" class="rung"/>
+    <text x="216" y="28" text-anchor="middle" class="label">Local causal intervention</text>
+    <text x="216" y="51" text-anchor="middle" class="small">Changing a semantic direction changes outputs.</text>
+  </g>
+  <path d="M380 410 L380 445" class="arrow"/>
+
+  <g transform="translate(164 454)">
+    <rect width="432" height="68" class="rung"/>
+    <text x="216" y="28" text-anchor="middle" class="label">Component localization</text>
+    <text x="216" y="51" text-anchor="middle" class="small">Specific model components matter.</text>
+  </g>
+  <path d="M380 528 L380 563" class="arrow"/>
+
+  <g transform="translate(164 572)">
+    <rect width="432" height="68" class="rung"/>
+    <text x="216" y="25" text-anchor="middle" class="label">Path / mediation evidence</text>
+    <text x="216" y="47" text-anchor="middle" class="small">The effect travels through identifiable routes.</text>
+  </g>
+  <text x="380" y="674" text-anchor="middle" class="label">Mechanistic explanation: how the computation is implemented.</text>
+</svg>

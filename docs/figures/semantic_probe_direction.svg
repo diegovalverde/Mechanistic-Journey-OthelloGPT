@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="520" viewBox="0 0 820 520" role="img" aria-labelledby="title desc">
+  <title id="title">Semantic probe direction cartoon</title>
+  <desc id="desc">A two-dimensional cartoon of a 512-dimensional residual space with loose empty, theirs, and mine regions, and a vector from theirs toward mine labeled v mine-vs-theirs.</desc>
+  <defs>
+    <style>
+      :root { --bg:#ffffff; --ink:#172033; --muted:#475569; --axis:#94a3b8; --mine:#2563eb; --theirs:#dc2626; --empty:#0f766e; --vec:#7c3aed; }
+      @media (prefers-color-scheme: dark) { :root { --bg:#111827; --ink:#f8fafc; --muted:#cbd5e1; --axis:#64748b; --mine:#60a5fa; --theirs:#f87171; --empty:#5eead4; --vec:#c084fc; } }
+      .title { font: 700 23px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .label { font: 700 18px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .small { font: 14px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--muted); }
+      .axis { stroke: var(--axis); stroke-width: 1.5; }
+      .region { opacity: 0.16; }
+      .point { opacity: 0.82; }
+      .vector { stroke: var(--vec); stroke-width: 5; fill: none; marker-end: url(#arrow); }
+      .vector-label { font: 700 17px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: var(--vec); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--vec)"/></marker>
+  </defs>
+  <rect width="820" height="520" fill="var(--bg)" rx="12"/>
+  <text x="410" y="42" text-anchor="middle" class="title">A Probe Weight Difference Defines a Direction</text>
+  <text x="410" y="70" text-anchor="middle" class="small">2D cartoon of a 512-dimensional residual space</text>
+  <line x1="104" y1="430" x2="716" y2="430" class="axis"/>
+  <line x1="104" y1="430" x2="104" y2="104" class="axis"/>
+  <text x="710" y="456" text-anchor="end" class="small">cartoon coordinate 1</text>
+  <text x="84" y="116" text-anchor="end" class="small" transform="rotate(-90 84 116)">cartoon coordinate 2</text>
+
+  <ellipse cx="250" cy="285" rx="112" ry="76" fill="var(--theirs)" class="region"/>
+  <ellipse cx="582" cy="210" rx="116" ry="78" fill="var(--mine)" class="region"/>
+  <ellipse cx="430" cy="344" rx="124" ry="64" fill="var(--empty)" class="region"/>
+
+  <text x="250" y="198" text-anchor="middle" class="label" fill="var(--theirs)">theirs</text>
+  <text x="582" y="118" text-anchor="middle" class="label" fill="var(--mine)">mine</text>
+  <text x="430" y="424" text-anchor="middle" class="label" fill="var(--empty)">empty</text>
+
+  <g fill="var(--theirs)">
+    <circle cx="205" cy="270" r="6" class="point"/><circle cx="246" cy="314" r="5" class="point"/><circle cx="282" cy="254" r="6" class="point"/><circle cx="306" cy="301" r="4" class="point"/><circle cx="228" cy="226" r="5" class="point"/>
+  </g>
+  <g fill="var(--mine)">
+    <circle cx="542" cy="194" r="6" class="point"/><circle cx="590" cy="160" r="5" class="point"/><circle cx="638" cy="226" r="6" class="point"/><circle cx="566" cy="250" r="4" class="point"/><circle cx="620" cy="186" r="5" class="point"/>
+  </g>
+  <g fill="var(--empty)">
+    <circle cx="384" cy="330" r="6" class="point"/><circle cx="436" cy="374" r="5" class="point"/><circle cx="470" cy="330" r="6" class="point"/><circle cx="412" cy="300" r="4" class="point"/><circle cx="502" cy="366" r="5" class="point"/>
+  </g>
+
+  <path d="M292 265 C382 250, 469 231, 552 204" class="vector"/>
+  <text x="398" y="232" class="vector-label">v_mine-vs-theirs</text>
+  <text x="410" y="486" text-anchor="middle" class="small">For a square q, this is W_q,mine - W_q,theirs. The real direction lives in 512 dimensions.</text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="680" viewBox="0 0 860 680" role="img" aria-labelledby="title desc">
+  <title id="title">Semantic residual-space intervention</title>
+  <desc id="desc">A vertical diagram showing a true board with D3 as theirs, a residual vector h, addition of a small alpha times the D3 more mine-like semantic direction, edited residual h prime, the rest of the Transformer, and changed move logits.</desc>
+  <defs>
+    <style>
+      :root { --bg:#ffffff; --ink:#172033; --muted:#475569; --stroke:#94a3b8; --blue:#2563eb; --red:#dc2626; --purple:#7c3aed; --purple-soft:#ede9fe; --soft:#f8fafc; }
+      @media (prefers-color-scheme: dark) { :root { --bg:#111827; --ink:#f8fafc; --muted:#cbd5e1; --stroke:#64748b; --blue:#60a5fa; --red:#f87171; --purple:#c084fc; --purple-soft:#3b225c; --soft:#1f2937; } }
+      .title { font: 700 23px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .label { font: 700 17px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--ink); }
+      .small { font: 14px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: var(--muted); }
+      .box { fill: var(--soft); stroke: var(--stroke); stroke-width: 1.5; rx: 8; }
+      .edit { fill: var(--purple-soft); stroke: var(--purple); stroke-width: 1.8; rx: 8; }
+      .arrow { stroke: var(--purple); stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .grid { fill: transparent; stroke: var(--stroke); stroke-width: 1; }
+      .theirDisc { fill: var(--red); }
+      .mineDisc { fill: var(--blue); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--purple)"/></marker>
+  </defs>
+  <rect width="860" height="680" fill="var(--bg)" rx="12"/>
+  <text x="430" y="38" text-anchor="middle" class="title">From a Probe Direction to a Residual Edit</text>
+  <text x="430" y="66" text-anchor="middle" class="small">Operational residual-space intervention - not a literal board edit.</text>
+
+  <g transform="translate(318 98)">
+    <text x="112" y="-16" text-anchor="middle" class="label">true board: D3 = theirs</text>
+    <g>
+      <rect x="0" y="0" width="28" height="28" class="grid"/><rect x="28" y="0" width="28" height="28" class="grid"/><rect x="56" y="0" width="28" height="28" class="grid"/><rect x="84" y="0" width="28" height="28" class="grid"/><rect x="112" y="0" width="28" height="28" class="grid"/><rect x="140" y="0" width="28" height="28" class="grid"/><rect x="168" y="0" width="28" height="28" class="grid"/><rect x="196" y="0" width="28" height="28" class="grid"/>
+      <rect x="0" y="28" width="28" height="28" class="grid"/><rect x="28" y="28" width="28" height="28" class="grid"/><rect x="56" y="28" width="28" height="28" class="grid"/><rect x="84" y="28" width="28" height="28" class="grid"/><rect x="112" y="28" width="28" height="28" class="grid"/><rect x="140" y="28" width="28" height="28" class="grid"/><rect x="168" y="28" width="28" height="28" class="grid"/><rect x="196" y="28" width="28" height="28" class="grid"/>
+      <rect x="0" y="56" width="28" height="28" class="grid"/><rect x="28" y="56" width="28" height="28" class="grid"/><rect x="56" y="56" width="28" height="28" class="grid"/><rect x="84" y="56" width="28" height="28" class="grid"/><rect x="112" y="56" width="28" height="28" class="grid"/><rect x="140" y="56" width="28" height="28" class="grid"/><rect x="168" y="56" width="28" height="28" class="grid"/><rect x="196" y="56" width="28" height="28" class="grid"/>
+      <circle cx="70" cy="70" r="10" class="theirDisc"/><text x="70" y="104" text-anchor="middle" class="small">D3</text>
+    </g>
+  </g>
+
+  <path d="M430 214 L430 256" class="arrow"/>
+  <rect x="310" y="262" width="240" height="62" class="box"/>
+  <text x="430" y="299" text-anchor="middle" class="label">residual vector h</text>
+
+  <path d="M430 328 L430 366" class="arrow"/>
+  <rect x="238" y="374" width="384" height="72" class="edit"/>
+  <text x="430" y="403" text-anchor="middle" class="label">+ small alpha * semantic direction</text>
+  <text x="430" y="426" text-anchor="middle" class="small">"D3 more mine-like"</text>
+
+  <path d="M430 450 L430 488" class="arrow"/>
+  <rect x="310" y="496" width="240" height="62" class="box"/>
+  <text x="430" y="533" text-anchor="middle" class="label">edited residual h'</text>
+
+  <path d="M554 527 L674 527" class="arrow"/>
+  <rect x="684" y="496" width="138" height="62" class="box"/>
+  <text x="753" y="523" text-anchor="middle" class="label">rest of</text>
+  <text x="753" y="544" text-anchor="middle" class="label">Transformer</text>
+
+  <path d="M753 562 L753 604" class="arrow"/>
+  <rect x="644" y="612" width="218" height="48" class="edit"/>
+  <text x="753" y="642" text-anchor="middle" class="label">move logits change</text>
+</svg>
