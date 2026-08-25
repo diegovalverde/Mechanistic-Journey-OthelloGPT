@@ -7,7 +7,6 @@ Every figure must have a descriptive filename and should be reproducible from co
 Future figure placeholders:
 
 <!-- TODO: transformer_world_model.svg -->
-<!-- TODO: hidden_board_probe.svg -->
 <!-- TODO: probing_vs_causality.svg -->
 <!-- TODO: jacobian_nudge.svg -->
 <!-- TODO: local_vs_average_jspace.svg -->
@@ -15,4 +14,3 @@ Future figure placeholders:
 <!-- TODO: mlp7_legality_flow.svg -->
 <!-- TODO: candidate_neuron_rule.svg -->
 <!-- TODO: full_mechanistic_hypothesis.svg -->
-

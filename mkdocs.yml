@@ -55,6 +55,7 @@ plugins:
 nav:
   - Home: index.md
   - About: about.md
+  - Authoring Guide: authoring_guide.md
   - Part I - The Mystery:
       - "1. Can a Transformer Build a World Model?": part1/chapter01_world_model.md
       - "2. Learning to See the Invisible Board": part1/chapter02_invisible_board.md

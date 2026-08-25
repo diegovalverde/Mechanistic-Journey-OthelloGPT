@@ -21,7 +21,7 @@ Each transcript is just a sequence of symbols. A symbol looks like a coordinate,
 Now someone asks you to play the same game:
 
 ```text
-C4 C3 D3 F4 C5 ...
+C4 C3 D3 E3 B2 ...
 ```
 
 What move comes next?
