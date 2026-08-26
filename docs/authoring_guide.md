@@ -116,8 +116,19 @@ Maintain consistent definitions for these terms:
 - causal intervention: a controlled change to an activation, component, or direction used to test whether outputs change as predicted.
 - Jacobian: a local linear map of how a small activation change affects later quantities.
 - J-space: the space of directions after transformation by a Jacobian, used here to reason about local effects on downstream representations or logits.
+- \(r_\text{pre}\): residual stream entering a transformer block, corresponding to `hook_resid_pre`.
+- `attn_out`: the attention update written to the residual stream, corresponding to `hook_attn_out`.
+- \(r_\text{mid}\): residual stream after the attention update has been added, corresponding to `hook_resid_mid`.
+- `mlp_out`: the MLP update written to the residual stream, corresponding to `hook_mlp_out`.
+- \(r_\text{post}\): residual stream after the full transformer block, corresponding to `hook_resid_post`.
 
 Definitions may become more precise as chapters progress, but they should not silently shift.
+
+Layer numbers for Othello-GPT are zero-based. The model has eight transformer blocks indexed 0 through 7. Layer 7 is the eighth and final transformer block. When ambiguity matters, write "layer 4 (zero-based block index 4)" or equivalent.
+
+Attention patterns are hypothesis-generating evidence, not causal proof. Do not describe an attention pattern as a circuit unless causal tests establish that the relevant head output matters and carries the claimed information.
+
+Component attribution and component ablation are different evidence types. Attribution compares current component outputs with local downstream sensitivities. Ablation changes or replaces a component and reruns the model. Do not describe them interchangeably.
 
 ## Jacobian Notation
 

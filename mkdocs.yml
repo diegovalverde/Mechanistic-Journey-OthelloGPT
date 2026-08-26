@@ -73,6 +73,7 @@ nav:
   - Research:
       - Research Log: research/research_log.md
       - Research Provenance: research/provenance.md
+      - Model Architecture: research/model_architecture.md
       - Findings Snapshot: research/findings_snapshot.md
       - Open Questions: research/open_questions.md
       - Experiment Index: research/experiment_index.md

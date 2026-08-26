@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" role="img" aria-labelledby="title desc">
+  <title id="title">Attribution versus ablation</title>
+  <desc id="desc">Attribution compares component outputs with gradients; ablation reruns after removing or replacing a component.</desc>
+  <style>
+  svg {
+    color-scheme: light dark;
+    --text: #172033;
+    --muted: #5e687c;
+    --line: #243045;
+    --grid: #d7dde8;
+    --fill: #f7f9fc;
+    --blue: #246bfe;
+    --teal: #0f8f7f;
+    --gold: #b98113;
+    --red: #cc4b37;
+  }
+  @media (prefers-color-scheme: dark) {
+    svg {
+      --text: #eef2ff;
+      --muted: #b8c1d3;
+      --line: #dce3f7;
+      --grid: #3b4558;
+      --fill: #1f2633;
+      --blue: #86a9ff;
+      --teal: #5fd4c7;
+      --gold: #ffd27a;
+      --red: #ff8f7d;
+    }
+  }
+  .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .label { font: 600 15px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .small { font: 13px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .tiny { font: 11px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .box { fill: var(--fill); stroke: var(--grid); stroke-width: 1.4; rx: 8; }
+  .pill { fill: transparent; stroke: var(--grid); stroke-width: 1.4; rx: 18; }
+  .line { stroke: var(--line); stroke-width: 2.2; fill: none; }
+  .dash { stroke: var(--grid); stroke-width: 1.6; stroke-dasharray: 6 6; fill: none; }
+  .arrow { stroke: var(--line); stroke-width: 2.2; fill: none; marker-end: url(#arrowLine); }
+  .arrow-blue { stroke: var(--blue); stroke-width: 3; fill: none; marker-end: url(#arrowBlue); }
+  .arrow-teal { stroke: var(--teal); stroke-width: 3; fill: none; marker-end: url(#arrowTeal); }
+  .arrow-gold { stroke: var(--gold); stroke-width: 3; fill: none; marker-end: url(#arrowGold); }
+  .arrow-red { stroke: var(--red); stroke-width: 3; fill: none; marker-end: url(#arrowRed); }
+  .node { fill: var(--fill); stroke: var(--line); stroke-width: 1.6; }
+</style>
+  <defs>
+  <marker id="arrowLine" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#243045"/></marker>
+  <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+  <marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+  <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+  <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+  <text class="title" x="42" y="44">Attribution and ablation ask different questions</text>
+  <rect class="box" x="70" y="120" width="290" height="210"/>
+  <text class="label" x="215.0" y="148" text-anchor="middle">Attribution</text>
+  <text class="small" x="105" y="185">current component output c</text>
+  <text class="small" x="105" y="220">downstream sensitivity g</text>
+  <text class="label" x="105" y="265">score: g^T c</text>
+  <text class="small" x="105" y="295">cheap local ranking signal</text>
+  <rect class="box" x="460" y="120" width="290" height="210"/>
+  <text class="label" x="605.0" y="148" text-anchor="middle">Ablation</text>
+  <text class="small" x="495" y="185">remove, replace, or patch c</text>
+  <text class="small" x="495" y="220">rerun downstream model</text>
+  <text class="label" x="495" y="265">measure output change</text>
+  <text class="small" x="495" y="295">interventional but baseline-dependent</text>
+  <text class="small" x="92" y="390">Neither one alone identifies a complete algorithm.</text>
+</svg>
