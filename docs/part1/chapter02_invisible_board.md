@@ -249,6 +249,25 @@ demos/Othello_GPT_Jacobian_Lens.ipynb
 
 on the `othello-jspace-analysis` branch of `diegovalverde/TransformerLens`.
 
+This experiment should be read as a reproduction and cleanup of an existing result, not as the first discovery of linear board decodability in Othello-GPT. Li et al. introduced the Othello-GPT setting and showed that board state could be recovered with nonlinear probes. Neel Nanda then found the key simplification this chapter relies on: the model has a linear board-state representation when the labels are framed as "my piece" and "their piece" rather than absolute black and white. He also showed that these probe directions could support causal interventions.
+
+Our contribution here is narrower. We rerun the linear probe idea inside the current `othello-jspace-analysis` notebook, using a small explicit simulator, regenerated random-play games, a strict whole-game train/validation split, and exact-prefix overlap removal. The number `0.9796` below is from that executed reproduction. It is not a new claim that replaces Neel's result; it is the local evidence base this book will refer back to in later chapters.
+
+## Why Layer 4?
+
+The choice of layer 4 is not meant to be a claim that layer 4 is uniquely best, and it is not an arbitrary aesthetic choice.
+
+It follows the lineage of Neel's investigation. In his writeup, Neel describes intervening on the residual stream after layer 4, and later notes that although one of his probes was trained on layer 6, the board state had already been computed by layer 4. That makes layer 4 a natural checkpoint: late enough that board information is expected to be present, but early enough that later layers can still use or transform it.
+
+In this notebook, we therefore set:
+
+```python
+PROBE_LAYER = 4
+PROBE_HOOK_NAME = "blocks.4.hook_resid_post"
+```
+
+This should be read as a historically and experimentally motivated choice. A full "which layer is best for board decoding?" study would require training and comparing probes across layers under the same split. Later chapters do perform layer comparisons for legality-related sensitivity, but Chapter 2's board-probe result is specifically the layer-4 result.
+
 The notebook rebuilds a small explicit Othello simulator and regenerates synthetic random-play games using the same move-token convention used by Othello-GPT. The token convention is:
 
 - `0 = pass`
@@ -460,4 +479,4 @@ Chapter 3 is about that gap. It asks why probing is not enough, and what kinds o
 - Executed notebook: `demos/Othello_GPT_Jacobian_Lens.ipynb`, section `7. Train a linear mine / theirs / empty board probe`, on `diegovalverde/TransformerLens`, branch `othello-jspace-analysis`.
 - Project research memory: [provenance](../research/provenance.md), [findings snapshot](../research/findings_snapshot.md), [research log](../research/research_log.md), and [experiment index](../research/experiment_index.md).
 - Li et al., [*Emergent World Representations: Exploring a Sequence Model Trained on a Synthetic Task*](https://openreview.net/forum?id=DeG07_TcZvT), ICLR 2023.
-- Neel Nanda, [*Actually, Othello-GPT Has A Linear Emergent World Representation*](https://www.neelnanda.io/mechanistic-interpretability/othello), 2023.
+- Neel Nanda, [*Actually, Othello-GPT Has A Linear Emergent World Representation*](https://www.neelnanda.io/mechanistic-interpretability/othello), 2023. This is the source for the linear my/their board-representation framing and the layer-4 motivation used in this chapter.
