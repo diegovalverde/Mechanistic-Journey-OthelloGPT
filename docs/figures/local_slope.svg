@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" role="img" aria-labelledby="title desc">
+  <title id="title">Local slope of a nonlinear function</title>
+  <desc id="desc">A nonlinear curve with a tangent line at the current point, showing a small delta x and the predicted delta z.</desc>
+  <style>
+    svg {
+      color-scheme: light dark;
+      --text: #172033;
+      --muted: #5c667a;
+      --axis: #263247;
+      --grid: #d8dde8;
+      --curve: #2563eb;
+      --tangent: #0f8f7f;
+      --delta: #c2410c;
+      --point: #111827;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --text: #eef2ff;
+        --muted: #b7bfd1;
+        --axis: #dce4f4;
+        --grid: #384153;
+        --curve: #7aa7ff;
+        --tangent: #45d6c4;
+        --delta: #fb923c;
+        --point: #f8fafc;
+      }
+    }
+    .title { fill: var(--text); font: 700 22px system-ui, -apple-system, Segoe UI, sans-serif; }
+    .label { fill: var(--text); font: 600 14px system-ui, -apple-system, Segoe UI, sans-serif; }
+    .muted { fill: var(--muted); font: 13px system-ui, -apple-system, Segoe UI, sans-serif; }
+    .axis { stroke: var(--axis); stroke-width: 2; }
+    .grid { stroke: var(--grid); stroke-width: 1; }
+    .curve { fill: none; stroke: var(--curve); stroke-width: 4; }
+    .tangent { stroke: var(--tangent); stroke-width: 3; stroke-dasharray: 8 7; }
+    .delta { stroke: var(--delta); stroke-width: 3; }
+    .guide { stroke: var(--delta); stroke-width: 2; stroke-dasharray: 5 6; }
+    .point { fill: var(--point); }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--delta)"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="64" y="38">Globally nonlinear, locally almost linear</text>
+  <line class="grid" x1="90" y1="350" x2="665" y2="350"/>
+  <line class="grid" x1="90" y1="260" x2="665" y2="260"/>
+  <line class="grid" x1="90" y1="170" x2="665" y2="170"/>
+  <line class="grid" x1="185" y1="72" x2="185" y2="370"/>
+  <line class="grid" x1="330" y1="72" x2="330" y2="370"/>
+  <line class="grid" x1="475" y1="72" x2="475" y2="370"/>
+
+  <line class="axis" x1="90" y1="370" x2="680" y2="370"/>
+  <line class="axis" x1="90" y1="370" x2="90" y2="62"/>
+  <text class="label" x="686" y="375">x</text>
+  <text class="label" x="82" y="55">z(x)</text>
+
+  <path class="curve" d="M 105 322 C 190 342, 235 282, 300 238 C 372 189, 442 205, 516 137 C 568 89, 625 85, 668 112"/>
+  <line class="tangent" x1="230" y1="295" x2="548" y2="126"/>
+
+  <circle class="point" cx="390" cy="210" r="6"/>
+  <text class="label" x="408" y="201">current point</text>
+  <text class="label" x="548" y="126">local tangent</text>
+  <text class="label" x="160" y="335">nonlinear function</text>
+
+  <line class="delta" x1="390" y1="378" x2="450" y2="378" marker-end="url(#arrow)"/>
+  <text class="muted" x="405" y="405">small delta x</text>
+  <line class="guide" x1="390" y1="210" x2="390" y2="370"/>
+  <line class="guide" x1="450" y1="178" x2="450" y2="370"/>
+  <line class="delta" x1="462" y1="210" x2="462" y2="178" marker-end="url(#arrow)"/>
+  <text class="muted" x="476" y="198">predicted delta z</text>
+</svg>

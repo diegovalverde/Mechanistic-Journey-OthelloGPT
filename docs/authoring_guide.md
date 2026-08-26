@@ -118,3 +118,19 @@ Maintain consistent definitions for these terms:
 - J-space: the space of directions after transformation by a Jacobian, used here to reason about local effects on downstream representations or logits.
 
 Definitions may become more precise as chapters progress, but they should not silently shift.
+
+## Jacobian Notation
+
+Use the following notation consistently after Chapter 4:
+
+- \(h\): the current residual-stream activation at a specified layer and token position.
+- \(\delta h\): a small additive residual-stream edit.
+- \(v\): a direction in residual space, often a normalized semantic direction from a probe.
+- \(\alpha\) or \(\epsilon\): a scalar perturbation strength. Prefer \(\alpha\) for semantic interventions and \(\epsilon\) for generic finite-difference checks, unless local context makes the other choice clearer.
+- \(z_m(h)\): one selected output logit, usually the logit for move \(m\), as a function of the chosen residual activation and the downstream computation.
+- \(z(h)\): the vector of output logits produced from the chosen residual activation.
+- \(\nabla_h z_m\): the gradient of one scalar logit with respect to the residual activation, with shape `[d_model]`.
+- \(J(h) = \partial z / \partial h\): the local Jacobian from residual activation to output logits, with shape `[d_vocab_out, d_model]` for logit-space analyses.
+- \(Jv\) or \(J(h)v\): a Jacobian-vector product, interpreted as the first-order predicted change in all output logits from moving along direction \(v\).
+
+Always state the layer, hook, token position, and output being differentiated when reporting an experimental Jacobian result. For Othello-GPT Chapter 4 results, the verified dimensions are `d_model = 512` and `d_vocab_out = 61`.

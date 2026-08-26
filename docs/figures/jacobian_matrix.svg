@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" role="img" aria-labelledby="title desc">
+  <title id="title">Jacobian matrix shape</title>
+  <desc id="desc">A conceptual Jacobian matrix with 61 move-logit rows and 512 residual-coordinate columns.</desc>
+  <style>
+    svg {
+      color-scheme: light dark;
+      --text: #172033;
+      --muted: #5c667a;
+      --grid: #cfd6e5;
+      --axis: #263247;
+      --fill: #e9f7f5;
+      --fill2: #dbeafe;
+      --stroke: #0f766e;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --text: #eef2ff;
+        --muted: #b7bfd1;
+        --grid: #3a4254;
+        --axis: #dce4f4;
+        --fill: #123532;
+        --fill2: #1d3158;
+        --stroke: #45d6c4;
+      }
+    }
+    .title { fill: var(--text); font: 700 22px system-ui, -apple-system, Segoe UI, sans-serif; }
+    .label { fill: var(--text); font: 600 15px system-ui, -apple-system, Segoe UI, sans-serif; }
+    .muted { fill: var(--muted); font: 13px system-ui, -apple-system, Segoe UI, sans-serif; }
+    .cell { fill: var(--fill); stroke: var(--grid); stroke-width: 1; }
+    .row { fill: var(--fill2); stroke: var(--grid); stroke-width: 1; }
+    .outline { fill: none; stroke: var(--stroke); stroke-width: 3; }
+    .brace { fill: none; stroke: var(--axis); stroke-width: 2.5; }
+  </style>
+
+  <text class="title" x="58" y="40">The Jacobian is a local map from residual coordinates to logits</text>
+  <text class="muted" x="58" y="66">Conceptual matrix, not measured values</text>
+
+  <text class="label" x="404" y="105" text-anchor="middle">residual coordinates</text>
+  <text class="muted" x="189" y="132" text-anchor="middle">h1</text>
+  <text class="muted" x="259" y="132" text-anchor="middle">h2</text>
+  <text class="muted" x="329" y="132" text-anchor="middle">h3</text>
+  <text class="muted" x="507" y="132" text-anchor="middle">...</text>
+  <text class="muted" x="633" y="132" text-anchor="middle">h512</text>
+
+  <g transform="translate(150 145)">
+    <rect class="row" x="0" y="0" width="76" height="52"/>
+    <rect class="cell" x="76" y="0" width="76" height="52"/>
+    <rect class="cell" x="152" y="0" width="76" height="52"/>
+    <rect class="cell" x="228" y="0" width="76" height="52"/>
+    <rect class="cell" x="304" y="0" width="76" height="52"/>
+    <rect class="cell" x="380" y="0" width="76" height="52"/>
+    <rect class="cell" x="456" y="0" width="76" height="52"/>
+    <rect class="cell" x="0" y="52" width="76" height="52"/>
+    <rect class="row" x="76" y="52" width="76" height="52"/>
+    <rect class="cell" x="152" y="52" width="76" height="52"/>
+    <rect class="cell" x="228" y="52" width="76" height="52"/>
+    <rect class="cell" x="304" y="52" width="76" height="52"/>
+    <rect class="cell" x="380" y="52" width="76" height="52"/>
+    <rect class="cell" x="456" y="52" width="76" height="52"/>
+    <rect class="cell" x="0" y="104" width="76" height="52"/>
+    <rect class="cell" x="76" y="104" width="76" height="52"/>
+    <rect class="row" x="152" y="104" width="76" height="52"/>
+    <rect class="cell" x="228" y="104" width="76" height="52"/>
+    <rect class="cell" x="304" y="104" width="76" height="52"/>
+    <rect class="cell" x="380" y="104" width="76" height="52"/>
+    <rect class="cell" x="456" y="104" width="76" height="52"/>
+    <rect class="cell" x="0" y="156" width="76" height="52"/>
+    <rect class="cell" x="76" y="156" width="76" height="52"/>
+    <rect class="cell" x="152" y="156" width="76" height="52"/>
+    <rect class="cell" x="228" y="156" width="76" height="52"/>
+    <rect class="cell" x="304" y="156" width="76" height="52"/>
+    <rect class="cell" x="380" y="156" width="76" height="52"/>
+    <rect class="cell" x="456" y="156" width="76" height="52"/>
+    <rect class="cell" x="0" y="208" width="76" height="52"/>
+    <rect class="cell" x="76" y="208" width="76" height="52"/>
+    <rect class="cell" x="152" y="208" width="76" height="52"/>
+    <rect class="cell" x="228" y="208" width="76" height="52"/>
+    <rect class="cell" x="304" y="208" width="76" height="52"/>
+    <rect class="cell" x="380" y="208" width="76" height="52"/>
+    <rect class="row" x="456" y="208" width="76" height="52"/>
+    <rect class="outline" x="0" y="0" width="532" height="260"/>
+    <text class="label" x="266" y="139" text-anchor="middle">J(h)</text>
+  </g>
+
+  <text class="muted" x="112" y="177" text-anchor="end">move 1</text>
+  <text class="muted" x="112" y="229" text-anchor="end">move 2</text>
+  <text class="muted" x="112" y="281" text-anchor="end">move 3</text>
+  <text class="muted" x="112" y="333" text-anchor="end">...</text>
+  <text class="muted" x="112" y="385" text-anchor="end">move 61</text>
+  <text class="label" x="62" y="277" transform="rotate(-90 62 277)" text-anchor="middle">output logits</text>
+
+  <path class="brace" d="M 706 145 C 732 145, 732 185, 706 185 M 732 185 L 732 405 M 706 405 C 732 405, 732 365, 706 365"/>
+  <text class="label" x="754" y="260">shape [61, 512]</text>
+  <text class="muted" x="754" y="286">each row is one logit's gradient</text>
+</svg>

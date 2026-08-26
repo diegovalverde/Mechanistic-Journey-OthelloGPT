@@ -2,6 +2,89 @@
 
 Every new experiment should be recorded here before it becomes polished book prose. Entries should preserve the question, method, result, interpretation, confidence, notebook location, and figure/table references.
 
+## 2026-08-26 - Chapter 4 Jacobian local-linearization details
+
+### Question
+
+Do the local derivatives computed at a TransformerLens residual hook quantitatively predict the effect of actually perturbing Othello-GPT's residual stream?
+
+### Experiment
+
+The executed notebook used `demos/Othello_GPT_Jacobian_Lens.ipynb` on `diegovalverde/TransformerLens`, branch `othello-jspace-analysis`.
+
+The setup was:
+
+- Model dimensions from the printed config: `d_model = 512`, `d_vocab = 61`, and `d_vocab_out = 61`.
+- Source layer: layer 4.
+- Source hook: `blocks.4.hook_resid_post`.
+- Analysis prefix length: 28.
+- Analysis prefix token IDs: `[20, 19, 18, 10, 2, 1, 27, 3, 41, 42, 34, 12, 4, 40, 11, 29, 43, 13, 48, 56, 33, 39, 22, 44, 24, 5, 46, 6]`.
+- Source and target token position: final prefix position, index 27.
+- Legal next moves under the inferred token mapping: `E3`, `B4`, `B5`, `C7`, `F7`, `G7`, `H7`, `C8`, `E8`.
+- Selected move logit: token 21, `E3`.
+- Model favorite move on the same prefix: token 57, `E8`.
+- Selected move baseline logit: `8.940763473510742`.
+- Selected move capture line: `D3`, `C3`.
+- Gradient norm for the selected E3 logit with respect to the layer-4 residual edit variable: `0.17336732149124146`.
+
+Section 5 first tested the derivative machinery along the normalized selected-logit gradient direction. It compared actual logit deltas from hook interventions against first-order predictions for epsilons `0.0001`, `0.0003`, `0.001`, `0.003`, `0.01`, `0.03`, and `0.1`.
+
+Section 9 then tested a semantic board-state intervention. It used the trained layer-4 board probe, selected the square with largest absolute mine-vs-theirs sensitivity for the E3 logit, and perturbed along that normalized probe direction.
+
+### Result
+
+Section 5 finite-difference sanity-check values:
+
+| Epsilon | Actual delta logit | First-order predicted delta logit |
+| --- | ---: | ---: |
+| 0.0001 | 0.000019073 | 0.000017337 |
+| 0.0003 | 0.000052452 | 0.000052010 |
+| 0.001 | 0.000170710 | 0.000173370 |
+| 0.003 | 0.000522610 | 0.000520100 |
+| 0.01 | 0.001734700 | 0.001733700 |
+| 0.03 | 0.005184200 | 0.005201000 |
+| 0.1 | 0.017184000 | 0.017337000 |
+
+Section 9 semantic board-state intervention details:
+
+- Selected intervention square: `G6`, square index 46.
+- Direction: normalized G6 mine-vs-theirs probe direction.
+- Directional derivative `v^T g_m`: `+0.030897`.
+- Tested alphas: `-0.1`, `-0.03`, `-0.01`, `-0.003`, `0.003`, `0.01`, `0.03`, `0.1`.
+
+| Alpha | Predicted delta logit | Actual delta logit | Absolute error |
+| --- | ---: | ---: | ---: |
+| -0.1 | -0.003090 | -0.003156 | 0.000066057 |
+| -0.03 | -0.000927 | -0.000932 | 0.000004844 |
+| -0.01 | -0.000309 | -0.000308 | 0.000000928 |
+| -0.003 | -0.000093 | -0.000095 | 0.000002678 |
+| 0.003 | 0.000093 | 0.000092 | 0.000001137 |
+| 0.01 | 0.000309 | 0.000308 | 0.000000928 |
+| 0.03 | 0.000927 | 0.000919 | 0.000007553 |
+| 0.1 | 0.003090 | 0.003023 | 0.000066504 |
+
+The maximum absolute prediction error across the semantic intervention alphas was `0.000067`.
+
+### Interpretation
+
+These checks support the local use of the Jacobian at the tested layer, position, direction, and perturbation sizes. They verify that the hook site, selected token position, selected output logit, autograd gradient, sign convention, and downstream continuation are mutually consistent.
+
+They do not show that Othello-GPT is globally linear, that the same approximation is equally accurate at other board positions, or that the selected G6 probe direction is a complete semantic variable used by the model. The claim is local: near this layer-4 activation, these small residual edits had output-logit effects that were accurately predicted by the first-order approximation.
+
+### Confidence
+
+Strong evidence for local first-order prediction in the tested examples.
+
+### Related notebook sections
+
+- `5. Sanity check: does the Jacobian predict an actual intervention?`
+- `9. Jacobian prediction vs actual board-state intervention`
+
+### Figures / tables
+
+- `docs/figures/jacobian_prediction_vs_intervention.json`
+- `docs/figures/jacobian_prediction_vs_intervention.svg`
+
 ## 2026-08-25 — Characterizing the Layer-7 legality computation
 
 ### Question

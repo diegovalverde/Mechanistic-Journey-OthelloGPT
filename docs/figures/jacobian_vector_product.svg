@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 440" role="img" aria-labelledby="title desc">
+  <title id="title">Jacobian-vector product</title>
+  <desc id="desc">A 512-dimensional perturbation enters a Jacobian and produces a 61-dimensional predicted logit change.</desc>
+  <style>
+    svg {
+      color-scheme: light dark;
+      --text: #172033;
+      --muted: #5c667a;
+      --stroke: #263247;
+      --box1: #dbeafe;
+      --box2: #e9f7f5;
+      --box3: #fde68a;
+      --accent: #0f8f7f;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --text: #eef2ff;
+        --muted: #b7bfd1;
+        --stroke: #dce4f4;
+        --box1: #1d3158;
+        --box2: #123532;
+        --box3: #4a3710;
+        --accent: #45d6c4;
+      }
+    }
+    .title { fill: var(--text); font: 700 22px system-ui, -apple-system, Segoe UI, sans-serif; }
+    .label { fill: var(--text); font: 700 17px system-ui, -apple-system, Segoe UI, sans-serif; }
+    .muted { fill: var(--muted); font: 13px system-ui, -apple-system, Segoe UI, sans-serif; }
+    .box { stroke: var(--stroke); stroke-width: 2; rx: 8; }
+    .arrow { stroke: var(--accent); stroke-width: 4; fill: none; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="var(--accent)"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="54" y="42">A Jacobian-vector product predicts a whole output change</text>
+  <text class="muted" x="54" y="66">Conceptual dimensionality for Othello-GPT logits</text>
+
+  <rect class="box" x="72" y="150" width="178" height="118" fill="var(--box1)"/>
+  <text class="label" x="161" y="188" text-anchor="middle">delta h</text>
+  <text class="muted" x="161" y="216" text-anchor="middle">one internal edit</text>
+  <text class="muted" x="161" y="240" text-anchor="middle">shape [512]</text>
+
+  <line class="arrow" x1="260" y1="209" x2="343" y2="209"/>
+
+  <rect class="box" x="360" y="124" width="136" height="170" fill="var(--box2)"/>
+  <text class="label" x="428" y="188" text-anchor="middle">J(h)</text>
+  <text class="muted" x="428" y="216" text-anchor="middle">local map</text>
+  <text class="muted" x="428" y="240" text-anchor="middle">shape [61, 512]</text>
+
+  <line class="arrow" x1="506" y1="209" x2="589" y2="209"/>
+
+  <rect class="box" x="606" y="150" width="178" height="118" fill="var(--box3)"/>
+  <text class="label" x="695" y="188" text-anchor="middle">J(h) delta h</text>
+  <text class="muted" x="695" y="216" text-anchor="middle">predicted logit change</text>
+  <text class="muted" x="695" y="240" text-anchor="middle">shape [61]</text>
+
+  <text class="label" x="428" y="352" text-anchor="middle">z(h + delta h) approximately equals z(h) + J(h) delta h</text>
+</svg>
