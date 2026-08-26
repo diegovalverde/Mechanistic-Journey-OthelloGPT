@@ -349,6 +349,21 @@ Strict game-level held-out validation. Source: Othello_GPT_Jacobian_Lens.ipynb, 
 </figcaption>
 </figure>
 
+For the concrete prefix used earlier in the chapter, the same trained probe gives three raw scores for every board square:
+
+$$
+s(q,\text{empty}), \quad s(q,\text{mine}), \quad s(q,\text{theirs}).
+$$
+
+The highest of these three scores is the probe's predicted state for that square. In the figure below, the color summarizes the probe's softmax over those three scores: empty squares tend toward white, current-player squares toward blue, and opponent squares toward red. The numbers inside each square are the raw probe logits, not probabilities.
+
+<figure markdown>
+![Board probe scores after C4 C3 D3 E3 B2](../figures/chapter02_probe_scores_c4_c3_d3_e3_b2.svg)
+<figcaption>
+Probe scores for the legal prefix `C4 C3 D3 E3 B2`, generated from the layer-4 board probe described in the executed notebook. Cell labels are relative to the next player to move: `E` is empty, `M` is mine, and `T` is theirs. The raw source values are stored in `docs/figures/chapter02_probe_scores_c4_c3_d3_e3_b2.json`.
+</figcaption>
+</figure>
+
 But the ownership accuracies are still high. The probe is not merely learning that many squares are empty. It is recovering a large amount of player-relative occupancy information from the residual stream.
 
 The notebook then reshapes the learned parameters into:
