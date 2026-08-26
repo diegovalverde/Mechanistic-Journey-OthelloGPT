@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 450" role="img" aria-labelledby="title desc">
+  <title id="title">J-space context cloud</title>
+  <desc id="desc">One source semantic direction has many local transformed versions across sampled Othello contexts.</desc>
+  <style>
+  svg {
+    color-scheme: light dark;
+    --text: #172033;
+    --muted: #5c667a;
+    --line: #253044;
+    --grid: #d8dde8;
+    --blue: #246bfe;
+    --green: #0f8f7f;
+    --red: #cc4b37;
+    --gold: #b98113;
+    --fill: #f7f9fc;
+  }
+  @media (prefers-color-scheme: dark) {
+    svg {
+      --text: #eef2ff;
+      --muted: #b7bfd1;
+      --line: #dce3f7;
+      --grid: #384153;
+      --blue: #82a7ff;
+      --green: #60d4c6;
+      --red: #ff8a76;
+      --gold: #ffd27a;
+      --fill: #1f2633;
+    }
+  }
+  .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .label { font: 600 15px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .small { font: 13px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .tiny { font: 11px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .axis { stroke: var(--grid); stroke-width: 1.2; }
+  .line { stroke: var(--line); stroke-width: 2.2; fill: none; }
+  .surface { stroke: var(--grid); fill: none; stroke-width: 1.4; }
+  .box { fill: var(--fill); stroke: var(--grid); stroke-width: 1.4; rx: 8; }
+  .arrow-v { stroke: var(--blue); stroke-width: 4; fill: none; marker-end: url(#arrowBlue); }
+  .arrow-local { stroke: var(--green); stroke-width: 4; fill: none; marker-end: url(#arrowGreen); }
+  .arrow-avg { stroke: var(--gold); stroke-width: 4; fill: none; marker-end: url(#arrowGold); }
+  .arrow-red { stroke: var(--red); stroke-width: 4; fill: none; marker-end: url(#arrowRed); }
+  .node { fill: var(--fill); stroke: var(--line); stroke-width: 1.8; }
+</style>
+  <defs>
+  <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+  <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+  <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+  <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+
+  <text class="title" x="36" y="48">One semantic direction, many local images</text>
+  <rect class="box" x="60" y="96" width="250" height="250"/>
+  <rect class="box" x="475" y="96" width="275" height="250"/>
+  <path class="axis" d="M112 280 L280 280 M146 312 L146 145"/>
+  <path class="axis" d="M520 280 L705 280 M545 318 L545 135"/>
+  <path class="arrow-v" d="M146 280 L235 220"/>
+  <text class="small" x="156" y="213">v</text>
+  <text class="small" x="92" y="130">source direction</text>
+  <path class="line" d="M328 220 C380 165, 430 165, 462 220" marker-end="url(#arrowGreen)"/>
+  <path class="line" d="M328 245 C384 245, 420 245, 462 245" marker-end="url(#arrowGreen)"/>
+  <path class="line" d="M328 270 C380 325, 430 325, 462 270" marker-end="url(#arrowGreen)"/>
+  <text class="small" x="356" y="150">different contexts x_i</text>
+  <path class="arrow-local" d="M545 255 L625 206"/>
+  <text class="tiny" x="630" y="210">J1 v</text>
+  <path class="arrow-local" d="M545 255 L642 250"/>
+  <text class="tiny" x="647" y="254">J2 v</text>
+  <path class="arrow-red" d="M545 255 L608 315"/>
+  <text class="tiny" x="613" y="319">J3 v</text>
+  <path class="arrow-local" d="M545 255 L590 188"/>
+  <text class="tiny" x="595" y="192">J4 v</text>
+  <path class="arrow-avg" d="M545 255 L664 282"/>
+  <text class="tiny" x="669" y="286">mean</text>
+
+  <text class="small" x="505" y="130">target-space cloud</text>
+  <text class="tiny" x="508" y="370">Schematic: arrows cluster partly, but not perfectly, around a shared direction.</text>
+</svg>

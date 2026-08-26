@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" role="img" aria-labelledby="title desc">
+  <title id="title">J-space JVP validation</title>
+  <desc id="desc">Measured finite-difference validation metrics for the local JVP are shown as compact gauges.</desc>
+  <style>
+  svg {
+    color-scheme: light dark;
+    --text: #172033;
+    --muted: #5c667a;
+    --line: #253044;
+    --grid: #d8dde8;
+    --blue: #246bfe;
+    --green: #0f8f7f;
+    --red: #cc4b37;
+    --gold: #b98113;
+    --fill: #f7f9fc;
+  }
+  @media (prefers-color-scheme: dark) {
+    svg {
+      --text: #eef2ff;
+      --muted: #b7bfd1;
+      --line: #dce3f7;
+      --grid: #384153;
+      --blue: #82a7ff;
+      --green: #60d4c6;
+      --red: #ff8a76;
+      --gold: #ffd27a;
+      --fill: #1f2633;
+    }
+  }
+  .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .label { font: 600 15px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .small { font: 13px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .tiny { font: 11px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .axis { stroke: var(--grid); stroke-width: 1.2; }
+  .line { stroke: var(--line); stroke-width: 2.2; fill: none; }
+  .surface { stroke: var(--grid); fill: none; stroke-width: 1.4; }
+  .box { fill: var(--fill); stroke: var(--grid); stroke-width: 1.4; rx: 8; }
+  .arrow-v { stroke: var(--blue); stroke-width: 4; fill: none; marker-end: url(#arrowBlue); }
+  .arrow-local { stroke: var(--green); stroke-width: 4; fill: none; marker-end: url(#arrowGreen); }
+  .arrow-avg { stroke: var(--gold); stroke-width: 4; fill: none; marker-end: url(#arrowGold); }
+  .arrow-red { stroke: var(--red); stroke-width: 4; fill: none; marker-end: url(#arrowRed); }
+  .node { fill: var(--fill); stroke: var(--line); stroke-width: 1.8; }
+</style>
+  <defs>
+  <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+  <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+  <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+  <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+
+  <text class="title" x="36" y="48">JVP validation and scale checks</text>
+  <rect class="box" x="72" y="92" width="285" height="210"/>
+  <text class="label" x="104" y="132">Finite-difference cosine</text>
+  <text class="title" x="104" y="190">0.999944</text>
+  <path class="axis" d="M104 232 L320 232"/>
+  <path class="arrow-local" d="M104 232 L318 232"/>
+  <text class="small" x="104" y="268">Central difference, epsilon = 0.001</text>
+  <rect class="box" x="403" y="92" width="285" height="210"/>
+  <text class="label" x="435" y="132">Relative error</text>
+  <text class="title" x="435" y="190">0.010651</text>
+  <path class="axis" d="M435 232 L650 232"/>
+  <path class="arrow-red" d="M435 232 L480 232"/>
+  <text class="small" x="435" y="268">Direction nearly perfect; magnitude differs slightly.</text>
+  <rect class="box" x="155" y="332" width="450" height="72"/>
+  <text class="small" x="188" y="362">||J_local v|| = 1.496970</text>
+  <text class="small" x="188" y="385">||E[J_i v]|| = 0.819020; local-vs-average cosine = 0.617840</text>
+  <text class="tiny" x="90" y="436">Measured values copied from executed notebook section 10.</text>
+</svg>

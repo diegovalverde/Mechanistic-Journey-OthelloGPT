@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 440" role="img" aria-labelledby="title desc">
+  <title id="title">Probe space versus J-space</title>
+  <desc id="desc">Probe geometry asks what can be decoded; J-space asks how a semantic direction is locally transformed downstream.</desc>
+  <style>
+  svg {
+    color-scheme: light dark;
+    --text: #172033;
+    --muted: #5c667a;
+    --line: #253044;
+    --grid: #d8dde8;
+    --blue: #246bfe;
+    --green: #0f8f7f;
+    --red: #cc4b37;
+    --gold: #b98113;
+    --fill: #f7f9fc;
+  }
+  @media (prefers-color-scheme: dark) {
+    svg {
+      --text: #eef2ff;
+      --muted: #b7bfd1;
+      --line: #dce3f7;
+      --grid: #384153;
+      --blue: #82a7ff;
+      --green: #60d4c6;
+      --red: #ff8a76;
+      --gold: #ffd27a;
+      --fill: #1f2633;
+    }
+  }
+  .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .label { font: 600 15px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .small { font: 13px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .tiny { font: 11px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .axis { stroke: var(--grid); stroke-width: 1.2; }
+  .line { stroke: var(--line); stroke-width: 2.2; fill: none; }
+  .surface { stroke: var(--grid); fill: none; stroke-width: 1.4; }
+  .box { fill: var(--fill); stroke: var(--grid); stroke-width: 1.4; rx: 8; }
+  .arrow-v { stroke: var(--blue); stroke-width: 4; fill: none; marker-end: url(#arrowBlue); }
+  .arrow-local { stroke: var(--green); stroke-width: 4; fill: none; marker-end: url(#arrowGreen); }
+  .arrow-avg { stroke: var(--gold); stroke-width: 4; fill: none; marker-end: url(#arrowGold); }
+  .arrow-red { stroke: var(--red); stroke-width: 4; fill: none; marker-end: url(#arrowRed); }
+  .node { fill: var(--fill); stroke: var(--line); stroke-width: 1.8; }
+</style>
+  <defs>
+  <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+  <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+  <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+  <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+
+  <text class="title" x="36" y="48">Probe space and J-space ask different questions</text>
+  <rect class="box" x="58" y="92" width="340" height="245"/>
+  <rect class="box" x="462" y="92" width="340" height="245"/>
+  <text class="label" x="92" y="130">Probe space</text>
+  <circle class="node" cx="126" cy="205" r="28"/>
+  <path class="arrow-v" d="M158 205 L252 205"/>
+  <circle class="node" cx="292" cy="205" r="28"/>
+  <text class="small" x="100" y="210">h</text>
+  <text class="small" x="192" y="194">probe v</text>
+  <text class="small" x="265" y="210">label</text>
+  <text class="small" x="92" y="285">Question: what board fact can be decoded here?</text>
+  <text class="label" x="496" y="130">J-space</text>
+  <circle class="node" cx="530" cy="205" r="28"/>
+  <path class="arrow-v" d="M562 205 L640 205"/>
+  <circle class="node" cx="680" cy="205" r="28"/>
+  <path class="arrow-local" d="M705 224 L760 268"/>
+  <text class="small" x="525" y="210">v</text>
+  <text class="small" x="588" y="194">J_x</text>
+  <text class="small" x="657" y="210">J_x v</text>
+  <text class="small" x="496" y="285">Question: how does downstream computation transform it?</text>
+</svg>

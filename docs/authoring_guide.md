@@ -134,3 +134,9 @@ Use the following notation consistently after Chapter 4:
 - \(Jv\) or \(J(h)v\): a Jacobian-vector product, interpreted as the first-order predicted change in all output logits from moving along direction \(v\).
 
 Always state the layer, hook, token position, and output being differentiated when reporting an experimental Jacobian result. For Othello-GPT Chapter 4 results, the verified dimensions are `d_model = 512` and `d_vocab_out = 61`.
+
+For hidden-state transport analyses after Chapter 5, state the source representation and the target representation explicitly. Do not silently reuse logit-space Jacobian notation when the actual function maps from one residual-stream state to a later residual-stream state. It is acceptable to write \(J_x v\) for the local image of a source-space direction \(v\), but the prose must specify the context \(x\), source hook, source position, target hook or target representation, target position, and vector dimension.
+
+Use \(\mathbb{E}_x[J_x v]\), \(\bar{J}v\), or \(\bar{v}_J\) only when the averaging procedure has been specified. If the implementation averages JVPs rather than materializing full Jacobian matrices, say so directly.
+
+When comparing directions, define cosine similarity as an angle-based comparison. A cosine is not a percentage of shared computation; never write or imply that a cosine of 0.62 means "62% the same."

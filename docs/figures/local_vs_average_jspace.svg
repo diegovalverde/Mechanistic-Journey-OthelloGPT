@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" role="img" aria-labelledby="title desc">
+  <title id="title">Local versus averaged J-space</title>
+  <desc id="desc">Schematic arrows show the measured cosine between local and averaged transformed G6 mine-vs-theirs directions.</desc>
+  <style>
+  svg {
+    color-scheme: light dark;
+    --text: #172033;
+    --muted: #5c667a;
+    --line: #253044;
+    --grid: #d8dde8;
+    --blue: #246bfe;
+    --green: #0f8f7f;
+    --red: #cc4b37;
+    --gold: #b98113;
+    --fill: #f7f9fc;
+  }
+  @media (prefers-color-scheme: dark) {
+    svg {
+      --text: #eef2ff;
+      --muted: #b7bfd1;
+      --line: #dce3f7;
+      --grid: #384153;
+      --blue: #82a7ff;
+      --green: #60d4c6;
+      --red: #ff8a76;
+      --gold: #ffd27a;
+      --fill: #1f2633;
+    }
+  }
+  .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .label { font: 600 15px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .small { font: 13px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .tiny { font: 11px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .axis { stroke: var(--grid); stroke-width: 1.2; }
+  .line { stroke: var(--line); stroke-width: 2.2; fill: none; }
+  .surface { stroke: var(--grid); fill: none; stroke-width: 1.4; }
+  .box { fill: var(--fill); stroke: var(--grid); stroke-width: 1.4; rx: 8; }
+  .arrow-v { stroke: var(--blue); stroke-width: 4; fill: none; marker-end: url(#arrowBlue); }
+  .arrow-local { stroke: var(--green); stroke-width: 4; fill: none; marker-end: url(#arrowGreen); }
+  .arrow-avg { stroke: var(--gold); stroke-width: 4; fill: none; marker-end: url(#arrowGold); }
+  .arrow-red { stroke: var(--red); stroke-width: 4; fill: none; marker-end: url(#arrowRed); }
+  .node { fill: var(--fill); stroke: var(--line); stroke-width: 1.8; }
+</style>
+  <defs>
+  <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+  <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+  <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+  <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+
+  <text class="title" x="36" y="48">Local vs averaged transformed direction</text>
+  <path class="axis" d="M110 390 L650 390 M160 430 L160 105"/>
+  <circle class="node" cx="160" cy="390" r="6"/>
+  <path class="arrow-local" d="M160 390 L365 155"/>
+  <path class="arrow-avg" d="M160 390 L522 315"/>
+  <path class="surface" d="M247 291 A150 150 0 0 1 307 359"/>
+  <text class="label" x="374" y="151">local J_x v</text>
+  <text class="label" x="532" y="320">average E[J_x v]</text>
+  <text class="label" x="304" y="266">cosine = 0.617840</text>
+  <text class="small" x="315" y="287">angle approx 51.8 degrees</text>
+  <text class="small" x="76" y="455">Arrow lengths and layout are schematic. The cosine annotation is measured from the executed notebook.</text>
+</svg>

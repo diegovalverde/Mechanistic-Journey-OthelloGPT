@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 420" role="img" aria-labelledby="title desc">
+  <title id="title">Jacobian direction transport</title>
+  <desc id="desc">A semantic direction in source residual space is mapped by a local Jacobian into a final residual-space direction.</desc>
+  <style>
+  svg {
+    color-scheme: light dark;
+    --text: #172033;
+    --muted: #5c667a;
+    --line: #253044;
+    --grid: #d8dde8;
+    --blue: #246bfe;
+    --green: #0f8f7f;
+    --red: #cc4b37;
+    --gold: #b98113;
+    --fill: #f7f9fc;
+  }
+  @media (prefers-color-scheme: dark) {
+    svg {
+      --text: #eef2ff;
+      --muted: #b7bfd1;
+      --line: #dce3f7;
+      --grid: #384153;
+      --blue: #82a7ff;
+      --green: #60d4c6;
+      --red: #ff8a76;
+      --gold: #ffd27a;
+      --fill: #1f2633;
+    }
+  }
+  .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .label { font: 600 15px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .small { font: 13px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .tiny { font: 11px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .axis { stroke: var(--grid); stroke-width: 1.2; }
+  .line { stroke: var(--line); stroke-width: 2.2; fill: none; }
+  .surface { stroke: var(--grid); fill: none; stroke-width: 1.4; }
+  .box { fill: var(--fill); stroke: var(--grid); stroke-width: 1.4; rx: 8; }
+  .arrow-v { stroke: var(--blue); stroke-width: 4; fill: none; marker-end: url(#arrowBlue); }
+  .arrow-local { stroke: var(--green); stroke-width: 4; fill: none; marker-end: url(#arrowGreen); }
+  .arrow-avg { stroke: var(--gold); stroke-width: 4; fill: none; marker-end: url(#arrowGold); }
+  .arrow-red { stroke: var(--red); stroke-width: 4; fill: none; marker-end: url(#arrowRed); }
+  .node { fill: var(--fill); stroke: var(--line); stroke-width: 1.8; }
+</style>
+  <defs>
+  <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+  <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+  <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+  <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+
+  <text class="title" x="36" y="48">First-order transport of a direction</text>
+  <rect class="box" x="70" y="92" width="250" height="210"/>
+  <rect class="box" x="500" y="92" width="250" height="210"/>
+  <text class="label" x="108" y="128">source residual space</text>
+  <text class="small" x="108" y="154">layer 4, final token</text>
+  <text class="label" x="536" y="128">target residual space</text>
+  <text class="small" x="536" y="154">final residual, same token</text>
+  <path class="axis" d="M115 250 L280 250 M150 285 L150 140"/>
+  <path class="axis" d="M545 250 L710 250 M580 285 L580 140"/>
+  <path class="arrow-v" d="M150 250 L245 190"/>
+  <path class="arrow-local" d="M580 250 L675 214"/>
+  <text class="small" x="170" y="185">v = G6 mine-vs-theirs</text>
+  <text class="small" x="600" y="207">J_x v</text>
+  <path class="line" d="M335 197 L482 197" marker-end="url(#arrowGreen)"/>
+  <text class="label" x="382" y="184">F_x</text>
+  <text class="small" x="330" y="235">linearized by J_x at this context</text>
+  <text class="tiny" x="116" y="352">The arrow is not physically carried through the model; this is the local derivative of the downstream function.</text>
+</svg>

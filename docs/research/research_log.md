@@ -2,6 +2,103 @@
 
 Every new experiment should be recorded here before it becomes polished book prose. Entries should preserve the question, method, result, interpretation, confidence, notebook location, and figure/table references.
 
+## 2026-08-26 - Local vs averaged J-space
+
+### Question
+
+For a fixed semantic board-state direction, is the downstream transformed direction mostly stable across Othello contexts, or does it depend strongly on the current board and move history?
+
+Chapter 4 validated local Jacobian predictions for one source activation and one output logit. This experiment asks a different question: if we use the same source-space semantic direction at layer 4, how similar is its local downstream image \(J_x v\) to an average image across many sampled positions?
+
+### Experiment
+
+The executed notebook used `demos/Othello_GPT_Jacobian_Lens.ipynb` on `diegovalverde/TransformerLens`, branch `othello-jspace-analysis`, section `10. Local J-space vs averaged J-space`.
+
+The source setup was:
+
+- Model dimensions from the printed config: `d_model = 512`, `d_vocab = 61`, and `d_vocab_out = 61`.
+- Source layer: layer 4.
+- Source hook: `blocks.4.hook_resid_post`.
+- Analysis prefix length: 28.
+- Analysis prefix token IDs: `[20, 19, 18, 10, 2, 1, 27, 3, 41, 42, 34, 12, 4, 40, 11, 29, 43, 13, 48, 56, 33, 39, 22, 44, 24, 5, 46, 6]`.
+- Source token position: final prefix position, index 27.
+- Target token position: final prefix position, index 27.
+- Semantic direction: G6 mine-vs-theirs, square index 46.
+- Direction construction: the layer-4 board probe weight difference `W[G6, mine] - W[G6, theirs]`, normalized before JVP computation.
+
+The target of the JVP was not the output-logit vector. It was the final residual-stream representation at the same token position, immediately before final layer normalization and unembedding. Operationally, the notebook defined a function that:
+
+1. cloned the cached `blocks.4.hook_resid_post` activation,
+2. added a source residual delta at position 27,
+3. continued the model from layer 5 through the end of the transformer stack with `start_at_layer=layer + 1` and `stop_at_layer=model.cfg.n_layers`,
+4. returned `final_resid[0, target_pos, :]`.
+
+The notebook computed the local transformed direction with `torch.autograd.functional.jvp` at a zero residual delta, using the normalized G6 mine-vs-theirs direction as the tangent vector. The resulting vectors therefore had shape `[512]`.
+
+The local JVP was validated with a central finite difference:
+
+```text
+(epsilon v) and -(epsilon v)
+epsilon = 0.001
+(F(h + epsilon v) - F(h - epsilon v)) / (2 epsilon)
+```
+
+For the averaged direction, the notebook sampled `100` unique Othello positions. Sampling used `JSPACE_AVG_PREFIX_MIN_LEN = 12`, `JSPACE_AVG_PREFIX_MAX_LEN = 45`, and `JSPACE_AVG_RANDOM_SEED = PROBE_RANDOM_SEED + 1`. For each sampled position, the code generated a random legal Othello game, selected one prefix length uniformly from the valid range, skipped duplicate prefixes and positions with no legal moves, and recorded the legal move that maximized `(num_flipped, num_capture_lines, -token_id)`. The chosen move metadata was used to ensure nontrivial legal positions, but the averaged transformed direction was the average of `J_i v` for the same fixed G6 semantic source direction:
+
+```text
+J_avg_v = mean_i J_i v
+```
+
+The notebook did not materialize or average a full `512 x 512` Jacobian matrix.
+
+### Result
+
+The local JVP finite-difference validation reported:
+
+- Local JVP finite-difference cosine: `0.999944`.
+- Local JVP finite-difference relative error: `0.010651`.
+
+The local-vs-average table reported:
+
+| Quantity | Value |
+| --- | ---: |
+| source-space derivative `v^T grad z_m` | `0.030897` |
+| final-readout effect of local `J_local_v` | `0.030897` |
+| final-readout effect of averaged `J_avg_v` | `0.018023` |
+| `||J_local_v||` | `1.496970` |
+| `||J_avg_v||` | `0.819020` |
+| `cos(J_local_v, J_avg_v)` | `0.617840` |
+
+The sampled J-space positions output was:
+
+```text
+Sampled J-space positions (independent games, one prefix each): 100
+Sampled prefix lengths (min / mean / max): 12 / 29.14 / 45
+First five sampled moves: [(30, 'F3', 5), (29, 'A3', 3), (28, 'G4', 5), (16, 'B4', 4), (16, 'D1', 5)]
+```
+
+### Interpretation
+
+The local JVP validation supports that the computed JVP is the correct first-order downstream displacement for the tested source hook, token position, target final-residual representation, and semantic direction.
+
+The local-vs-average cosine of `0.617840` suggests that the local transformed G6 mine-vs-theirs direction has a substantial shared component with the average transformed direction, but it is not close to context-independent. This should not be read as "62% the same." Cosine similarity is an angle-based comparison, not a percentage of shared computation. The result is best interpreted as moderate evidence for shared transformed geometry plus substantial context-dependent variation.
+
+This experiment does not show that every board-state direction behaves this way, that all layers share the same J-space geometry, or that the averaged transformed direction is a complete account of the model's legality computation.
+
+### Confidence
+
+Moderate evidence for context-dependent but nonrandom transformed geometry in the tested G6 mine-vs-theirs direction.
+
+### Related notebook section
+
+- `10. Local J-space vs averaged J-space`
+
+### Figures / tables
+
+- `docs/figures/jspace_jvp_validation.json`
+- `docs/figures/jspace_jvp_validation.svg`
+- `docs/figures/local_vs_average_jspace.svg`
+
 ## 2026-08-26 - Chapter 4 Jacobian local-linearization details
 
 ### Question

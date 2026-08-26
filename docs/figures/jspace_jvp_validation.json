@@ -1,0 +1,111 @@
+{
+  "source_repository": "diegovalverde/TransformerLens",
+  "source_checkout": "/Users/diegovalverdegarro/workspace/projects/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "section": "10. Local J-space vs averaged J-space",
+  "model_dimensions": {
+    "d_model": 512,
+    "d_vocab": 61,
+    "d_vocab_out": 61
+  },
+  "source": {
+    "layer": 4,
+    "hook": "blocks.4.hook_resid_post",
+    "position": 27,
+    "prefix_length": 28,
+    "prefix_token_ids": [
+      20,
+      19,
+      18,
+      10,
+      2,
+      1,
+      27,
+      3,
+      41,
+      42,
+      34,
+      12,
+      4,
+      40,
+      11,
+      29,
+      43,
+      13,
+      48,
+      56,
+      33,
+      39,
+      22,
+      44,
+      24,
+      5,
+      46,
+      6
+    ]
+  },
+  "target": {
+    "representation": "final residual stream immediately before final layer norm and unembedding",
+    "position": 27,
+    "dimension": 512
+  },
+  "semantic_direction": {
+    "square": "G6",
+    "square_index": 46,
+    "contrast": "mine-vs-theirs",
+    "construction": "normalized layer-4 linear-probe weight difference W[q,mine] - W[q,theirs]"
+  },
+  "jvp": {
+    "implementation": "torch.autograd.functional.jvp over final_resid_from_delta",
+    "finite_difference": "central difference (F(h + eps v) - F(h - eps v)) / (2 eps)",
+    "finite_difference_epsilon": 0.001,
+    "local_jvp_finite_difference_cosine": 0.999944,
+    "local_jvp_finite_difference_relative_error": 0.010651
+  },
+  "averaging": {
+    "num_positions": 100,
+    "prefix_len_min": 12,
+    "prefix_len_mean": 29.14,
+    "prefix_len_max": 45,
+    "random_seed": "PROBE_RANDOM_SEED + 1",
+    "sampling": "Generate random legal Othello games, choose one unique prefix per sampled position with length uniformly sampled from the valid range, require at least one legal move, and record the legal move that maximizes flipped pieces, then capture lines, then lower token id.",
+    "first_five_sampled_moves": [
+      {
+        "prefix_len": 30,
+        "chosen_move": "F3",
+        "num_flipped": 5
+      },
+      {
+        "prefix_len": 29,
+        "chosen_move": "A3",
+        "num_flipped": 3
+      },
+      {
+        "prefix_len": 28,
+        "chosen_move": "G4",
+        "num_flipped": 5
+      },
+      {
+        "prefix_len": 16,
+        "chosen_move": "B4",
+        "num_flipped": 4
+      },
+      {
+        "prefix_len": 16,
+        "chosen_move": "D1",
+        "num_flipped": 5
+      }
+    ]
+  },
+  "results": {
+    "source_space_derivative_v_dot_grad_z_E3": 0.030897,
+    "final_readout_effect_local_J_local_v": 0.030897,
+    "final_readout_effect_averaged_J_avg_v": 0.018023,
+    "norm_J_local_v": 1.49697,
+    "norm_J_avg_v": 0.81902,
+    "local_vs_average_cosine": 0.61784,
+    "local_vs_average_angle_degrees": 51.841429165482594
+  },
+  "figure_note": "Measured annotations come from executed notebook output; schematic arrow geometry is illustrative unless explicitly stated otherwise."
+}

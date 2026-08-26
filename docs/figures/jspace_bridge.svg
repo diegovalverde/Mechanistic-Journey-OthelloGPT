@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 560" role="img" aria-labelledby="title desc">
+  <title id="title">J-space as a bridge</title>
+  <desc id="desc">J-space connects semantic directions from probes to local Jacobian transport and later component hypotheses.</desc>
+  <style>
+  svg {
+    color-scheme: light dark;
+    --text: #172033;
+    --muted: #5c667a;
+    --line: #253044;
+    --grid: #d8dde8;
+    --blue: #246bfe;
+    --green: #0f8f7f;
+    --red: #cc4b37;
+    --gold: #b98113;
+    --fill: #f7f9fc;
+  }
+  @media (prefers-color-scheme: dark) {
+    svg {
+      --text: #eef2ff;
+      --muted: #b7bfd1;
+      --line: #dce3f7;
+      --grid: #384153;
+      --blue: #82a7ff;
+      --green: #60d4c6;
+      --red: #ff8a76;
+      --gold: #ffd27a;
+      --fill: #1f2633;
+    }
+  }
+  .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .label { font: 600 15px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--text); }
+  .small { font: 13px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .tiny { font: 11px system-ui, -apple-system, Segoe UI, sans-serif; fill: var(--muted); }
+  .axis { stroke: var(--grid); stroke-width: 1.2; }
+  .line { stroke: var(--line); stroke-width: 2.2; fill: none; }
+  .surface { stroke: var(--grid); fill: none; stroke-width: 1.4; }
+  .box { fill: var(--fill); stroke: var(--grid); stroke-width: 1.4; rx: 8; }
+  .arrow-v { stroke: var(--blue); stroke-width: 4; fill: none; marker-end: url(#arrowBlue); }
+  .arrow-local { stroke: var(--green); stroke-width: 4; fill: none; marker-end: url(#arrowGreen); }
+  .arrow-avg { stroke: var(--gold); stroke-width: 4; fill: none; marker-end: url(#arrowGold); }
+  .arrow-red { stroke: var(--red); stroke-width: 4; fill: none; marker-end: url(#arrowRed); }
+  .node { fill: var(--fill); stroke: var(--line); stroke-width: 1.8; }
+</style>
+  <defs>
+  <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+  <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+  <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+  <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+  <rect class="box" x="235" y="105" width="350" height="58"/>
+  <text class="label" x="270" y="129">semantic direction</text>
+  <text class="small" x="270" y="150">G6 mine-vs-theirs</text>
+  <path class="line" d="M410 169 L410 199" marker-end="url(#arrowGreen)"/>
+  <rect class="box" x="235" y="200" width="350" height="58"/>
+  <text class="label" x="270" y="224">local Jacobian</text>
+  <text class="small" x="270" y="245">context-specific J_x</text>
+  <path class="line" d="M410 264 L410 294" marker-end="url(#arrowGreen)"/>
+  <rect class="box" x="235" y="295" width="350" height="58"/>
+  <text class="label" x="270" y="319">transformed direction</text>
+  <text class="small" x="270" y="340">J_x v</text>
+  <path class="line" d="M410 359 L410 389" marker-end="url(#arrowGreen)"/>
+  <rect class="box" x="235" y="390" width="350" height="58"/>
+  <text class="label" x="270" y="414">compare contexts</text>
+  <text class="small" x="270" y="435">local vs average</text>
+  <path class="line" d="M410 454 L410 484" marker-end="url(#arrowGreen)"/>
+  <rect class="box" x="235" y="485" width="350" height="58"/>
+  <text class="label" x="270" y="509">candidate computation</text>
+  <text class="small" x="270" y="530">where is it produced?</text>
+
+  <text class="title" x="36" y="48">J-space bridges representation and computation</text>
+  <text class="small" x="76" y="520">Probe analysis supplies interpretable directions. Jacobian analysis asks what the downstream model does to them.</text>
+</svg>
