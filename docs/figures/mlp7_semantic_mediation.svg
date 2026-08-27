@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" role="img" aria-labelledby="title desc">
+<title id="title">MLP7 semantic mediation diagnostic</title>
+<desc id="desc">Example-level mediation-like effects for two capture-line and two unrelated semantic edits.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8;--blue:#246bfe;--red:#cc4b37;--teal:#0f8f7f}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153;--blue:#86a9ff;--red:#ff8f7d;--teal:#5fd4c7}}
+.title{font:700 24px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.label{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.small{font:12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.axis{stroke:var(--grid);stroke-width:1.1}.pos{fill:var(--teal)}.neg{fill:var(--red)}
+</style>
+<text class="title" x="42" y="48">Semantic edit x MLP7 ablation diagnostic</text>
+<text class="small" x="42" y="72">M = delta L normal - delta L with MLP7 ablated. Example-level diagnostic, not a dataset distribution.</text>
+<line class="axis" x1="360" y1="100" x2="360" y2="250"/>
+<text class="label" x="330" y="126" text-anchor="end">C3 capture</text>
+<rect class="pos" x="360.0" y="110" width="68.6" height="22" rx="4"/>
+<text class="small" x="436.6" y="126" text-anchor="start">0.013071</text>
+<text class="label" x="330" y="162" text-anchor="end">D3 capture</text>
+<rect class="pos" x="360.0" y="146" width="313.3" height="22" rx="4"/>
+<text class="small" x="681.3" y="162" text-anchor="start">0.059675</text>
+<text class="label" x="330" y="198" text-anchor="end">G4 unrelated</text>
+<rect class="neg" x="336.3" y="182" width="23.7" height="22" rx="4"/>
+<text class="small" x="328.3" y="198" text-anchor="end">-0.004507</text>
+<text class="label" x="330" y="234" text-anchor="end">F6 unrelated</text>
+<rect class="neg" x="313.8" y="218" width="46.2" height="22" rx="4"/>
+<text class="small" x="305.8" y="234" text-anchor="end">-0.008799</text>
+<text class="small" x="42" y="300">Mean capture-edit M = 0.036373; mean unrelated-edit M = -0.006653.</text>
+<metadata>{"source": "24. Capture-line intervention x component ablation interaction", "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb", "branch": "othello-jspace-analysis"}</metadata>
+</svg>

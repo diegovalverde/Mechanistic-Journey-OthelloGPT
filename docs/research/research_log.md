@@ -2,6 +2,208 @@
 
 Every new experiment should be recorded here before it becomes polished book prose. Entries should preserve the question, method, result, interpretation, confidence, notebook location, and figure/table references.
 
+## 2026-08-27 - Localizing capture-line legality geometry to layer 7
+
+### Question
+
+Where in the network does board-state sensitivity become selectively aligned with the squares that make a legal move possible?
+
+### Legality contrast
+
+The executed notebook used the selected legal move's logit minus the mean logit of currently illegal empty-square move tokens:
+
+```text
+L_m = z_m - mean_{j in illegal empty-square moves} z_j
+```
+
+The illegal baseline is the actual illegal EMPTY-square move set in the current Othello position. It excludes occupied squares, non-move starting-center squares, and `pass`.
+
+### Concrete E3 example
+
+The analysis example selected `E3` as the target move. Its verified capture ray was:
+
+```text
+E3 target
+D3 opponent
+C3 opponent
+B3 friendly terminator
+```
+
+Notebook section `11. A legality score instead of a raw move logit` reported:
+
+| Quantity | Value |
+| --- | ---: |
+| Raw `E3` logit | 8.9408 |
+| Mean illegal empty-square logit | -1.5438 |
+| Mean other-legal logit | 8.9298 |
+| Legality contrast | 10.4845 |
+| Legal-preference contrast | 0.0110 |
+| Rank among all output tokens | 4 |
+| Rank among current legal moves | 4 |
+| Illegal empty-square tokens in contrast | 23 |
+
+### Layer-4 aggregate result
+
+The first dataset-level layer-4 aggregate was negative/inconclusive. It reported mean(capture - unrelated occupied) `-0.000499`, bootstrap 95% CI `[-0.003646, 0.002784]`, mean capture/unrelated ratio `1.118791`, and mean shuffled capture/unrelated ratio `1.038956`.
+
+### Layer sweep
+
+The layer sweep in notebook section `17. Which layer computes legality?` trained lightweight board probes for layers `2`, `4`, `6`, and `7`, for `8` epochs each. It used the union of capture-line opponent squares and friendly terminators as the capture-support set, and unrelated occupied squares as controls.
+
+| Layer | Probe validation accuracy | Capture-vs-unrelated ratio | Capture-minus-unrelated |
+| ---: | ---: | ---: | ---: |
+| 2 | 0.883759 | 1.076216 | -0.000256 |
+| 4 | 0.952699 | 1.098189 | -0.000439 |
+| 6 | 0.891667 | 1.006662 | -0.000596 |
+| 7 | 0.850000 | 2.251362 | 0.026569 |
+
+### Stronger Layer-7 validation
+
+Notebook section `19. Is the layer-7 legality enrichment real?` focused the validation on capture-opponent squares versus unrelated occupied controls. It used position-level means, `1000` bootstrap samples, `300` shuffled-square repeats, and `RATIO_EPSILON = 1e-9`.
+
+| Metric | Value |
+| --- | ---: |
+| Capture mean | 0.063157 |
+| Unrelated occupied mean | 0.022995 |
+| Difference | 0.040162 |
+| Ratio | 2.746573 |
+| Difference 95% CI | [0.035965, 0.044268] |
+| Ratio 95% CI | [2.524081, 2.971348] |
+| Shuffled-null mean ratio | 1.046078 |
+| Shuffled-null 95th percentile | 1.176336 |
+| Empirical permutation p | 0.003322 |
+
+The bootstrap resampled positions rather than individual squares. The shuffled control permuted square labels inside each layer-7 sensitivity map before recomputing capture-opponent and unrelated-occupied means.
+
+### Interpretation
+
+Strong evidence: capture-line semantic geometry is enriched at layer 7.
+
+Not established: responsible component, algorithm, neuron, or complete circuit.
+
+### Related notebook sections
+
+- `11. A legality score instead of a raw move logit`
+- `12. Which board squares causally support legality?`
+- `15. Dataset-level legality relevance test`
+- `16. Path structure, not just square relevance`
+- `17. Which layer computes legality?`
+- `19. Is the layer-7 legality enrichment real?`
+
+### Figures
+
+- `docs/figures/chapter07_layer_sweep.json`
+- `docs/figures/chapter07_layer_sweep.svg`
+- `docs/figures/chapter07_layer7_validation.json`
+- `docs/figures/chapter07_layer7_validation.svg`
+
+## 2026-08-27 - Localizing the layer-7 legality effect to MLP7
+
+### Question
+
+Within layer 7, which component most strongly affects the selected-move legality contrast?
+
+### Component attribution
+
+Notebook section `20. Layer-7 component decomposition` used:
+
+```text
+A_c = dot(component output, legality gradient)
+```
+
+The individual head vectors came from `blocks.7.attn.hook_result`; MLP7 came from `blocks.7.hook_mlp_out`. Over `30` component positions, MLP7 ranked first by mean absolute attribution:
+
+| Component | Mean signed attribution | Mean absolute attribution |
+| --- | ---: | ---: |
+| MLP7 | 0.126682 | 0.267666 |
+| L7H0 | 0.169024 | 0.201140 |
+| L7H2 | 0.157269 | 0.186625 |
+| L7H7 | 0.135668 | 0.180907 |
+
+In the concrete `E3` example, MLP7 attribution was `-0.560007`, the largest absolute component attribution.
+
+### Component ablation
+
+Notebook section `21. Causal ablation of layer-7 components` patched each component at the final token and reran the model. Heads were patched at `blocks.7.attn.hook_result[:, final_token, head, :]`; MLP7 was patched at `blocks.7.hook_mlp_out[:, final_token, :]`. Replacements were mean activations from the 30-position component set.
+
+Sign convention:
+
+```text
+delta_legality_contrast = L_ablate - L_clean
+```
+
+| Component | Mean signed effect | Mean absolute effect | Median effect |
+| --- | ---: | ---: | ---: |
+| MLP7 | -0.105164 | 0.262614 | -0.128594 |
+| L7H7 | -0.109719 | 0.109719 | -0.104066 |
+| L7H2 | -0.093151 | 0.094140 | -0.093622 |
+| L7H0 | -0.090048 | 0.090048 | -0.083029 |
+
+MLP7 had the largest mean absolute ablation effect under this intervention.
+
+### Semantic mediation diagnostic
+
+Notebook section `24. Capture-line intervention x component ablation interaction` measured an example-level interaction:
+
+```text
+M = delta_L_normal - delta_L_component_ablated
+```
+
+For MLP7 on the concrete example, two capture-line edits had mediation-like effects `0.013071` for `C3` and `0.059675` for `D3`. Two unrelated edits had effects `-0.004507` for `G4` and `-0.008799` for `F6`. Mean over all four rows was `0.014860`. This is a small example-level diagnostic, not a dataset-level mediation distribution.
+
+### Neuron attribution ranking
+
+Notebook sections `25. What is MLP7 doing?` and `28. Fix the candidate MLP7 legality neurons` decomposed MLP7 into neuron writes `post_activation_j * W_out[j, :]` and ranked neurons by mean absolute legality attribution over `30` positions.
+
+The fixed top-20 candidate MLP7 neurons were:
+
+```text
+399, 1322, 1576, 366, 558, 1858, 1747, 495, 1167, 14,
+1400, 272, 1673, 1953, 991, 734, 1000, 877, 125, 912
+```
+
+Neuron 399 had mean signed legality attribution `-0.219701` and mean absolute legality attribution `0.276027`.
+
+### Top-N vs random group ablations
+
+Notebook section `26. MLP7 neuron ablation` patched selected MLP7 `hook_post` activations at the final token to mean post-activation baselines. It compared top-attribution groups against `25` random same-size groups for each size.
+
+Sign convention:
+
+```text
+legality_degradation = L_clean - L_ablate
+```
+
+| Group size | Top-attribution group | Random same-size mean |
+| ---: | ---: | ---: |
+| 1 | -0.137254 | 0.000685 |
+| 2 | -0.153469 | -0.001759 |
+| 5 | -0.204493 | -0.000735 |
+| 10 | -0.335030 | 0.002325 |
+| 20 | -0.543530 | 0.012949 |
+
+### Interpretation and claim boundaries
+
+Strong evidence: MLP7 is the most important tested layer-7 component under component attribution and component ablation.
+
+Moderate evidence: high-attribution MLP7 neuron groups identify an unusually important subpopulation compared with random groups.
+
+Not established: MLP7 computes the legality algorithm; attention is irrelevant; neuron 399 or the top-20 group implements the Othello rule; a complete attention-to-MLP-to-logit circuit.
+
+### Figures
+
+- `docs/figures/layer7_component_map.svg`
+- `docs/figures/mlp7_component_attribution.json`
+- `docs/figures/mlp7_component_attribution.svg`
+- `docs/figures/mlp7_component_ablation.json`
+- `docs/figures/mlp7_component_ablation.svg`
+- `docs/figures/attention_to_mlp7_hypothesis.svg`
+- `docs/figures/mlp7_semantic_mediation.json`
+- `docs/figures/mlp7_semantic_mediation.svg`
+- `docs/figures/mlp7_neuron_group_ablation.json`
+- `docs/figures/mlp7_neuron_group_ablation.svg`
+- `docs/figures/evidence_ladder_mlp7.svg`
+
 ## 2026-08-26 - Local vs averaged J-space
 
 ### Question

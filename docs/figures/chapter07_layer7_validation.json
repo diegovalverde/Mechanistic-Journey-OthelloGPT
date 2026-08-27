@@ -1,0 +1,36 @@
+{
+  "source_repository": "diegovalverde/TransformerLens",
+  "source_checkout": "/Users/diegovalverdegarro/workspace/projects/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "notebook_section": "19. Is the layer-7 legality enrichment real?",
+  "figure": "docs/figures/chapter07_layer7_validation.svg",
+  "configuration": {
+    "component_layer": 7,
+    "bootstrap_samples": 1000,
+    "shuffle_repeats": 300,
+    "ratio_epsilon": 1e-9,
+    "probe_direction": "Layer-7 mine-vs-theirs directions from the lightweight layer-7 board probe.",
+    "gradient_target": "Selected legal move legality contrast: selected legal move logit minus mean illegal empty-square move logit.",
+    "bootstrap_procedure": "For each sampled position, compute capture-opponent and unrelated-occupied position means; resample positions with replacement and recompute mean difference and mean ratio.",
+    "shuffle_procedure": "For each repeat and position, permute the 64 square labels inside the layer-7 mine-vs-theirs sensitivity map, then compare shuffled capture-opponent squares with shuffled unrelated occupied controls."
+  },
+  "category_distributions": [
+    {"category": "capture_opponent", "count": 205, "mean": 0.061847, "median": 0.044633, "std": 0.050225, "iqr": 0.06324},
+    {"category": "nearby_irrelevant", "count": 595, "mean": 0.037307, "median": 0.028864, "std": 0.033152, "iqr": 0.037535},
+    {"category": "unrelated_empty", "count": 1618, "mean": 0.032901, "median": 0.026925, "std": 0.02761, "iqr": 0.032141},
+    {"category": "capture_terminator", "count": 101, "mean": 0.022928, "median": 0.018961, "std": 0.016832, "iqr": 0.023708},
+    {"category": "unrelated_occupied", "count": 1085, "mean": 0.022898, "median": 0.018482, "std": 0.018553, "iqr": 0.024698}
+  ],
+  "validation": {
+    "capture_mean": 0.063157,
+    "unrelated_occupied_mean": 0.022995,
+    "difference": 0.040162,
+    "ratio": 2.746573,
+    "bootstrap_difference_95_ci": [0.035965, 0.044268],
+    "bootstrap_ratio_95_ci": [2.524081, 2.971348],
+    "shuffled_null_mean_ratio": 1.046078,
+    "shuffled_null_95th_percentile": 1.176336,
+    "empirical_permutation_p": 0.003322
+  }
+}

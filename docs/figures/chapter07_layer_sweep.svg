@@ -1,44 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="420" viewBox="0 0 820 420" role="img" aria-labelledby="title desc">
-  <title id="title">Layer sweep capture-line legality enrichment</title>
-  <desc id="desc">Measured capture-vs-unrelated ratios for layers 2, 4, 6, and 7: 1.076216, 1.098189, 1.006662, and 2.251362.</desc>
-  <style>
-    .axis { stroke: #334155; stroke-width: 1.5; }
-    .grid { stroke: #cbd5e1; stroke-width: 1; opacity: 0.75; }
-    .label { fill: #0f172a; font: 14px sans-serif; }
-    .small { fill: #475569; font: 12px sans-serif; }
-    .title { fill: #0f172a; font: 20px sans-serif; font-weight: 700; }
-    .bar { fill: #2563eb; }
-    .bar7 { fill: #dc2626; }
-  </style>
-  <rect width="820" height="420" fill="none"/>
-  <text x="55" y="38" class="title">Layer 7 Is Different</text>
-  <text x="55" y="62" class="small">Capture-vs-unrelated legality sensitivity ratio from notebook section 17</text>
-  <line x1="90" y1="340" x2="760" y2="340" class="axis"/>
-  <line x1="90" y1="80" x2="90" y2="340" class="axis"/>
-  <line x1="90" y1="340" x2="760" y2="340" class="grid"/>
-  <line x1="90" y1="276.6" x2="760" y2="276.6" class="grid"/>
-  <line x1="90" y1="213.2" x2="760" y2="213.2" class="grid"/>
-  <line x1="90" y1="149.8" x2="760" y2="149.8" class="grid"/>
-  <line x1="90" y1="86.4" x2="760" y2="86.4" class="grid"/>
-  <text x="56" y="344" class="small">0.0</text>
-  <text x="56" y="281" class="small">0.5</text>
-  <text x="56" y="217" class="small">1.0</text>
-  <text x="56" y="154" class="small">1.5</text>
-  <text x="56" y="90" class="small">2.0</text>
-  <text x="92" y="76" class="small">ratio</text>
-  <g>
-    <rect x="150" y="203.6" width="74" height="136.4" class="bar"/>
-    <rect x="300" y="200.8" width="74" height="139.2" class="bar"/>
-    <rect x="450" y="212.4" width="74" height="127.6" class="bar"/>
-    <rect x="600" y="54.6" width="74" height="285.4" class="bar7"/>
-    <text x="168" y="362" class="label">2</text>
-    <text x="318" y="362" class="label">4</text>
-    <text x="468" y="362" class="label">6</text>
-    <text x="618" y="362" class="label">7</text>
-    <text x="139" y="195" class="small">1.076216</text>
-    <text x="289" y="192" class="small">1.098189</text>
-    <text x="439" y="204" class="small">1.006662</text>
-    <text x="589" y="46" class="small">2.251362</text>
-  </g>
-  <text x="373" y="395" class="label">layer</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" role="img" aria-labelledby="title desc">
+<title id="title">Layer sweep: capture-line legality enrichment</title>
+<desc id="desc">Measured capture-vs-unrelated ratio and probe validation accuracy for layers 2, 4, 6, and 7.</desc>
+<style>
+svg { color-scheme: light dark; --text:#172033; --muted:#5c667a; --grid:#d8dde8; --fill:#f7f9fc; --blue:#246bfe; --teal:#0f8f7f; --gold:#b98113; --red:#cc4b37; }
+@media (prefers-color-scheme: dark) { svg { --text:#eef2ff; --muted:#b7bfd1; --grid:#384153; --fill:#1f2633; --blue:#86a9ff; --teal:#5fd4c7; --gold:#ffd27a; --red:#ff8f7d; } }
+.title{font:700 24px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}
+.label{font:600 14px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}
+.small{font:12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.axis{stroke:var(--grid);stroke-width:1.2}.bar{fill:var(--blue)}.acc{fill:var(--teal)}.zero{stroke:var(--red);stroke-width:1.5;stroke-dasharray:5 5}.box{fill:var(--fill);stroke:var(--grid);stroke-width:1.2;rx:8}
+</style>
+<text class="title" x="42" y="48">Layer sweep: legality enrichment appears late</text>
+<text class="small" x="42" y="72">Measured notebook output, section 17. Ratio axis starts at 0; neutral ratio = 1.0.</text>
+<line class="axis" x1="88" y1="350" x2="660" y2="350"/>
+<line class="axis" x1="88" y1="100" x2="88" y2="350"/>
+<line class="axis" x1="88" y1="350.0" x2="660" y2="350.0"/>
+<text class="small" x="74" y="354.0" text-anchor="end">0.0</text>
+<line class="axis" x1="88" y1="300.0" x2="660" y2="300.0"/>
+<text class="small" x="74" y="304.0" text-anchor="end">0.5</text>
+<line class="zero" x1="88" y1="250.0" x2="660" y2="250.0"/>
+<text class="small" x="74" y="254.0" text-anchor="end">1.0</text>
+<line class="axis" x1="88" y1="200.0" x2="660" y2="200.0"/>
+<text class="small" x="74" y="204.0" text-anchor="end">1.5</text>
+<line class="axis" x1="88" y1="150.0" x2="660" y2="150.0"/>
+<text class="small" x="74" y="154.0" text-anchor="end">2.0</text>
+<line class="axis" x1="88" y1="100.0" x2="660" y2="100.0"/>
+<text class="small" x="74" y="104.0" text-anchor="end">2.5</text>
+<text class="small" x="30" y="226" transform="rotate(-90 30 226)" text-anchor="middle">capture / unrelated ratio</text>
+<rect class="bar" x="94" y="242.4" width="52" height="107.6" rx="4"/>
+<text class="label" x="120" y="234.4" text-anchor="middle">1.076</text>
+<rect class="acc" x="100" y="325.5" width="40" height="79.5" rx="4"/>
+<text class="small" x="120" y="430" text-anchor="middle">L2</text>
+<text class="small" x="120" y="390" text-anchor="middle">acc 0.884</text>
+<rect class="bar" x="219" y="240.2" width="52" height="109.8" rx="4"/>
+<text class="label" x="245" y="232.2" text-anchor="middle">1.098</text>
+<rect class="acc" x="225" y="319.3" width="40" height="85.7" rx="4"/>
+<text class="small" x="245" y="430" text-anchor="middle">L4</text>
+<text class="small" x="245" y="390" text-anchor="middle">acc 0.953</text>
+<rect class="bar" x="344" y="249.3" width="52" height="100.7" rx="4"/>
+<text class="label" x="370" y="241.3" text-anchor="middle">1.007</text>
+<rect class="acc" x="350" y="324.7" width="40" height="80.3" rx="4"/>
+<text class="small" x="370" y="430" text-anchor="middle">L6</text>
+<text class="small" x="370" y="390" text-anchor="middle">acc 0.892</text>
+<rect class="bar" x="469" y="124.9" width="52" height="225.1" rx="4"/>
+<text class="label" x="495" y="116.9" text-anchor="middle">2.251</text>
+<rect class="acc" x="475" y="328.5" width="40" height="76.5" rx="4"/>
+<text class="small" x="495" y="430" text-anchor="middle">L7</text>
+<text class="small" x="495" y="390" text-anchor="middle">acc 0.850</text>
+<rect class="box" x="520" y="112" width="184" height="78"/>
+<rect class="bar" x="538" y="132" width="18" height="18" rx="3"/><text class="small" x="566" y="146">enrichment ratio</text>
+<rect class="acc" x="538" y="160" width="18" height="18" rx="3"/><text class="small" x="566" y="174">probe accuracy</text>
+<text class="small" x="92" y="452">Probe accuracy is shown separately below each layer; it is not plotted on a second y-axis.</text>
+<metadata>{"source": "17. Which layer computes legality?", "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb", "branch": "othello-jspace-analysis"}</metadata>
 </svg>

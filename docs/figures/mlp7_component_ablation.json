@@ -1,0 +1,29 @@
+{
+  "source_repository": "diegovalverde/TransformerLens",
+  "source_checkout": "/Users/diegovalverdegarro/workspace/projects/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "notebook_section": "21. Causal ablation of layer-7 components",
+  "figure": "docs/figures/mlp7_component_ablation.svg",
+  "configuration": {
+    "layer": 7,
+    "num_positions": 30,
+    "component_positions": "First 30 sampled legality positions from the notebook's sampled_legality_positions list.",
+    "replacement_baseline": "Mean component activation over the 30-position component set.",
+    "head_ablation": "Patch one head's vector at blocks.7.attn.hook_result[:, final_token, head, :] to that head's mean replacement vector.",
+    "mlp_ablation": "Patch blocks.7.hook_mlp_out[:, final_token, :] to the mean MLP7 output vector.",
+    "downstream": "The model is rerun with hooks in a normal forward pass and logits are recomputed.",
+    "sign_convention": "delta_legality_contrast = L_ablate - L_clean; negative values mean the replacement reduced the selected move's legality contrast."
+  },
+  "components": [
+    {"component": "MLP7", "mean_signed_effect": -0.105164, "mean_absolute_effect": 0.262614, "median_effect": -0.128594, "mean_selected_logit_effect": -0.10168, "mean_legal_preference_effect": -0.130038, "mean_entropy_effect": -0.080419, "num_positions": 30, "rank": 1},
+    {"component": "L7H7", "mean_signed_effect": -0.109719, "mean_absolute_effect": 0.109719, "median_effect": -0.104066, "mean_selected_logit_effect": -0.081282, "mean_legal_preference_effect": 0.000449, "mean_entropy_effect": 0.000283, "num_positions": 30, "rank": 2},
+    {"component": "L7H2", "mean_signed_effect": -0.093151, "mean_absolute_effect": 0.09414, "median_effect": -0.093622, "mean_selected_logit_effect": -0.071195, "mean_legal_preference_effect": 0.006325, "mean_entropy_effect": 0.000045, "num_positions": 30, "rank": 3},
+    {"component": "L7H0", "mean_signed_effect": -0.090048, "mean_absolute_effect": 0.090048, "median_effect": -0.083029, "mean_selected_logit_effect": -0.076222, "mean_legal_preference_effect": 0.001289, "mean_entropy_effect": 0.000029, "num_positions": 30, "rank": 4},
+    {"component": "L7H3", "mean_signed_effect": -0.050368, "mean_absolute_effect": 0.053335, "median_effect": -0.047586, "mean_selected_logit_effect": -0.036045, "mean_legal_preference_effect": 0.001863, "mean_entropy_effect": 0.000024, "num_positions": 30, "rank": 5},
+    {"component": "L7H1", "mean_signed_effect": 0.017107, "mean_absolute_effect": 0.03142, "median_effect": 0.009137, "mean_selected_logit_effect": -0.001614, "mean_legal_preference_effect": 0.002401, "mean_entropy_effect": 0.000154, "num_positions": 30, "rank": 6},
+    {"component": "L7H5", "mean_signed_effect": 0.001272, "mean_absolute_effect": 0.020224, "median_effect": 0.004613, "mean_selected_logit_effect": -0.006459, "mean_legal_preference_effect": 0.000519, "mean_entropy_effect": -0.000086, "num_positions": 30, "rank": 7},
+    {"component": "L7H6", "mean_signed_effect": 0.007529, "mean_absolute_effect": 0.018022, "median_effect": 0.001273, "mean_selected_logit_effect": -0.003348, "mean_legal_preference_effect": 0.000544, "mean_entropy_effect": -0.000025, "num_positions": 30, "rank": 8},
+    {"component": "L7H4", "mean_signed_effect": 0.001514, "mean_absolute_effect": 0.007506, "median_effect": 0.002101, "mean_selected_logit_effect": -0.002327, "mean_legal_preference_effect": 0.000157, "mean_entropy_effect": 0.000005, "num_positions": 30, "rank": 9}
+  ]
+}

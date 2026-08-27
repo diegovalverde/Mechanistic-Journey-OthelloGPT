@@ -1,0 +1,44 @@
+{
+  "source_repository": "diegovalverde/TransformerLens",
+  "source_checkout": "/Users/diegovalverdegarro/workspace/projects/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "notebook_section": "17. Which layer computes legality?",
+  "figure": "docs/figures/chapter07_layer_sweep.svg",
+  "configuration": {
+    "layers": [2, 4, 6, 7],
+    "probe_epochs": 8,
+    "probe_direction": "mine-vs-theirs direction from each layer's lightweight board probe",
+    "score": "Mean absolute legality-gradient projection on capture-supporting squares divided by mean absolute projection on unrelated occupied controls.",
+    "capture_set": "Union of capture-line opponent squares and friendly terminators.",
+    "control_set": "Unrelated occupied squares.",
+    "ratio_epsilon": 1e-9,
+    "sampling": "The sampled legality-position set from notebook section 15: random legal Othello games, prefix lengths between 12 and 45, duplicate prefixes skipped, selected legal move chosen by maximizing flipped pieces, then number of capture lines, then lower token id."
+  },
+  "data": [
+    {
+      "layer": 2,
+      "probe_validation_accuracy": 0.883759,
+      "capture_vs_unrelated_ratio": 1.076216,
+      "capture_minus_unrelated": -0.000256
+    },
+    {
+      "layer": 4,
+      "probe_validation_accuracy": 0.952699,
+      "capture_vs_unrelated_ratio": 1.098189,
+      "capture_minus_unrelated": -0.000439
+    },
+    {
+      "layer": 6,
+      "probe_validation_accuracy": 0.891667,
+      "capture_vs_unrelated_ratio": 1.006662,
+      "capture_minus_unrelated": -0.000596
+    },
+    {
+      "layer": 7,
+      "probe_validation_accuracy": 0.85,
+      "capture_vs_unrelated_ratio": 2.251362,
+      "capture_minus_unrelated": 0.026569
+    }
+  ]
+}

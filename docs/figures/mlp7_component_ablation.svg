@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 520" role="img" aria-labelledby="title desc">
+<title id="title">MLP7 component ablation</title>
+<desc id="desc">Mean absolute ablation effect for each layer-7 attention head and MLP7.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8;--blue:#246bfe;--teal:#0f8f7f;--red:#cc4b37}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153;--blue:#86a9ff;--teal:#5fd4c7;--red:#ff8f7d}}
+.title{font:700 24px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.label{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.small{font:12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.axis{stroke:var(--grid);stroke-width:1.1}.bar{fill:var(--blue)}.neg{fill:var(--red)}.pos{fill:var(--teal)}
+</style>
+<text class="title" x="42" y="48">Component ablation inside layer 7</text>
+<text class="small" x="42" y="72">Delta L = L_ablate - L_clean. Negative signed values mean removal reduced the legality contrast.</text>
+<line class="axis" x1="200" y1="98" x2="200" y2="430"/>
+<text class="label" x="180" y="129" text-anchor="end">MLP7</text>
+<rect class="bar" x="200" y="112" width="430.0" height="22" rx="4"/>
+<text class="small" x="638.0" y="128">|dL| 0.262614; signed -0.105164</text>
+<text class="label" x="180" y="163" text-anchor="end">L7H7</text>
+<rect class="bar" x="200" y="146" width="179.7" height="22" rx="4"/>
+<text class="small" x="387.7" y="162">|dL| 0.109719; signed -0.109719</text>
+<text class="label" x="180" y="197" text-anchor="end">L7H2</text>
+<rect class="bar" x="200" y="180" width="154.1" height="22" rx="4"/>
+<text class="small" x="362.1" y="196">|dL| 0.094140; signed -0.093151</text>
+<text class="label" x="180" y="231" text-anchor="end">L7H0</text>
+<rect class="bar" x="200" y="214" width="147.4" height="22" rx="4"/>
+<text class="small" x="355.4" y="230">|dL| 0.090048; signed -0.090048</text>
+<text class="label" x="180" y="265" text-anchor="end">L7H3</text>
+<rect class="bar" x="200" y="248" width="87.3" height="22" rx="4"/>
+<text class="small" x="295.3" y="264">|dL| 0.053335; signed -0.050368</text>
+<text class="label" x="180" y="299" text-anchor="end">L7H1</text>
+<rect class="bar" x="200" y="282" width="51.4" height="22" rx="4"/>
+<text class="small" x="259.4" y="298">|dL| 0.031420; signed 0.017107</text>
+<text class="label" x="180" y="333" text-anchor="end">L7H5</text>
+<rect class="bar" x="200" y="316" width="33.1" height="22" rx="4"/>
+<text class="small" x="241.1" y="332">|dL| 0.020224; signed 0.001272</text>
+<text class="label" x="180" y="367" text-anchor="end">L7H6</text>
+<rect class="bar" x="200" y="350" width="29.5" height="22" rx="4"/>
+<text class="small" x="237.5" y="366">|dL| 0.018022; signed 0.007529</text>
+<text class="label" x="180" y="401" text-anchor="end">L7H4</text>
+<rect class="bar" x="200" y="384" width="12.3" height="22" rx="4"/>
+<text class="small" x="220.3" y="400">|dL| 0.007506; signed 0.001514</text>
+<text class="small" x="42" y="474">Components were replaced at the final token with mean activations from the 30-position component set, then logits were recomputed.</text>
+<metadata>{"source": "21. Causal ablation of layer-7 components", "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb", "branch": "othello-jspace-analysis"}</metadata>
+</svg>

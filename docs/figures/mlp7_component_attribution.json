@@ -1,0 +1,51 @@
+{
+  "source_repository": "diegovalverde/TransformerLens",
+  "source_checkout": "/Users/diegovalverdegarro/workspace/projects/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "notebook_section": "20. Layer-7 component decomposition",
+  "figure": "docs/figures/mlp7_component_attribution.svg",
+  "configuration": {
+    "layer": 7,
+    "num_positions": 30,
+    "gradient_target": "Selected legal move legality contrast.",
+    "head_source": "Per-head result tensors from blocks.7.attn.hook_result, not the aggregate hook_attn_out tensor.",
+    "mlp_source": "blocks.7.hook_mlp_out.",
+    "attribution": "A_c = dot(component_output_at_final_token, legality_gradient_at_layer_7_final_token).",
+    "absolute_attribution": "abs(A_c)."
+  },
+  "example": {
+    "selected_move": "E3",
+    "selected_move_token": 21,
+    "legality_contrast": 10.484534,
+    "components": [
+      {"component": "MLP7", "legality_attribution": -0.560007, "absolute_attribution": 0.560007, "rank": 1},
+      {"component": "L7H2", "legality_attribution": 0.351337, "absolute_attribution": 0.351337, "rank": 2},
+      {"component": "L7H0", "legality_attribution": 0.221331, "absolute_attribution": 0.221331, "rank": 3},
+      {"component": "L7H4", "legality_attribution": 0.128856, "absolute_attribution": 0.128856, "rank": 4},
+      {"component": "L7H1", "legality_attribution": 0.113646, "absolute_attribution": 0.113646, "rank": 5},
+      {"component": "L7H5", "legality_attribution": 0.069681, "absolute_attribution": 0.069681, "rank": 6},
+      {"component": "L7H6", "legality_attribution": 0.042409, "absolute_attribution": 0.042409, "rank": 7},
+      {"component": "L7H3", "legality_attribution": -0.017783, "absolute_attribution": 0.017783, "rank": 8},
+      {"component": "L7H7", "legality_attribution": -0.003058, "absolute_attribution": 0.003058, "rank": 9}
+    ],
+    "block_summary": [
+      {"quantity": "resid_pre L7", "legality_attribution": 0.288673},
+      {"quantity": "attn_out L7", "legality_attribution": 0.271383},
+      {"quantity": "mlp_out L7", "legality_attribution": -0.560007},
+      {"quantity": "resid_post L7", "legality_attribution": 0.000048},
+      {"quantity": "final legality contrast", "legality_attribution": 10.484534}
+    ]
+  },
+  "aggregate": [
+    {"component": "MLP7", "mean_legality_attribution": 0.126682, "mean_absolute_attribution": 0.267666, "median_legality_attribution": 0.135275, "num_positions": 30, "rank": 1},
+    {"component": "L7H0", "mean_legality_attribution": 0.169024, "mean_absolute_attribution": 0.20114, "median_legality_attribution": 0.147394, "num_positions": 30, "rank": 2},
+    {"component": "L7H2", "mean_legality_attribution": 0.157269, "mean_absolute_attribution": 0.186625, "median_legality_attribution": 0.0709, "num_positions": 30, "rank": 3},
+    {"component": "L7H7", "mean_legality_attribution": 0.135668, "mean_absolute_attribution": 0.180907, "median_legality_attribution": 0.111529, "num_positions": 30, "rank": 4},
+    {"component": "L7H3", "mean_legality_attribution": 0.057958, "mean_absolute_attribution": 0.128902, "median_legality_attribution": 0.047306, "num_positions": 30, "rank": 5},
+    {"component": "L7H4", "mean_legality_attribution": 0.027255, "mean_absolute_attribution": 0.066253, "median_legality_attribution": 0.014419, "num_positions": 30, "rank": 6},
+    {"component": "L7H6", "mean_legality_attribution": 0.033227, "mean_absolute_attribution": 0.061204, "median_legality_attribution": 0.044634, "num_positions": 30, "rank": 7},
+    {"component": "L7H1", "mean_legality_attribution": 0.026097, "mean_absolute_attribution": 0.060749, "median_legality_attribution": 0.022503, "num_positions": 30, "rank": 8},
+    {"component": "L7H5", "mean_legality_attribution": 0.040836, "mean_absolute_attribution": 0.055079, "median_legality_attribution": 0.045661, "num_positions": 30, "rank": 9}
+  ]
+}

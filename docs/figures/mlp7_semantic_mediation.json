@@ -1,0 +1,28 @@
+{
+  "source_repository": "diegovalverde/TransformerLens",
+  "source_checkout": "/Users/diegovalverdegarro/workspace/projects/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "notebook_section": "24. Capture-line intervention x component ablation interaction",
+  "figure": "docs/figures/mlp7_semantic_mediation.svg",
+  "configuration": {
+    "component": "MLP7",
+    "example": "Concrete E3 analysis prefix.",
+    "semantic_edit_alpha": 0.3,
+    "edit_direction": "Layer-4 mine-vs-theirs semantic direction for selected squares.",
+    "component_ablation": "MLP7 output at the final token patched to the mean MLP7 output baseline using the same component-ablation hook as section 21.",
+    "quantity": "mediation_like_effect = delta_L_normal - delta_L_component_ablated.",
+    "boundary": "This is an example-level interaction diagnostic, not a dataset-level mediation distribution."
+  },
+  "rows": [
+    {"component": "MLP7", "edit_group": "capture-line semantic edits", "square": "C3", "chosen_sign": -1.0, "delta_L_normal": -0.012246, "delta_L_component_ablated": -0.025317, "mediation_like_effect": 0.013071, "edited_legality_normal": 10.472287, "edited_legality_component_ablated": 11.01739},
+    {"component": "MLP7", "edit_group": "capture-line semantic edits", "square": "D3", "chosen_sign": -1.0, "delta_L_normal": -0.007092, "delta_L_component_ablated": -0.066767, "mediation_like_effect": 0.059675, "edited_legality_normal": 10.477442, "edited_legality_component_ablated": 10.975941},
+    {"component": "MLP7", "edit_group": "unrelated-square semantic edits", "square": "G4", "chosen_sign": 1.0, "delta_L_normal": -0.007164, "delta_L_component_ablated": -0.002657, "mediation_like_effect": -0.004507, "edited_legality_normal": 10.477369, "edited_legality_component_ablated": 11.040051},
+    {"component": "MLP7", "edit_group": "unrelated-square semantic edits", "square": "F6", "chosen_sign": -1.0, "delta_L_normal": -0.011683, "delta_L_component_ablated": -0.002885, "mediation_like_effect": -0.008799, "edited_legality_normal": 10.47285, "edited_legality_component_ablated": 11.039823}
+  ],
+  "summary": {
+    "mean_mediation_like_effect_all_rows": 0.01486,
+    "mean_mediation_like_effect_capture_edits": 0.036373,
+    "mean_mediation_like_effect_unrelated_edits": -0.006653
+  }
+}

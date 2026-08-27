@@ -44,3 +44,36 @@ python3 scripts/generate_chapter06_architecture_figures.py
 ```
 
 This regenerates the Chapter 6 conceptual architecture figures. These SVGs document the verified Othello-GPT dimensions, block ordering, hook locations, and evidence distinctions used in the prose. They are not measured experimental plots.
+
+```bash
+python3 scripts/generate_layer_sweep_figure.py
+python3 scripts/generate_layer7_validation_figure.py
+```
+
+These regenerate the measured Chapter 7 figures from:
+
+```text
+docs/figures/chapter07_layer_sweep.json
+docs/figures/chapter07_layer7_validation.json
+```
+
+The source values come from executed TransformerLens notebook sections `17. Which layer computes legality?` and `19. Is the layer-7 legality enrichment real?`.
+
+```bash
+python3 scripts/generate_chapter08_mlp7_concept_figures.py
+python3 scripts/generate_mlp7_component_attribution_figure.py
+python3 scripts/generate_mlp7_component_ablation_figure.py
+python3 scripts/generate_mlp7_semantic_mediation_figure.py
+python3 scripts/generate_mlp7_neuron_group_ablation_figure.py
+```
+
+These regenerate the Chapter 8 conceptual and measured figures. The measured scripts read:
+
+```text
+docs/figures/mlp7_component_attribution.json
+docs/figures/mlp7_component_ablation.json
+docs/figures/mlp7_semantic_mediation.json
+docs/figures/mlp7_neuron_group_ablation.json
+```
+
+The source values come from executed TransformerLens notebook sections `20. Layer-7 component decomposition`, `21. Causal ablation of layer-7 components`, `24. Capture-line intervention x component ablation interaction`, and `26. MLP7 neuron ablation`.

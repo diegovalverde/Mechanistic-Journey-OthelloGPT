@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 520" role="img" aria-labelledby="title desc">
+<title id="title">MLP7 component attribution</title>
+<desc id="desc">Mean absolute legality attribution for each layer-7 attention head and MLP7.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8;--blue:#246bfe;--teal:#0f8f7f;--red:#cc4b37}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153;--blue:#86a9ff;--teal:#5fd4c7;--red:#ff8f7d}}
+.title{font:700 24px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.label{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.small{font:12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.axis{stroke:var(--grid);stroke-width:1.1}.bar{fill:var(--blue)}.signed{fill:var(--teal)}.neg{fill:var(--red)}
+</style>
+<text class="title" x="42" y="48">Component attribution inside layer 7</text>
+<text class="small" x="42" y="72">A_c = gradient dot component output. Attribution is a local alignment measure, not an ablation.</text>
+<line class="axis" x1="200" y1="98" x2="200" y2="430"/>
+<text class="label" x="180" y="129" text-anchor="end">MLP7</text>
+<rect class="bar" x="200" y="112" width="430.0" height="22" rx="4"/>
+<text class="small" x="638.0" y="128">0.267666</text>
+<text class="label" x="180" y="163" text-anchor="end">L7H0</text>
+<rect class="bar" x="200" y="146" width="323.1" height="22" rx="4"/>
+<text class="small" x="531.1" y="162">0.201140</text>
+<text class="label" x="180" y="197" text-anchor="end">L7H2</text>
+<rect class="bar" x="200" y="180" width="299.8" height="22" rx="4"/>
+<text class="small" x="507.8" y="196">0.186625</text>
+<text class="label" x="180" y="231" text-anchor="end">L7H7</text>
+<rect class="bar" x="200" y="214" width="290.6" height="22" rx="4"/>
+<text class="small" x="498.6" y="230">0.180907</text>
+<text class="label" x="180" y="265" text-anchor="end">L7H3</text>
+<rect class="bar" x="200" y="248" width="207.1" height="22" rx="4"/>
+<text class="small" x="415.1" y="264">0.128902</text>
+<text class="label" x="180" y="299" text-anchor="end">L7H4</text>
+<rect class="bar" x="200" y="282" width="106.4" height="22" rx="4"/>
+<text class="small" x="314.4" y="298">0.066253</text>
+<text class="label" x="180" y="333" text-anchor="end">L7H6</text>
+<rect class="bar" x="200" y="316" width="98.3" height="22" rx="4"/>
+<text class="small" x="306.3" y="332">0.061204</text>
+<text class="label" x="180" y="367" text-anchor="end">L7H1</text>
+<rect class="bar" x="200" y="350" width="97.6" height="22" rx="4"/>
+<text class="small" x="305.6" y="366">0.060749</text>
+<text class="label" x="180" y="401" text-anchor="end">L7H5</text>
+<rect class="bar" x="200" y="384" width="88.5" height="22" rx="4"/>
+<text class="small" x="296.5" y="400">0.055079</text>
+<text class="label" x="200" y="470">Mean signed attribution</text>
+<line class="axis" x1="390" y1="476" x2="390" y2="504"/>
+<line class="signed" x1="390" y1="478" x2="584.9" y2="478" stroke-width="4"/>
+<line class="signed" x1="390" y1="483" x2="650.0" y2="483" stroke-width="4"/>
+<line class="signed" x1="390" y1="488" x2="631.9" y2="488" stroke-width="4"/>
+<line class="signed" x1="390" y1="493" x2="598.7" y2="493" stroke-width="4"/>
+<line class="signed" x1="390" y1="498" x2="479.2" y2="498" stroke-width="4"/>
+<text class="small" x="42" y="492">Main bars show mean absolute attribution across 30 positions. Signed means are kept separate below.</text>
+<metadata>{"source": "20. Layer-7 component decomposition", "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb", "branch": "othello-jspace-analysis"}</metadata>
+</svg>

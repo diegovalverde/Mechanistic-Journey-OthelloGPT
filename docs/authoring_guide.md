@@ -130,6 +130,14 @@ Attention patterns are hypothesis-generating evidence, not causal proof. Do not 
 
 Component attribution and component ablation are different evidence types. Attribution compares current component outputs with local downstream sensitivities. Ablation changes or replaces a component and reruns the model. Do not describe them interchangeably.
 
+For Chapter 8 component attribution, \(A_c = g^\top c\) compares a layer-7 component write with the legality-gradient direction. It is a local alignment measure, not a causal intervention.
+
+For Chapter 8 whole-component ablation, the sign convention is `delta_legality_contrast = L_ablate - L_clean`; negative values mean the replacement reduced the selected move's legality contrast.
+
+For Chapter 8 MLP7 neuron-group ablation, the notebook reports `legality_degradation = L_clean - L_ablate`; negative values mean the mean-replacement intervention increased the measured legality contrast. When discussing those results, focus on separation from random same-size groups unless the sign convention is explicitly explained.
+
+High MLP7 neuron attribution or a top-k group effect supports candidate-neuron participation. It does not establish that a neuron detects a capture rule, writes legality selectively, or implements the Othello algorithm.
+
 ## Jacobian Notation
 
 Use the following notation consistently after Chapter 4:
