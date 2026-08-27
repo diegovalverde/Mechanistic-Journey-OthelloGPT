@@ -2,11 +2,7 @@
 
 This appendix is a practical guide to the TransformerLens concepts used in the project. It is not a complete TransformerLens manual. It explains the parts needed to read `demos/Othello_GPT_Jacobian_Lens.ipynb`, reproduce the book's hook-based experiments, and avoid the most common mistakes when caching, editing, or differentiating through Othello-GPT.
 
-The sibling source checkout used by the project is:
-
-```text
-/Users/diegovalverdegarro/workspace/projects/TransformerLens
-```
+The sibling source repository used by the project is [diegovalverde/TransformerLens](https://github.com/diegovalverde/TransformerLens).
 
 The experimental notebook is:
 

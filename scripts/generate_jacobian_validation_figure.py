@@ -3,7 +3,7 @@
 
 Inputs are constants copied from executed outputs in:
 
-    /Users/diegovalverdegarro/workspace/projects/TransformerLens
+    https://github.com/diegovalverde/TransformerLens
     branch: othello-jspace-analysis
     notebook: demos/Othello_GPT_Jacobian_Lens.ipynb
     section: 9. Jacobian prediction vs actual board-state intervention
@@ -79,7 +79,7 @@ ROWS = [
 
 METADATA = {
     "source_repository": "diegovalverde/TransformerLens",
-    "source_checkout": "/Users/diegovalverdegarro/workspace/projects/TransformerLens",
+    "source_repository_url": "https://github.com/diegovalverde/TransformerLens",
     "branch": "othello-jspace-analysis",
     "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
     "section": "9. Jacobian prediction vs actual board-state intervention",

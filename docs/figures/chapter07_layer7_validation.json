@@ -1,6 +1,6 @@
 {
   "source_repository": "diegovalverde/TransformerLens",
-  "source_checkout": "/Users/diegovalverdegarro/workspace/projects/TransformerLens",
+  "source_repository_url": "https://github.com/diegovalverde/TransformerLens",
   "branch": "othello-jspace-analysis",
   "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
   "notebook_section": "19. Is the layer-7 legality enrichment real?",

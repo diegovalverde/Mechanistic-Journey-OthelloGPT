@@ -2,9 +2,7 @@
 
 This appendix is a roadmap to the experimental notebook:
 
-```text
-/Users/diegovalverdegarro/workspace/projects/TransformerLens/demos/Othello_GPT_Jacobian_Lens.ipynb
-```
+[demos/Othello_GPT_Jacobian_Lens.ipynb](https://github.com/diegovalverde/TransformerLens/blob/othello-jspace-analysis/demos/Othello_GPT_Jacobian_Lens.ipynb)
 
 The notebook is the primary executed source for the book's new experiments. The polished chapters are not a substitute for the notebook. If a future revision wants to strengthen a scientific claim, the provenance path is:
 

@@ -6,8 +6,7 @@ This page is a durable technical reference for the model architecture used in th
 
 | Field | Value |
 | --- | --- |
-| Repository | `diegovalverde/TransformerLens` |
-| Local checkout | `/Users/diegovalverdegarro/workspace/projects/TransformerLens` |
+| Repository | [diegovalverde/TransformerLens](https://github.com/diegovalverde/TransformerLens) |
 | Branch | `othello-jspace-analysis` |
 | Original notebook | `demos/Othello_GPT.ipynb` |
 | Experimental notebook | `demos/Othello_GPT_Jacobian_Lens.ipynb` |

@@ -3,7 +3,7 @@
 
 Inputs are constants copied from executed outputs in:
 
-    /Users/diegovalverdegarro/workspace/projects/TransformerLens
+    https://github.com/diegovalverde/TransformerLens
     branch: othello-jspace-analysis
     notebook: demos/Othello_GPT_Jacobian_Lens.ipynb
     section: 10. Local J-space vs averaged J-space
@@ -26,7 +26,7 @@ FIGURE_DIR = ROOT / "docs" / "figures"
 
 METRICS = {
     "source_repository": "diegovalverde/TransformerLens",
-    "source_checkout": "/Users/diegovalverdegarro/workspace/projects/TransformerLens",
+    "source_repository_url": "https://github.com/diegovalverde/TransformerLens",
     "branch": "othello-jspace-analysis",
     "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
     "section": "10. Local J-space vs averaged J-space",
