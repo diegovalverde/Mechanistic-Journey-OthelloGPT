@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 340" role="img" aria-labelledby="title desc">
+<title id="title">MLP7 semantic edit activation deltas</title>
+<desc id="desc">Largest sparse activation deltas from example semantic residual edits.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8;--pos:#0f8f7f;--neg:#cc4b37}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153;--pos:#5fd4c7;--neg:#ff8f7d}}
+.title{font:700 23px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.label{font:600 12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.small{font:11px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.axis{stroke:var(--grid);stroke-width:1.1}.zero{stroke:var(--grid);stroke-width:1.6;stroke-dasharray:5 5}.pos{fill:var(--pos)}.neg{fill:var(--neg)}
+</style>
+<text class="title" x="42" y="44">Semantic edits can move some candidate activations</text>
+<text class="small" x="42" y="68">Displayed rows are the largest measured example-level effects; this is not a dataset distribution.</text>
+<line class="axis" x1="250" y1="274" x2="735" y2="274"/>
+<line class="zero" x1="492.5" y1="92" x2="492.5" y2="286"/>
+<text class="small" x="272.0" y="298" text-anchor="middle">-0.02</text>
+<text class="small" x="382.3" y="298" text-anchor="middle">-0.01</text>
+<text class="small" x="492.5" y="298" text-anchor="middle">+0.00</text>
+<text class="small" x="602.7" y="298" text-anchor="middle">+0.01</text>
+<text class="small" x="713.0" y="298" text-anchor="middle">+0.02</text>
+<text class="small" x="236" y="121" text-anchor="end">friendly_terminator / natural_break_or_add / n1322</text>
+<rect class="pos" x="492.5" y="105" width="212.5" height="22"/>
+<text class="small" x="711.0" y="120" text-anchor="start">+0.019275</text>
+<text class="small" x="236" y="155" text-anchor="end">friendly_terminator / opposite / n1322</text>
+<rect class="neg" x="280.6" y="139" width="211.9" height="22"/>
+<text class="small" x="274.6" y="154" text-anchor="end">-0.019228</text>
+<text class="small" x="236" y="189" text-anchor="end">friendly_terminator / natural_break_or_add / n125</text>
+<rect class="pos" x="492.5" y="173" width="202.5" height="22"/>
+<text class="small" x="701.0" y="188" text-anchor="start">+0.018370</text>
+<text class="small" x="236" y="223" text-anchor="end">friendly_terminator / opposite / n125</text>
+<rect class="neg" x="297.5" y="207" width="195.0" height="22"/>
+<text class="small" x="291.5" y="222" text-anchor="end">-0.017688</text>
+<text class="small" x="236" y="257" text-anchor="end">capture_opponent / opposite / n1322</text>
+<rect class="pos" x="492.5" y="241" width="94.9" height="22"/>
+<text class="small" x="593.4" y="256" text-anchor="start">+0.008606</text>
+<text class="small" x="493" y="326" text-anchor="middle">mean change in post-GELU activation</text>
+<metadata>{"source": "33. Do board-state edits causally change candidate-neuron activation?", "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb", "branch": "othello-jspace-analysis"}</metadata>
+</svg>

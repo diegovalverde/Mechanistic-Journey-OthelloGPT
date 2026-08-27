@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 670" role="img" aria-labelledby="title desc">
+<title id="title">MLP7 capture-structure correlations</title>
+<desc id="desc">Zero-centered heatmap of small Pearson correlations.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153}}
+.title{font:700 23px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.label{font:600 12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.small{font:11px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.cell{stroke:var(--grid);stroke-width:1}.axis{stroke:var(--grid);stroke-width:1.1}
+</style>
+<text class="title" x="42" y="44">Line structure correlations are weak</text>
+<text class="small" x="42" y="68">Pearson r over 1278 valid-condition examples; color scale is centered at zero.</text>
+<text class="label" x="255.0" y="84" text-anchor="middle">longest line</text>
+<text class="label" x="405.0" y="84" text-anchor="middle">directions</text>
+<text class="label" x="555.0" y="84" text-anchor="middle">flipped</text>
+<text class="small" x="168" y="108" text-anchor="end">399</text>
+<rect class="cell" x="180" y="92" width="150" height="24" fill="rgb(232,204,188)"/>
+<text class="small" x="255.0" y="108" text-anchor="middle">-0.032</text>
+<rect class="cell" x="330" y="92" width="150" height="24" fill="rgb(234,211,198)"/>
+<text class="small" x="405.0" y="108" text-anchor="middle">-0.027</text>
+<rect class="cell" x="480" y="92" width="150" height="24" fill="rgb(232,204,187)"/>
+<text class="small" x="555.0" y="108" text-anchor="middle">-0.033</text>
+<text class="small" x="168" y="132" text-anchor="end">1322</text>
+<rect class="cell" x="180" y="116" width="150" height="24" fill="rgb(218,155,117)"/>
+<text class="small" x="255.0" y="132" text-anchor="middle">-0.070</text>
+<rect class="cell" x="330" y="116" width="150" height="24" fill="rgb(232,202,185)"/>
+<text class="small" x="405.0" y="132" text-anchor="middle">-0.034</text>
+<rect class="cell" x="480" y="116" width="150" height="24" fill="rgb(218,153,115)"/>
+<text class="small" x="555.0" y="132" text-anchor="middle">-0.071</text>
+<text class="small" x="168" y="156" text-anchor="end">1576</text>
+<rect class="cell" x="180" y="140" width="150" height="24" fill="rgb(236,216,205)"/>
+<text class="small" x="255.0" y="156" text-anchor="middle">-0.023</text>
+<rect class="cell" x="330" y="140" width="150" height="24" fill="rgb(240,231,226)"/>
+<text class="small" x="405.0" y="156" text-anchor="middle">-0.012</text>
+<rect class="cell" x="480" y="140" width="150" height="24" fill="rgb(238,225,218)"/>
+<text class="small" x="555.0" y="156" text-anchor="middle">-0.016</text>
+<text class="small" x="168" y="180" text-anchor="end">366</text>
+<rect class="cell" x="180" y="164" width="150" height="24" fill="rgb(231,198,179)"/>
+<text class="small" x="255.0" y="180" text-anchor="middle">-0.037</text>
+<rect class="cell" x="330" y="164" width="150" height="24" fill="rgb(229,192,171)"/>
+<text class="small" x="405.0" y="180" text-anchor="middle">-0.042</text>
+<rect class="cell" x="480" y="164" width="150" height="24" fill="rgb(226,183,157)"/>
+<text class="small" x="555.0" y="180" text-anchor="middle">-0.049</text>
+<text class="small" x="168" y="204" text-anchor="end">558</text>
+<rect class="cell" x="180" y="188" width="150" height="24" fill="rgb(234,209,194)"/>
+<text class="small" x="255.0" y="204" text-anchor="middle">-0.029</text>
+<rect class="cell" x="330" y="188" width="150" height="24" fill="rgb(234,209,195)"/>
+<text class="small" x="405.0" y="204" text-anchor="middle">-0.029</text>
+<rect class="cell" x="480" y="188" width="150" height="24" fill="rgb(230,196,176)"/>
+<text class="small" x="555.0" y="204" text-anchor="middle">-0.039</text>
+<text class="small" x="168" y="228" text-anchor="end">1858</text>
+<rect class="cell" x="180" y="212" width="150" height="24" fill="rgb(225,177,149)"/>
+<text class="small" x="255.0" y="228" text-anchor="middle">-0.053</text>
+<rect class="cell" x="330" y="212" width="150" height="24" fill="rgb(227,186,162)"/>
+<text class="small" x="405.0" y="228" text-anchor="middle">-0.046</text>
+<rect class="cell" x="480" y="212" width="150" height="24" fill="rgb(218,155,118)"/>
+<text class="small" x="555.0" y="228" text-anchor="middle">-0.069</text>
+<text class="small" x="168" y="252" text-anchor="end">1747</text>
+<rect class="cell" x="180" y="236" width="150" height="24" fill="rgb(240,245,246)"/>
+<text class="small" x="255.0" y="252" text-anchor="middle">+0.002</text>
+<rect class="cell" x="330" y="236" width="150" height="24" fill="rgb(237,219,209)"/>
+<text class="small" x="405.0" y="252" text-anchor="middle">-0.021</text>
+<rect class="cell" x="480" y="236" width="150" height="24" fill="rgb(239,228,222)"/>
+<text class="small" x="555.0" y="252" text-anchor="middle">-0.014</text>
+<text class="small" x="168" y="276" text-anchor="end">495</text>
+<rect class="cell" x="180" y="260" width="150" height="24" fill="rgb(238,223,216)"/>
+<text class="small" x="255.0" y="276" text-anchor="middle">-0.018</text>
+<rect class="cell" x="330" y="260" width="150" height="24" fill="rgb(232,203,186)"/>
+<text class="small" x="405.0" y="276" text-anchor="middle">-0.033</text>
+<rect class="cell" x="480" y="260" width="150" height="24" fill="rgb(234,209,195)"/>
+<text class="small" x="555.0" y="276" text-anchor="middle">-0.029</text>
+<text class="small" x="168" y="300" text-anchor="end">1167</text>
+<rect class="cell" x="180" y="284" width="150" height="24" fill="rgb(149,211,188)"/>
+<text class="small" x="255.0" y="300" text-anchor="middle">+0.040</text>
+<rect class="cell" x="330" y="284" width="150" height="24" fill="rgb(232,242,241)"/>
+<text class="small" x="405.0" y="300" text-anchor="middle">+0.005</text>
+<rect class="cell" x="480" y="284" width="150" height="24" fill="rgb(177,222,206)"/>
+<text class="small" x="555.0" y="300" text-anchor="middle">+0.028</text>
+<text class="small" x="168" y="324" text-anchor="end">14</text>
+<rect class="cell" x="180" y="308" width="150" height="24" fill="rgb(229,191,169)"/>
+<text class="small" x="255.0" y="324" text-anchor="middle">-0.043</text>
+<rect class="cell" x="330" y="308" width="150" height="24" fill="rgb(226,183,158)"/>
+<text class="small" x="405.0" y="324" text-anchor="middle">-0.048</text>
+<rect class="cell" x="480" y="308" width="150" height="24" fill="rgb(221,165,133)"/>
+<text class="small" x="555.0" y="324" text-anchor="middle">-0.062</text>
+<text class="small" x="168" y="348" text-anchor="end">1400</text>
+<rect class="cell" x="180" y="332" width="150" height="24" fill="rgb(170,219,201)"/>
+<text class="small" x="255.0" y="348" text-anchor="middle">+0.031</text>
+<rect class="cell" x="330" y="332" width="150" height="24" fill="rgb(232,242,240)"/>
+<text class="small" x="405.0" y="348" text-anchor="middle">+0.005</text>
+<rect class="cell" x="480" y="332" width="150" height="24" fill="rgb(163,216,197)"/>
+<text class="small" x="555.0" y="348" text-anchor="middle">+0.034</text>
+<text class="small" x="168" y="372" text-anchor="end">272</text>
+<rect class="cell" x="180" y="356" width="150" height="24" fill="rgb(237,220,211)"/>
+<text class="small" x="255.0" y="372" text-anchor="middle">-0.020</text>
+<rect class="cell" x="330" y="356" width="150" height="24" fill="rgb(240,245,245)"/>
+<text class="small" x="405.0" y="372" text-anchor="middle">+0.002</text>
+<rect class="cell" x="480" y="356" width="150" height="24" fill="rgb(237,219,209)"/>
+<text class="small" x="555.0" y="372" text-anchor="middle">-0.021</text>
+<text class="small" x="168" y="396" text-anchor="end">1673</text>
+<rect class="cell" x="180" y="380" width="150" height="24" fill="rgb(243,246,248)"/>
+<text class="small" x="255.0" y="396" text-anchor="middle">+0.001</text>
+<rect class="cell" x="330" y="380" width="150" height="24" fill="rgb(218,153,116)"/>
+<text class="small" x="405.0" y="396" text-anchor="middle">-0.071</text>
+<rect class="cell" x="480" y="380" width="150" height="24" fill="rgb(230,196,176)"/>
+<text class="small" x="555.0" y="396" text-anchor="middle">-0.039</text>
+<text class="small" x="168" y="420" text-anchor="end">1953</text>
+<rect class="cell" x="180" y="404" width="150" height="24" fill="rgb(238,223,215)"/>
+<text class="small" x="255.0" y="420" text-anchor="middle">-0.018</text>
+<rect class="cell" x="330" y="404" width="150" height="24" fill="rgb(233,205,190)"/>
+<text class="small" x="405.0" y="420" text-anchor="middle">-0.031</text>
+<rect class="cell" x="480" y="404" width="150" height="24" fill="rgb(234,209,196)"/>
+<text class="small" x="555.0" y="420" text-anchor="middle">-0.028</text>
+<text class="small" x="168" y="444" text-anchor="end">991</text>
+<rect class="cell" x="180" y="428" width="150" height="24" fill="rgb(172,220,203)"/>
+<text class="small" x="255.0" y="444" text-anchor="middle">+0.030</text>
+<rect class="cell" x="330" y="428" width="150" height="24" fill="rgb(169,219,201)"/>
+<text class="small" x="405.0" y="444" text-anchor="middle">+0.032</text>
+<rect class="cell" x="480" y="428" width="150" height="24" fill="rgb(158,215,194)"/>
+<text class="small" x="555.0" y="444" text-anchor="middle">+0.037</text>
+<text class="small" x="168" y="468" text-anchor="end">734</text>
+<rect class="cell" x="180" y="452" width="150" height="24" fill="rgb(242,239,237)"/>
+<text class="small" x="255.0" y="468" text-anchor="middle">-0.006</text>
+<rect class="cell" x="330" y="452" width="150" height="24" fill="rgb(239,226,219)"/>
+<text class="small" x="405.0" y="468" text-anchor="middle">-0.016</text>
+<rect class="cell" x="480" y="452" width="150" height="24" fill="rgb(238,224,216)"/>
+<text class="small" x="555.0" y="468" text-anchor="middle">-0.017</text>
+<text class="small" x="168" y="492" text-anchor="end">1000</text>
+<rect class="cell" x="180" y="476" width="150" height="24" fill="rgb(229,191,169)"/>
+<text class="small" x="255.0" y="492" text-anchor="middle">-0.042</text>
+<rect class="cell" x="330" y="476" width="150" height="24" fill="rgb(234,210,196)"/>
+<text class="small" x="405.0" y="492" text-anchor="middle">-0.028</text>
+<rect class="cell" x="480" y="476" width="150" height="24" fill="rgb(226,181,156)"/>
+<text class="small" x="555.0" y="492" text-anchor="middle">-0.050</text>
+<text class="small" x="168" y="516" text-anchor="end">877</text>
+<rect class="cell" x="180" y="500" width="150" height="24" fill="rgb(232,242,241)"/>
+<text class="small" x="255.0" y="516" text-anchor="middle">+0.005</text>
+<rect class="cell" x="330" y="500" width="150" height="24" fill="rgb(240,245,246)"/>
+<text class="small" x="405.0" y="516" text-anchor="middle">+0.002</text>
+<rect class="cell" x="480" y="500" width="150" height="24" fill="rgb(202,231,222)"/>
+<text class="small" x="555.0" y="516" text-anchor="middle">+0.018</text>
+<text class="small" x="168" y="540" text-anchor="end">125</text>
+<rect class="cell" x="180" y="524" width="150" height="24" fill="rgb(167,218,200)"/>
+<text class="small" x="255.0" y="540" text-anchor="middle">+0.032</text>
+<rect class="cell" x="330" y="524" width="150" height="24" fill="rgb(241,233,230)"/>
+<text class="small" x="405.0" y="540" text-anchor="middle">-0.010</text>
+<rect class="cell" x="480" y="524" width="150" height="24" fill="rgb(198,229,219)"/>
+<text class="small" x="555.0" y="540" text-anchor="middle">+0.020</text>
+<text class="small" x="168" y="564" text-anchor="end">912</text>
+<rect class="cell" x="180" y="548" width="150" height="24" fill="rgb(227,185,161)"/>
+<text class="small" x="255.0" y="564" text-anchor="middle">-0.047</text>
+<rect class="cell" x="330" y="548" width="150" height="24" fill="rgb(234,211,198)"/>
+<text class="small" x="405.0" y="564" text-anchor="middle">-0.027</text>
+<rect class="cell" x="480" y="548" width="150" height="24" fill="rgb(228,190,168)"/>
+<text class="small" x="555.0" y="564" text-anchor="middle">-0.043</text>
+<text class="small" x="180" y="615">blue-ish = negative; green-ish = positive; all displayed magnitudes are small.</text>
+<metadata>{"source": "32. Does neuron activation encode capture-line structure?", "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb", "branch": "othello-jspace-analysis"}</metadata>
+</svg>

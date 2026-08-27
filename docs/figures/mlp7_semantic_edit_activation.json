@@ -1,0 +1,18 @@
+{
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "repository": "diegovalverde/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook_section": "33. Do board-state edits causally change candidate-neuron activation?",
+  "description": "Largest mean candidate-neuron post-activation deltas under residual-space semantic board edits in the concrete example. The displayed values are sparse, example-specific effects.",
+  "source_layer": 4,
+  "target_layer": 7,
+  "activation_hook": "blocks.7.mlp.hook_post",
+  "alpha_magnitude": 0.3,
+  "rows": [
+    {"semantic_edit": "friendly_terminator", "sign_label": "natural_break_or_add", "neuron": 1322, "mean_delta_activation": 0.019275, "mean_abs_delta_activation": 0.019275, "mean_delta_legality_contrast": -0.005048},
+    {"semantic_edit": "friendly_terminator", "sign_label": "opposite", "neuron": 1322, "mean_delta_activation": -0.019228, "mean_abs_delta_activation": 0.019228, "mean_delta_legality_contrast": 0.001996},
+    {"semantic_edit": "friendly_terminator", "sign_label": "natural_break_or_add", "neuron": 125, "mean_delta_activation": 0.018370, "mean_abs_delta_activation": 0.018370, "mean_delta_legality_contrast": -0.005048},
+    {"semantic_edit": "friendly_terminator", "sign_label": "opposite", "neuron": 125, "mean_delta_activation": -0.017688, "mean_abs_delta_activation": 0.017688, "mean_delta_legality_contrast": 0.001996},
+    {"semantic_edit": "capture_opponent", "sign_label": "opposite", "neuron": 1322, "mean_delta_activation": 0.008606, "mean_abs_delta_activation": 0.013741, "mean_delta_legality_contrast": -0.009669}
+  ]
+}

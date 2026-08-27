@@ -77,3 +77,24 @@ docs/figures/mlp7_neuron_group_ablation.json
 ```
 
 The source values come from executed TransformerLens notebook sections `20. Layer-7 component decomposition`, `21. Causal ablation of layer-7 components`, `24. Capture-line intervention x component ablation interaction`, and `26. MLP7 neuron ablation`.
+
+```bash
+python3 scripts/generate_chapter09_concept_figures.py
+python3 scripts/generate_mlp7_valid_invalid_selectivity_figure.py
+python3 scripts/generate_mlp7_matched_valid_invalid_figure.py
+python3 scripts/generate_mlp7_capture_structure_correlations_figure.py
+python3 scripts/generate_mlp7_semantic_edit_activation_figure.py
+python3 scripts/generate_mlp7_end_to_end_neuron_test_figure.py
+```
+
+These regenerate the Chapter 9 conceptual and measured figures. The measured scripts read:
+
+```text
+docs/figures/mlp7_valid_invalid_selectivity.json
+docs/figures/mlp7_matched_valid_invalid.json
+docs/figures/mlp7_capture_structure_correlations.json
+docs/figures/mlp7_semantic_edit_activation.json
+docs/figures/mlp7_end_to_end_neuron_test.json
+```
+
+The source values come from executed TransformerLens notebook sections `30. Candidate neuron activation by Othello condition`, `31. Matched controls`, `32. Does neuron activation encode capture-line structure?`, `33. Do board-state edits causally change candidate-neuron activation?`, and `37. End-to-end causal test of the strongest neurons`.

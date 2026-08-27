@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 450" role="img" aria-labelledby="title desc">
+<title id="title">Detector versus writer evidence</title>
+<desc id="desc">A neuron input side and output side can have different interpretability evidence.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8;--fill:#f7f9fc;--target:#f2c94c;--opp:#cc4b37;--mine:#246bfe;--empty:#b8c0d0;--teal:#0f8f7f;--weak:#9aa3b7}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153;--fill:#1f2633;--target:#ffd766;--opp:#ff8f7d;--mine:#86a9ff;--empty:#5a6578;--teal:#5fd4c7;--weak:#808ba0}}
+.title{font:700 24px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.label{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.small{font:12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.box{fill:var(--fill);stroke:var(--grid);stroke-width:1.3;rx:8}.line{stroke:var(--grid);stroke-width:2;fill:none;marker-end:url(#arrow)}.teal{stroke:var(--teal);stroke-width:3;fill:none;marker-end:url(#arrowTeal)}.weak{stroke:var(--weak);stroke-width:2;stroke-dasharray:6 5;fill:none;marker-end:url(#arrowWeak)}
+.target{fill:var(--target);stroke:var(--grid);stroke-width:1.2}.opp{fill:var(--opp);stroke:var(--grid);stroke-width:1.2}.mine{fill:var(--mine);stroke:var(--grid);stroke-width:1.2}.empty{fill:var(--empty);stroke:var(--grid);stroke-width:1.2}.frontier{stroke:var(--opp);stroke-width:2.4;stroke-dasharray:7 5}
+</style>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#5c667a"/></marker>
+<marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+<marker id="arrowWeak" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#9aa3b7"/></marker>
+</defs>
+<text class="title" x="42" y="48">A neuron has an input side and an output side</text>
+<text class="small" x="42" y="72">Neuron 399 is more interpretable from output geometry than from valid-capture activation selectivity.</text>
+<rect class="box" x="72" y="140" width="185" height="80"/><text class="label" x="164" y="172" text-anchor="middle">residual features</text><text class="small" x="164" y="196" text-anchor="middle">mixed board / context state</text>
+<path class="weak" d="M257 180 L340 180"/><text class="small" x="280" y="164">W_in</text>
+<rect class="box" x="340" y="140" width="140" height="80"/><text class="label" x="410" y="172" text-anchor="middle">activation</text><text class="small" x="410" y="196" text-anchor="middle">post-GELU scalar</text>
+<path class="teal" d="M480 180 L565 180"/><text class="small" x="507" y="164">W_out</text>
+<rect class="box" x="565" y="140" width="190" height="80"/><text class="label" x="660" y="172" text-anchor="middle">residual write</text><text class="small" x="660" y="196" text-anchor="middle">legality-gradient aligned</text>
+<rect class="box" x="72" y="278" width="310" height="86"/><text class="label" x="227" y="307" text-anchor="middle">input-side evidence</text><text class="small" x="227" y="331" text-anchor="middle">valid-vs-invalid selectivity for neuron 399: -0.125210</text><text class="small" x="227" y="352" text-anchor="middle">not a clean valid-capture detector in this test</text>
+<rect class="box" x="445" y="278" width="310" height="86"/><text class="label" x="600" y="307" text-anchor="middle">output-side evidence</text><text class="small" x="600" y="331" text-anchor="middle">mean post activation: 0.604659</text><text class="small" x="600" y="352" text-anchor="middle">activation x legality write: -0.076923</text>
+</svg>

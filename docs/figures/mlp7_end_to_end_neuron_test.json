@@ -1,0 +1,19 @@
+{
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "repository": "diegovalverde/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook_section": "37. End-to-end causal test of the strongest neurons",
+  "description": "Single-neuron mean-replacement ablations on preferred relational-condition examples. Sign convention: legality_degradation = L_clean - L_ablate.",
+  "groups": [
+    {"group": "combined-evidence top neurons", "neurons": [734, 1747, 1673, 125, 1167], "examples": 195, "mean_legality_degradation": -0.019919, "median_legality_degradation": -0.000007, "mean_entropy_change": -0.012298, "mean_selected_logit_change": 0.026172},
+    {"group": "low-attribution controls", "neurons": [1819, 694, 988, 940, 1963], "examples": 195, "mean_legality_degradation": -0.000001, "median_legality_degradation": 0.0, "mean_entropy_change": -0.0000000376, "mean_selected_logit_change": 0.000003},
+    {"group": "random controls", "neurons": [12, 1346, 1386, 1664, 1945], "examples": 195, "mean_legality_degradation": -0.003751, "median_legality_degradation": 0.0, "mean_entropy_change": -0.003253, "mean_selected_logit_change": 0.003354}
+  ],
+  "individual_neurons": [
+    {"group": "combined-evidence top neurons", "neuron": 734, "examples": 39, "mean_legality_degradation": -0.001635, "median_legality_degradation": -0.002091, "mean_selected_logit_change": 0.017964},
+    {"group": "combined-evidence top neurons", "neuron": 1747, "examples": 39, "mean_legality_degradation": -0.001183, "median_legality_degradation": -0.002650, "mean_selected_logit_change": 0.025397},
+    {"group": "combined-evidence top neurons", "neuron": 1673, "examples": 39, "mean_legality_degradation": -0.065093, "median_legality_degradation": 0.001103, "mean_selected_logit_change": 0.064082},
+    {"group": "combined-evidence top neurons", "neuron": 125, "examples": 39, "mean_legality_degradation": -0.037334, "median_legality_degradation": -0.000742, "mean_selected_logit_change": 0.032012},
+    {"group": "combined-evidence top neurons", "neuron": 1167, "examples": 39, "mean_legality_degradation": 0.005649, "median_legality_degradation": -0.000443, "mean_selected_logit_change": -0.008596}
+  ]
+}

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 330" role="img" aria-labelledby="title desc">
+<title id="title">MLP7 end-to-end neuron test</title>
+<desc id="desc">Combined-evidence neurons have a larger but small mean effect than controls.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8;--sel:#cc4b37;--ctrl:#0f8f7f;--rnd:#246bfe}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153;--sel:#ff8f7d;--ctrl:#5fd4c7;--rnd:#86a9ff}}
+.title{font:700 23px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.label{font:600 12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}.small{font:11px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.axis{stroke:var(--grid);stroke-width:1.1}.zero{stroke:var(--grid);stroke-width:1.6;stroke-dasharray:5 5}.sel{fill:var(--sel)}.ctrl{fill:var(--ctrl)}.rnd{fill:var(--rnd)}
+</style>
+<text class="title" x="42" y="44">Selected neurons have a small selective causal effect</text>
+<text class="small" x="42" y="68">Mean-replacement ablations on preferred relational-condition examples; sign convention is L_clean - L_ablate.</text>
+<line class="axis" x1="270" y1="246" x2="730" y2="246"/>
+<line class="zero" x1="661.9" y1="100" x2="661.9" y2="258"/>
+<text class="small" x="321.1" y="272" text-anchor="middle">-0.02</text>
+<text class="small" x="491.5" y="272" text-anchor="middle">-0.01</text>
+<text class="small" x="661.9" y="272" text-anchor="middle">+0.00</text>
+<text class="small" x="256" y="137" text-anchor="end">combined-evidence top neurons</text>
+<rect class="sel" x="322.5" y="120" width="339.4" height="24"/>
+<text class="small" x="316.5" y="137" text-anchor="end">-0.019919</text>
+<text class="small" x="256" y="181" text-anchor="end">low-attribution controls</text>
+<rect class="ctrl" x="661.8" y="164" width="0.0" height="24"/>
+<text class="small" x="655.8" y="181" text-anchor="end">-0.000001</text>
+<text class="small" x="256" y="225" text-anchor="end">random controls</text>
+<rect class="rnd" x="597.9" y="208" width="63.9" height="24"/>
+<text class="small" x="591.9" y="225" text-anchor="end">-0.003751</text>
+<text class="small" x="500" y="310" text-anchor="middle">mean legality degradation</text>
+<metadata>{"source": "37. End-to-end causal test of the strongest neurons", "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb", "branch": "othello-jspace-analysis"}</metadata>
+</svg>

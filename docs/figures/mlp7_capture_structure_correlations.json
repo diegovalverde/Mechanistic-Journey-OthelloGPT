@@ -1,0 +1,31 @@
+{
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "repository": "diegovalverde/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook_section": "32. Does neuron activation encode capture-line structure?",
+  "description": "Pearson correlations between candidate-neuron post-activation and structural variables over valid_capture plus multiple_capture examples.",
+  "examples": 1278,
+  "features": ["longest_capture_line", "num_capture_directions", "total_flipped"],
+  "correlations": [
+    {"neuron": 399, "longest_capture_line": -0.032424, "num_capture_directions": -0.027171, "total_flipped": -0.032633},
+    {"neuron": 1322, "longest_capture_line": -0.069893, "num_capture_directions": -0.033864, "total_flipped": -0.071322},
+    {"neuron": 1576, "longest_capture_line": -0.023228, "num_capture_directions": -0.012117, "total_flipped": -0.016416},
+    {"neuron": 366, "longest_capture_line": -0.036926, "num_capture_directions": -0.041515, "total_flipped": -0.048664},
+    {"neuron": 558, "longest_capture_line": -0.028911, "num_capture_directions": -0.028780, "total_flipped": -0.038697},
+    {"neuron": 1858, "longest_capture_line": -0.053270, "num_capture_directions": -0.046304, "total_flipped": -0.069374},
+    {"neuron": 1747, "longest_capture_line": 0.001875, "num_capture_directions": -0.021095, "total_flipped": -0.014180},
+    {"neuron": 495, "longest_capture_line": -0.017530, "num_capture_directions": -0.033094, "total_flipped": -0.028620},
+    {"neuron": 1167, "longest_capture_line": 0.040129, "num_capture_directions": 0.005267, "total_flipped": 0.028293},
+    {"neuron": 14, "longest_capture_line": -0.042517, "num_capture_directions": -0.048390, "total_flipped": -0.061806},
+    {"neuron": 1400, "longest_capture_line": 0.031364, "num_capture_directions": 0.005365, "total_flipped": 0.034363},
+    {"neuron": 272, "longest_capture_line": -0.019833, "num_capture_directions": 0.002019, "total_flipped": -0.021004},
+    {"neuron": 1673, "longest_capture_line": 0.000600, "num_capture_directions": -0.070929, "total_flipped": -0.038692},
+    {"neuron": 1953, "longest_capture_line": -0.017835, "num_capture_directions": -0.031341, "total_flipped": -0.028247},
+    {"neuron": 991, "longest_capture_line": 0.030423, "num_capture_directions": 0.031771, "total_flipped": 0.036569},
+    {"neuron": 734, "longest_capture_line": -0.005993, "num_capture_directions": -0.015620, "total_flipped": -0.017493},
+    {"neuron": 1000, "longest_capture_line": -0.042484, "num_capture_directions": -0.028071, "total_flipped": -0.049573},
+    {"neuron": 877, "longest_capture_line": 0.005321, "num_capture_directions": 0.001940, "total_flipped": 0.017988},
+    {"neuron": 125, "longest_capture_line": 0.032455, "num_capture_directions": -0.009939, "total_flipped": 0.019732},
+    {"neuron": 912, "longest_capture_line": -0.046840, "num_capture_directions": -0.026818, "total_flipped": -0.042804}
+  ]
+}

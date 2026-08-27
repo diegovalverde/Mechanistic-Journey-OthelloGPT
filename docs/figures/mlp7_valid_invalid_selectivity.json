@@ -1,0 +1,33 @@
+{
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "repository": "diegovalverde/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook_section": "30. Candidate neuron activation by Othello condition",
+  "description": "Unpaired standardized post-activation selectivity: valid_capture mean minus opponent_without_terminator mean, divided by pooled post-activation standard deviation.",
+  "conditions": {
+    "valid_capture_examples": 763,
+    "opponent_without_terminator_examples": 654
+  },
+  "neurons": [
+    {"neuron": 399, "valid_mean": 0.298471, "opponent_without_terminator_mean": 0.384435, "pooled_std": 0.686553, "valid_vs_opponent_no_terminator_selectivity": -0.125210},
+    {"neuron": 1322, "valid_mean": 0.183225, "opponent_without_terminator_mean": 0.218659, "pooled_std": 0.474705, "valid_vs_opponent_no_terminator_selectivity": -0.074643},
+    {"neuron": 1576, "valid_mean": 0.315192, "opponent_without_terminator_mean": 0.346365, "pooled_std": 0.642363, "valid_vs_opponent_no_terminator_selectivity": -0.048529},
+    {"neuron": 366, "valid_mean": 0.299257, "opponent_without_terminator_mean": 0.331134, "pooled_std": 0.613944, "valid_vs_opponent_no_terminator_selectivity": -0.051922},
+    {"neuron": 558, "valid_mean": 0.132172, "opponent_without_terminator_mean": 0.147121, "pooled_std": 0.426598, "valid_vs_opponent_no_terminator_selectivity": -0.035041},
+    {"neuron": 1858, "valid_mean": 0.273495, "opponent_without_terminator_mean": 0.299813, "pooled_std": 0.613190, "valid_vs_opponent_no_terminator_selectivity": -0.042921},
+    {"neuron": 1747, "valid_mean": 0.295384, "opponent_without_terminator_mean": 0.251131, "pooled_std": 0.541782, "valid_vs_opponent_no_terminator_selectivity": 0.081680},
+    {"neuron": 495, "valid_mean": 0.317185, "opponent_without_terminator_mean": 0.313763, "pooled_std": 0.604010, "valid_vs_opponent_no_terminator_selectivity": 0.005667},
+    {"neuron": 1167, "valid_mean": 0.229822, "opponent_without_terminator_mean": 0.172248, "pooled_std": 0.533152, "valid_vs_opponent_no_terminator_selectivity": 0.107989},
+    {"neuron": 14, "valid_mean": 0.116563, "opponent_without_terminator_mean": 0.139480, "pooled_std": 0.438377, "valid_vs_opponent_no_terminator_selectivity": -0.052277},
+    {"neuron": 1400, "valid_mean": 0.362853, "opponent_without_terminator_mean": 0.338476, "pooled_std": 0.650886, "valid_vs_opponent_no_terminator_selectivity": 0.037452},
+    {"neuron": 272, "valid_mean": 0.272094, "opponent_without_terminator_mean": 0.225598, "pooled_std": 0.600583, "valid_vs_opponent_no_terminator_selectivity": 0.077419},
+    {"neuron": 1673, "valid_mean": 0.195157, "opponent_without_terminator_mean": 0.231362, "pooled_std": 0.538077, "valid_vs_opponent_no_terminator_selectivity": -0.067286},
+    {"neuron": 1953, "valid_mean": 0.294793, "opponent_without_terminator_mean": 0.292845, "pooled_std": 0.565905, "valid_vs_opponent_no_terminator_selectivity": 0.003442},
+    {"neuron": 991, "valid_mean": 0.160698, "opponent_without_terminator_mean": 0.137959, "pooled_std": 0.428070, "valid_vs_opponent_no_terminator_selectivity": 0.053119},
+    {"neuron": 734, "valid_mean": 0.254424, "opponent_without_terminator_mean": 0.210395, "pooled_std": 0.464368, "valid_vs_opponent_no_terminator_selectivity": 0.094814},
+    {"neuron": 1000, "valid_mean": 0.158889, "opponent_without_terminator_mean": 0.178614, "pooled_std": 0.467420, "valid_vs_opponent_no_terminator_selectivity": -0.042199},
+    {"neuron": 877, "valid_mean": 0.336358, "opponent_without_terminator_mean": 0.296262, "pooled_std": 0.639626, "valid_vs_opponent_no_terminator_selectivity": 0.062688},
+    {"neuron": 125, "valid_mean": 0.318121, "opponent_without_terminator_mean": 0.303069, "pooled_std": 0.593594, "valid_vs_opponent_no_terminator_selectivity": 0.025358},
+    {"neuron": 912, "valid_mean": 0.217467, "opponent_without_terminator_mean": 0.213336, "pooled_std": 0.490755, "valid_vs_opponent_no_terminator_selectivity": 0.008417}
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "repository": "diegovalverde/TransformerLens",
+  "branch": "othello-jspace-analysis",
+  "notebook_section": "31. Matched controls",
+  "description": "Greedy matched valid-minus-invalid post-activation differences. Matching approximately controls target square, target region, game phase, adjacent opponent-run length, and occupancy bin.",
+  "matched_pairs": 654,
+  "neurons": [
+    {"neuron": 399, "mean_valid_minus_invalid": -0.089261, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.960813, "frac_positive": 0.296636},
+    {"neuron": 1322, "mean_valid_minus_invalid": 0.013029, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.667566, "frac_positive": 0.382263},
+    {"neuron": 1576, "mean_valid_minus_invalid": -0.038735, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.867672, "frac_positive": 0.388379},
+    {"neuron": 366, "mean_valid_minus_invalid": -0.053210, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.859413, "frac_positive": 0.298165},
+    {"neuron": 558, "mean_valid_minus_invalid": -0.041524, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.600485, "frac_positive": 0.087156},
+    {"neuron": 1858, "mean_valid_minus_invalid": -0.021939, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.824146, "frac_positive": 0.333333},
+    {"neuron": 1747, "mean_valid_minus_invalid": 0.018654, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.767440, "frac_positive": 0.477064},
+    {"neuron": 495, "mean_valid_minus_invalid": -0.004734, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.796887, "frac_positive": 0.451070},
+    {"neuron": 1167, "mean_valid_minus_invalid": 0.039280, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.703837, "frac_positive": 0.389908},
+    {"neuron": 14, "mean_valid_minus_invalid": -0.029245, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.545549, "frac_positive": 0.252294},
+    {"neuron": 1400, "mean_valid_minus_invalid": 0.004130, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.910396, "frac_positive": 0.356269},
+    {"neuron": 272, "mean_valid_minus_invalid": 0.047312, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.851884, "frac_positive": 0.328746},
+    {"neuron": 1673, "mean_valid_minus_invalid": -0.002058, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.793950, "frac_positive": 0.246177},
+    {"neuron": 1953, "mean_valid_minus_invalid": -0.001942, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.746804, "frac_positive": 0.464832},
+    {"neuron": 991, "mean_valid_minus_invalid": 0.069904, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.599950, "frac_positive": 0.414373},
+    {"neuron": 734, "mean_valid_minus_invalid": 0.010453, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.646924, "frac_positive": 0.466361},
+    {"neuron": 1000, "mean_valid_minus_invalid": -0.028281, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.637402, "frac_positive": 0.237003},
+    {"neuron": 877, "mean_valid_minus_invalid": 0.053469, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.925011, "frac_positive": 0.446483},
+    {"neuron": 125, "mean_valid_minus_invalid": -0.001252, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.831547, "frac_positive": 0.383792},
+    {"neuron": 912, "mean_valid_minus_invalid": 0.017276, "median_valid_minus_invalid": 0.0, "std_valid_minus_invalid": 0.664816, "frac_positive": 0.405199}
+  ]
+}
