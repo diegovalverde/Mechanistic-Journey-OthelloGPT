@@ -98,3 +98,20 @@ docs/figures/mlp7_end_to_end_neuron_test.json
 ```
 
 The source values come from executed TransformerLens notebook sections `30. Candidate neuron activation by Othello condition`, `31. Matched controls`, `32. Does neuron activation encode capture-line structure?`, `33. Do board-state edits causally change candidate-neuron activation?`, and `37. End-to-end causal test of the strongest neurons`.
+
+```bash
+python3 scripts/generate_chapter10_concept_figures.py
+```
+
+This regenerates the Chapter 10 conceptual synthesis figures:
+
+```text
+docs/figures/mechanistic_workflow.svg
+docs/figures/why_othello_is_special.svg
+docs/figures/ground_truth_spectrum.svg
+docs/figures/mechanistic_roles.svg
+docs/figures/othello_next_experiments.svg
+docs/figures/map_to_mechanism.svg
+```
+
+These diagrams are not measured plots. They summarize the method, ground-truth tradeoffs, mechanistic roles, open Othello experiments, and evidence hierarchy at the end of the book.

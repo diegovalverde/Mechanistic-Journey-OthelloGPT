@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 660" role="img" aria-labelledby="title desc">
+<title id="title">Mechanistic workflow</title>
+<desc id="desc">A staged evidence workflow from known latent variables to mechanistic claims.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8;--fill:#f7f9fc;--blue:#246bfe;--teal:#0f8f7f;--gold:#b98113;--red:#cc4b37;--green:#2f8f46;--purple:#6a4bc3}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153;--fill:#1f2633;--blue:#86a9ff;--teal:#5fd4c7;--gold:#ffd27a;--red:#ff8f7d;--green:#7bd88f;--purple:#b9a5ff}}
+.title{font:700 23px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}
+.label{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}
+.small{font:12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.tiny{font:11px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.box{fill:var(--fill);stroke:var(--grid);stroke-width:1.25;rx:8}
+.pill{fill:var(--fill);stroke:var(--grid);stroke-width:1.2;rx:16}
+.line{stroke:var(--grid);stroke-width:2;fill:none;marker-end:url(#arrow)}
+.teal{stroke:var(--teal);stroke-width:3;fill:none;marker-end:url(#arrowTeal)}
+.blue{stroke:var(--blue);stroke-width:3;fill:none;marker-end:url(#arrowBlue)}
+.gold{stroke:var(--gold);stroke-width:3;fill:none;marker-end:url(#arrowGold)}
+.red{stroke:var(--red);stroke-width:2.5;fill:none;marker-end:url(#arrowRed)}
+.dash{stroke:var(--muted);stroke-width:2;stroke-dasharray:7 5;fill:none;marker-end:url(#arrow)}
+.gate{fill:#fff8e5;stroke:var(--gold);stroke-width:1.2;rx:8}
+@media(prefers-color-scheme:dark){.gate{fill:#332b1b}}
+</style>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#5c667a"/></marker>
+<marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+<marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+<marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+<marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+<text class="title" x="42" y="42">A workflow, not a slogan</text>
+<text class="small" x="42" y="64">Major transitions require evidence gates. The final claim should not be stronger than the weakest unsupported gate.</text>
+<rect class="box" x="238" y="72" width="330" height="34"/><text class="label" x="403" y="87" text-anchor="middle">Known latent variable</text><text class="tiny" x="403" y="101" text-anchor="middle">B_t, legal moves, capture rays</text><path class="line" d="M403 106 L403 122"/><rect class="gate" x="590" y="110" width="170" height="28"/><text class="tiny" x="675" y="128" text-anchor="middle">Can we decode it?</text><rect class="box" x="238" y="122" width="330" height="34"/><text class="label" x="403" y="137" text-anchor="middle">Probe</text><text class="tiny" x="403" y="151" text-anchor="middle">Can we decode it?</text><path class="line" d="M403 156 L403 172"/><rect class="box" x="238" y="172" width="330" height="34"/><text class="label" x="403" y="187" text-anchor="middle">Semantic direction</text><text class="tiny" x="403" y="201" text-anchor="middle">Can we get a handle?</text><path class="line" d="M403 206 L403 222"/><rect class="gate" x="590" y="210" width="170" height="28"/><text class="tiny" x="675" y="228" text-anchor="middle">Does changing it matter?</text><rect class="box" x="238" y="222" width="330" height="34"/><text class="label" x="403" y="237" text-anchor="middle">Causal intervention</text><text class="tiny" x="403" y="251" text-anchor="middle">Does changing it matter?</text><path class="line" d="M403 256 L403 272"/><rect class="box" x="238" y="272" width="330" height="34"/><text class="label" x="403" y="287" text-anchor="middle">Jacobian / J-space</text><text class="tiny" x="403" y="301" text-anchor="middle">Can local geometry predict transport?</text><path class="line" d="M403 306 L403 322"/><rect class="gate" x="590" y="310" width="170" height="28"/><text class="tiny" x="675" y="328" text-anchor="middle">Where does its effect emerge?</text><rect class="box" x="238" y="322" width="330" height="34"/><text class="label" x="403" y="337" text-anchor="middle">Task-specific score</text><text class="tiny" x="403" y="351" text-anchor="middle">What computation are we isolating?</text><path class="line" d="M403 356 L403 372"/><rect class="box" x="238" y="372" width="330" height="34"/><text class="label" x="403" y="387" text-anchor="middle">Layer localization</text><text class="tiny" x="403" y="401" text-anchor="middle">Where does the effect emerge?</text><path class="line" d="M403 406 L403 422"/><rect class="box" x="238" y="422" width="330" height="34"/><text class="label" x="403" y="437" text-anchor="middle">Component localization</text><text class="tiny" x="403" y="451" text-anchor="middle">Which parts matter?</text><path class="line" d="M403 456 L403 472"/><rect class="gate" x="590" y="460" width="170" height="28"/><text class="tiny" x="675" y="478" text-anchor="middle">Which components matter?</text><rect class="box" x="238" y="472" width="330" height="34"/><text class="label" x="403" y="487" text-anchor="middle">Population characterization</text><text class="tiny" x="403" y="501" text-anchor="middle">What do candidates read and write?</text><path class="line" d="M403 506 L403 522"/><rect class="box" x="238" y="522" width="330" height="34"/><text class="label" x="403" y="537" text-anchor="middle">Mediation / rescue</text><text class="tiny" x="403" y="551" text-anchor="middle">Does the proposed path survive controls?</text><path class="line" d="M403 556 L403 572"/><rect class="gate" x="590" y="560" width="170" height="28"/><text class="tiny" x="675" y="578" text-anchor="middle">Survive controls?</text><rect class="box" x="238" y="572" width="330" height="34"/><text class="label" x="403" y="587" text-anchor="middle">Mechanistic claim</text><text class="tiny" x="403" y="601" text-anchor="middle">Match claim strength to evidence</text>
+</svg>

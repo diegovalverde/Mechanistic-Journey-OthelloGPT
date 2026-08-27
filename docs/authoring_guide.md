@@ -159,3 +159,14 @@ For hidden-state transport analyses after Chapter 5, state the source representa
 Use \(\mathbb{E}_x[J_x v]\), \(\bar{J}v\), or \(\bar{v}_J\) only when the averaging procedure has been specified. If the implementation averages JVPs rather than materializing full Jacobian matrices, say so directly.
 
 When comparing directions, define cosine similarity as an angle-based comparison. A cosine is not a percentage of shared computation; never write or imply that a cosine of 0.62 means "62% the same."
+
+## Final Book Principles
+
+Preserve these principles in future revisions:
+
+- Localization is not interpretation. Finding a layer, component, neuron, or subspace tells us where to look next; it does not by itself identify the computation.
+- Causal importance does not imply monosemanticity. A component or neuron can matter for a behavior without corresponding to one clean human-readable feature.
+- The mathematics often generalizes more easily than the semantic ontology. Probes, interventions, Jacobians, JVPs, attribution, ablation, mediation, and rescue can travel across domains, but the trustworthiness of the latent-variable label may not.
+- Negative results constrain mechanisms and belong in the narrative. Weak layer-4 enrichment, mixed neuron selectivity, weak input-weight alignment, tiny conjunction-regression gains, and absent rescue are part of the evidence.
+- Claim strength should decrease when moving beyond domains with known ground-truth latent state unless new evidence compensates for the weaker labels.
+- A distributed mechanism can be interpretable without a one-neuron-one-rule decomposition. Directions, subspaces, populations, paths, and write/read geometry can be legitimate mechanistic objects.

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500" role="img" aria-labelledby="title desc">
+<title id="title">Othello next experiments</title>
+<desc id="desc">Open experimental program after the current Othello-GPT evidence frontier.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8;--fill:#f7f9fc;--blue:#246bfe;--teal:#0f8f7f;--gold:#b98113;--red:#cc4b37;--green:#2f8f46;--purple:#6a4bc3}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153;--fill:#1f2633;--blue:#86a9ff;--teal:#5fd4c7;--gold:#ffd27a;--red:#ff8f7d;--green:#7bd88f;--purple:#b9a5ff}}
+.title{font:700 23px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}
+.label{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}
+.small{font:12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.tiny{font:11px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.box{fill:var(--fill);stroke:var(--grid);stroke-width:1.25;rx:8}
+.pill{fill:var(--fill);stroke:var(--grid);stroke-width:1.2;rx:16}
+.line{stroke:var(--grid);stroke-width:2;fill:none;marker-end:url(#arrow)}
+.teal{stroke:var(--teal);stroke-width:3;fill:none;marker-end:url(#arrowTeal)}
+.blue{stroke:var(--blue);stroke-width:3;fill:none;marker-end:url(#arrowBlue)}
+.gold{stroke:var(--gold);stroke-width:3;fill:none;marker-end:url(#arrowGold)}
+.red{stroke:var(--red);stroke-width:2.5;fill:none;marker-end:url(#arrowRed)}
+.dash{stroke:var(--muted);stroke-width:2;stroke-dasharray:7 5;fill:none;marker-end:url(#arrow)}
+.gate{fill:#fff8e5;stroke:var(--gold);stroke-width:1.2;rx:8}
+@media(prefers-color-scheme:dark){.gate{fill:#332b1b}}
+</style>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#5c667a"/></marker>
+<marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+<marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+<marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+<marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+<text class="title" x="42" y="50">Open experimental program for Othello-GPT</text>
+<text class="small" x="42" y="74">Current evidence narrows the search. The dashed arrows mark tests not yet completed.</text>
+<rect class="box" x="70" y="190" width="130" height="60"/><text class="label" x="135" y="214" text-anchor="middle">board</text><text class="small" x="135" y="235" text-anchor="middle">strong</text>
+<path class="teal" d="M200 220 L285 220"/>
+<rect class="box" x="285" y="190" width="130" height="60"/><text class="label" x="350" y="214" text-anchor="middle">layer 7</text><text class="small" x="350" y="235" text-anchor="middle">strong</text>
+<path class="teal" d="M415 220 L500 220"/>
+<rect class="box" x="500" y="190" width="130" height="60"/><text class="label" x="565" y="214" text-anchor="middle">MLP7</text><text class="small" x="565" y="235" text-anchor="middle">strong</text>
+<path class="teal" d="M630 220 L715 220"/>
+<rect class="box" x="715" y="190" width="90" height="60"/><text class="label" x="760" y="214" text-anchor="middle">candidates</text><text class="small" x="760" y="235" text-anchor="middle">mixed</text>
+<path class="dash" d="M350 190 C350 118 450 118 500 178"/><text class="small" x="363" y="124">attention path?</text>
+<path class="dash" d="M760 190 C744 116 642 112 592 178"/><text class="small" x="640" y="112">population subspace?</text>
+<path class="dash" d="M760 250 C748 328 646 336 584 262"/><text class="small" x="636" y="356">mediation?</text>
+<path class="dash" d="M565 250 C500 365 310 356 203 250"/><text class="small" x="322" y="386">rescue?</text>
+<path class="dash" d="M135 250 C150 395 705 402 760 250"/><text class="small" x="340" y="430">generalization across rays, lengths, phases?</text>
+</svg>

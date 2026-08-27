@@ -2,11 +2,11 @@
 
 ## From Hidden Board States to Rule Circuits
 
-This book follows a mechanistic interpretability investigation of Othello-GPT: a small GPT-2-style decoder-only transformer trained on Othello move sequences. The central puzzle is how a model trained only to predict moves can come to represent board state and use that representation when judging legal moves.
+This book follows a ten-chapter mechanistic interpretability investigation of Othello-GPT: a small GPT-2-style decoder-only transformer trained on Othello move sequences. The central puzzle is how a model trained only to predict moves can come to represent board state and use that representation when judging legal moves.
 
-The book is for students, researchers, and engineers who want a careful path from linear probes to causal interventions, Jacobians, layer-level analysis, and candidate rule circuits. It avoids treating a probe result as the end of the story, and instead asks how information moves through the network.
+The book is for students, researchers, and engineers who want a careful path from linear probes to causal interventions, Jacobians, J-space, layer-level analysis, attribution, ablation, and candidate rule circuits. It avoids treating a probe result as the end of the story, and instead asks how information moves through the network.
 
-The current research status is mixed by design: some findings are established, some have strong or moderate evidence, and some remain hypotheses. The book follows the real investigation and labels claims cautiously rather than turning unfinished work into a finished story.
+The current research status is mixed by design: some findings are established, some have strong or moderate evidence, and some remain hypotheses. The book follows the real investigation and labels claims cautiously rather than turning unfinished work into a finished story. In particular, it does not claim a completed Othello legality circuit.
 
 ## Who This Is For
 
@@ -38,5 +38,4 @@ flowchart LR
 
 ## Current Research Status
 
-The project currently supports moderate evidence for rule-structured computation in Othello-GPT, especially around layer 7 and MLP7. It does not yet prove a complete legality circuit. See the research pages for the current findings, experiment index, open questions, and dated research log.
-
+The project supports strong evidence for board decodability, local semantic causal relevance, layer-7 capture-line enrichment, and MLP7 component importance. It supports weaker and mixed evidence at the individual-neuron rule-detector level. See the research pages for the findings snapshot, final evidence map, experiment index, open questions, and dated research log.

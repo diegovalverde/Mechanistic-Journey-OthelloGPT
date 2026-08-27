@@ -397,7 +397,7 @@ More specifically: after establishing that layer 7 has unusually strong capture-
 The executed notebook first revalidated the broader setup:
 
 - A strict split board-state probe was trained from residual activations.
-- A legality contrast was defined for a selected move by comparing the selected legal move against illegal moves.
+- A legality contrast was defined for a selected move by comparing the selected legal move against currently illegal empty-square moves.
 - Capture-line sensitivity was measured across board squares and across layers.
 - Layer-7 component decomposition and component ablations tested whether MLP7, attention heads, or the whole residual stream most affected the legality contrast.
 

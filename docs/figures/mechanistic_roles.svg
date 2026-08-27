@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 420" role="img" aria-labelledby="title desc">
+<title id="title">Mechanistic roles</title>
+<desc id="desc">Components can be interpreted by what they read, route, transform, and write.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8;--fill:#f7f9fc;--blue:#246bfe;--teal:#0f8f7f;--gold:#b98113;--red:#cc4b37;--green:#2f8f46;--purple:#6a4bc3}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153;--fill:#1f2633;--blue:#86a9ff;--teal:#5fd4c7;--gold:#ffd27a;--red:#ff8f7d;--green:#7bd88f;--purple:#b9a5ff}}
+.title{font:700 23px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}
+.label{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}
+.small{font:12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.tiny{font:11px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.box{fill:var(--fill);stroke:var(--grid);stroke-width:1.25;rx:8}
+.pill{fill:var(--fill);stroke:var(--grid);stroke-width:1.2;rx:16}
+.line{stroke:var(--grid);stroke-width:2;fill:none;marker-end:url(#arrow)}
+.teal{stroke:var(--teal);stroke-width:3;fill:none;marker-end:url(#arrowTeal)}
+.blue{stroke:var(--blue);stroke-width:3;fill:none;marker-end:url(#arrowBlue)}
+.gold{stroke:var(--gold);stroke-width:3;fill:none;marker-end:url(#arrowGold)}
+.red{stroke:var(--red);stroke-width:2.5;fill:none;marker-end:url(#arrowRed)}
+.dash{stroke:var(--muted);stroke-width:2;stroke-dasharray:7 5;fill:none;marker-end:url(#arrow)}
+.gate{fill:#fff8e5;stroke:var(--gold);stroke-width:1.2;rx:8}
+@media(prefers-color-scheme:dark){.gate{fill:#332b1b}}
+</style>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#5c667a"/></marker>
+<marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+<marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+<marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+<marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+<text class="title" x="42" y="50">Four roles a component or population can play</text>
+<text class="small" x="42" y="74">The roles can overlap. They are analysis handles, not a claim of strict modularity.</text>
+<rect class="box" x="66" y="165" width="138" height="84"/><text class="label" x="135" y="197" text-anchor="middle">read</text><text class="small" x="135" y="222" text-anchor="middle">input geometry</text>
+<path class="blue" d="M204 207 L286 207"/>
+<rect class="box" x="286" y="165" width="138" height="84"/><text class="label" x="355" y="197" text-anchor="middle">route</text><text class="small" x="355" y="222" text-anchor="middle">information path</text>
+<path class="teal" d="M424 207 L506 207"/>
+<rect class="box" x="506" y="165" width="138" height="84"/><text class="label" x="575" y="197" text-anchor="middle">transform</text><text class="small" x="575" y="222" text-anchor="middle">nonlinear map</text>
+<path class="gold" d="M644 207 L716 207"/>
+<rect class="box" x="686" y="165" width="96" height="84"/><text class="label" x="734" y="197" text-anchor="middle">write</text><text class="small" x="734" y="222" text-anchor="middle">output dir.</text>
+<rect class="pill" x="236" y="300" width="350" height="44"/><text class="label" x="411" y="328" text-anchor="middle">population behavior can be the interpretable scale</text>
+</svg>

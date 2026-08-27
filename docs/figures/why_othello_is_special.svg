@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 500" role="img" aria-labelledby="title desc">
+<title id="title">Why Othello is special</title>
+<desc id="desc">Seven properties that make Othello-GPT unusually favorable for mechanistic interpretability.</desc>
+<style>
+svg{color-scheme:light dark;--text:#172033;--muted:#5c667a;--grid:#d8dde8;--fill:#f7f9fc;--blue:#246bfe;--teal:#0f8f7f;--gold:#b98113;--red:#cc4b37;--green:#2f8f46;--purple:#6a4bc3}
+@media(prefers-color-scheme:dark){svg{--text:#eef2ff;--muted:#b7bfd1;--grid:#384153;--fill:#1f2633;--blue:#86a9ff;--teal:#5fd4c7;--gold:#ffd27a;--red:#ff8f7d;--green:#7bd88f;--purple:#b9a5ff}}
+.title{font:700 23px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}
+.label{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--text)}
+.small{font:12px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.tiny{font:11px system-ui,-apple-system,Segoe UI,sans-serif;fill:var(--muted)}
+.box{fill:var(--fill);stroke:var(--grid);stroke-width:1.25;rx:8}
+.pill{fill:var(--fill);stroke:var(--grid);stroke-width:1.2;rx:16}
+.line{stroke:var(--grid);stroke-width:2;fill:none;marker-end:url(#arrow)}
+.teal{stroke:var(--teal);stroke-width:3;fill:none;marker-end:url(#arrowTeal)}
+.blue{stroke:var(--blue);stroke-width:3;fill:none;marker-end:url(#arrowBlue)}
+.gold{stroke:var(--gold);stroke-width:3;fill:none;marker-end:url(#arrowGold)}
+.red{stroke:var(--red);stroke-width:2.5;fill:none;marker-end:url(#arrowRed)}
+.dash{stroke:var(--muted);stroke-width:2;stroke-dasharray:7 5;fill:none;marker-end:url(#arrow)}
+.gate{fill:#fff8e5;stroke:var(--gold);stroke-width:1.2;rx:8}
+@media(prefers-color-scheme:dark){.gate{fill:#332b1b}}
+</style>
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#5c667a"/></marker>
+<marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f8f7f"/></marker>
+<marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#246bfe"/></marker>
+<marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b98113"/></marker>
+<marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#cc4b37"/></marker>
+</defs>
+<text class="title" x="42" y="50">Why Othello-GPT was unusually favorable</text>
+<text class="small" x="42" y="74">The clean external state makes the investigation falsifiable. It does not make the internal mechanism simple.</text>
+<rect class="box" x="56" y="116" width="220" height="76"/><text class="label" x="166" y="146" text-anchor="middle">Exact latent state</text><text class="small" x="166" y="170" text-anchor="middle">board after every prefix</text><rect class="box" x="300" y="116" width="220" height="76"/><text class="label" x="410" y="146" text-anchor="middle">Exact dynamics</text><text class="small" x="410" y="170" text-anchor="middle">deterministic simulator</text><rect class="box" x="544" y="116" width="220" height="76"/><text class="label" x="654" y="146" text-anchor="middle">Exact rules</text><text class="small" x="654" y="170" text-anchor="middle">legal moves and capture rays</text><rect class="box" x="56" y="244" width="220" height="76"/><text class="label" x="166" y="274" text-anchor="middle">Counterfactuals</text><text class="small" x="166" y="298" text-anchor="middle">known board edits</text><rect class="box" x="300" y="244" width="220" height="76"/><text class="label" x="410" y="274" text-anchor="middle">Dense labels</text><text class="small" x="410" y="298" text-anchor="middle">64 square states per position</text><rect class="box" x="544" y="244" width="220" height="76"/><text class="label" x="654" y="274" text-anchor="middle">Small model</text><text class="small" x="654" y="298" text-anchor="middle">8 blocks, d_model 512</text><rect class="box" x="300" y="372" width="220" height="76"/><text class="label" x="410" y="402" text-anchor="middle">Reproducible hooks</text><text class="small" x="410" y="426" text-anchor="middle">probes, gradients, ablations</text>
+</svg>

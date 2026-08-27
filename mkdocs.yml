@@ -75,6 +75,8 @@ nav:
       - Research Provenance: research/provenance.md
       - Model Architecture: research/model_architecture.md
       - Findings Snapshot: research/findings_snapshot.md
+      - Final Evidence Map: research/final_evidence_map.md
+      - Chapter Summaries: research/chapter_summaries.md
       - Open Questions: research/open_questions.md
       - Experiment Index: research/experiment_index.md
   - Appendix:
