@@ -74,6 +74,20 @@ The source values come from executed TransformerLens notebook sections `17. Whic
 This regenerates the Chapter 7 per-board capture-line layer sensitivity PNG and JSON by rerunning the relevant TransformerLens code path. It needs the TransformerLens environment because it loads Othello-GPT, trains lightweight probes, and computes legality-gradient projections.
 
 ```bash
+/Users/diegovalverdegarro/workspace/projects/TransformerLens/.venv/bin/python \
+  scripts/generate_chapter07_nonvalid_capture_line_layer_sensitivity_png.py \
+  --output docs/figures/chapter07_nonvalid_capture_line_layer_sensitivity.png \
+  --json-output docs/figures/chapter07_nonvalid_capture_line_layer_sensitivity.json \
+  --layers 0 1 2 3 4 5 6 7 \
+  --num-positions 50 \
+  --num-boards 10 \
+  --probe-epochs 8 \
+  --device auto
+```
+
+This regenerates the Chapter 7 non-valid capture-like comparison PNG and JSON. It samples illegal empty targets with contiguous opponent runs but no friendly terminator, then scores an invalid-target-vs-legal-logit contrast across all eight layers.
+
+```bash
 python3 scripts/generate_chapter08_mlp7_concept_figures.py
 python3 scripts/generate_mlp7_component_attribution_figure.py
 python3 scripts/generate_mlp7_component_ablation_figure.py

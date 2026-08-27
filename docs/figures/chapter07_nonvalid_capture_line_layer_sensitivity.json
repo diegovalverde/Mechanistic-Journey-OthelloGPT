@@ -1,0 +1,1861 @@
+{
+  "source_notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "source_sections": [
+    "Chapter 7 helpers plus invalid opponent-run sampling inspired by Chapter 9 condition dataset"
+  ],
+  "configuration": {
+    "num_positions": 50,
+    "num_boards": 10,
+    "layers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "probe_epochs": 8,
+    "probe_num_games": 150,
+    "legality_random_seed": 7,
+    "score": "For each illegal target with an opponent run but no friendly terminator, mean absolute invalid-target-vs-legal-gradient projection on opponent-run plus failure squares divided by non-support controls."
+  },
+  "layer_summary": [
+    {
+      "layer": 0,
+      "probe_val_accuracy": 0.7331364154815674,
+      "nonvalid_line_vs_control_ratio": 1.2598893932618567,
+      "nonvalid_line_minus_control": 0.008809856304840968
+    },
+    {
+      "layer": 1,
+      "probe_val_accuracy": 0.8123094439506531,
+      "nonvalid_line_vs_control_ratio": 1.5266528512203106,
+      "nonvalid_line_minus_control": 0.02952882585982418
+    },
+    {
+      "layer": 2,
+      "probe_val_accuracy": 0.8837175965309143,
+      "nonvalid_line_vs_control_ratio": 1.8492169228163933,
+      "nonvalid_line_minus_control": 0.05286585351679702
+    },
+    {
+      "layer": 3,
+      "probe_val_accuracy": 0.9281154870986938,
+      "nonvalid_line_vs_control_ratio": 2.2749103204601426,
+      "nonvalid_line_minus_control": 0.10836154825849573
+    },
+    {
+      "layer": 4,
+      "probe_val_accuracy": 0.9519817233085632,
+      "nonvalid_line_vs_control_ratio": 2.700609609070186,
+      "nonvalid_line_minus_control": 0.16031867428601237
+    },
+    {
+      "layer": 5,
+      "probe_val_accuracy": 0.9428353905677795,
+      "nonvalid_line_vs_control_ratio": 2.575488876484438,
+      "nonvalid_line_minus_control": 0.13904447886626256
+    },
+    {
+      "layer": 6,
+      "probe_val_accuracy": 0.8919112086296082,
+      "nonvalid_line_vs_control_ratio": 1.8900135067035477,
+      "nonvalid_line_minus_control": 0.033557462254391275
+    },
+    {
+      "layer": 7,
+      "probe_val_accuracy": 0.8503239154815674,
+      "nonvalid_line_vs_control_ratio": 1.800328509971588,
+      "nonvalid_line_minus_control": 0.01942670720501053
+    }
+  ],
+  "displayed_position_layer_scores": [
+    {
+      "position_index": 0,
+      "illegal_target": "H1",
+      "prefix_len": 25,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 2.3643085754519193,
+          "capture_minus_unrelated": 0.0850703388842571
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.8340634701580661,
+          "capture_minus_unrelated": -0.011811999381225333
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 1.6433587087954378,
+          "capture_minus_unrelated": 0.050220773857819215
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 2.1944915774647797,
+          "capture_minus_unrelated": 0.13556650361348677
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 2.9903185675031865,
+          "capture_minus_unrelated": 0.16254579241419387
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 2.7002873754332515,
+          "capture_minus_unrelated": 0.10045254659146453
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 2.693825279728516,
+          "capture_minus_unrelated": 0.08970697491198906
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 1.5589575693864794,
+          "capture_minus_unrelated": 0.02313910946488762
+        }
+      ]
+    },
+    {
+      "position_index": 1,
+      "illegal_target": "F2",
+      "prefix_len": 36,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.13712408058199319,
+          "capture_minus_unrelated": -0.022425241559615422
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.7803575185765954,
+          "capture_minus_unrelated": -0.006811785327013712
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 0.03957409608834105,
+          "capture_minus_unrelated": -0.031789210723343723
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 1.174198373043538,
+          "capture_minus_unrelated": 0.009251820935129093
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 1.6686058940680988,
+          "capture_minus_unrelated": 0.037683381843541204
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 1.4182639322185018,
+          "capture_minus_unrelated": 0.05025831272761369
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 0.23832415885424404,
+          "capture_minus_unrelated": -0.03960956533535801
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 0.2445045866683368,
+          "capture_minus_unrelated": -0.026380341291299153
+        }
+      ]
+    },
+    {
+      "position_index": 2,
+      "illegal_target": "A5",
+      "prefix_len": 37,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 1.6087770227795857,
+          "capture_minus_unrelated": 0.046602472146092866
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 1.5996499458106241,
+          "capture_minus_unrelated": 0.03850129570116052
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 0.904474907532773,
+          "capture_minus_unrelated": -0.009388025305080372
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 1.4211478325537115,
+          "capture_minus_unrelated": 0.03942401010727324
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 4.025890724622444,
+          "capture_minus_unrelated": 0.26375358644872904
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 1.830354234766369,
+          "capture_minus_unrelated": 0.08061018267104014
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 2.3127489566580377,
+          "capture_minus_unrelated": 0.05112465994642372
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 2.357978835193405,
+          "capture_minus_unrelated": 0.02946448245259759
+        }
+      ]
+    },
+    {
+      "position_index": 3,
+      "illegal_target": "B1",
+      "prefix_len": 17,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 1.4793126976989839,
+          "capture_minus_unrelated": 0.03213496576958838
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 1.8174043618621711,
+          "capture_minus_unrelated": 0.053806800735541255
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 2.1588682317400063,
+          "capture_minus_unrelated": 0.07190772335833082
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 1.5989790834030233,
+          "capture_minus_unrelated": 0.05126529297110839
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 2.2441990879848754,
+          "capture_minus_unrelated": 0.11316668024609008
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 4.406846748645697,
+          "capture_minus_unrelated": 0.19812016989677572
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 3.000071885187719,
+          "capture_minus_unrelated": 0.07730666970690855
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 2.3589917195325714,
+          "capture_minus_unrelated": 0.04410669923527166
+        }
+      ]
+    },
+    {
+      "position_index": 4,
+      "illegal_target": "H7",
+      "prefix_len": 17,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 2.0539183147866016,
+          "capture_minus_unrelated": 0.046833047488083444
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 2.0414161028455537,
+          "capture_minus_unrelated": 0.05004722435303308
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 3.148189040403716,
+          "capture_minus_unrelated": 0.09837946901615294
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 2.4881797585079104,
+          "capture_minus_unrelated": 0.12266231490023156
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 2.800587919331593,
+          "capture_minus_unrelated": 0.1588892199030077
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 3.452302488675795,
+          "capture_minus_unrelated": 0.31315167824979184
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 1.771200923339872,
+          "capture_minus_unrelated": 0.026665473417206494
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 1.9361328243236946,
+          "capture_minus_unrelated": 0.023353021707454763
+        }
+      ]
+    },
+    {
+      "position_index": 5,
+      "illegal_target": "G8",
+      "prefix_len": 12,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.4352499573780614,
+          "capture_minus_unrelated": -0.02866792178247124
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 1.0172961321221308,
+          "capture_minus_unrelated": 0.000716574681324085
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 1.129739992896509,
+          "capture_minus_unrelated": 0.006056967507382591
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 2.0173519524270236,
+          "capture_minus_unrelated": 0.057529322836281996
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 3.7064988147335134,
+          "capture_minus_unrelated": 0.21534485403182252
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 5.473723623746245,
+          "capture_minus_unrelated": 0.26286016752211644
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 3.6523824038629615,
+          "capture_minus_unrelated": 0.10177664200143356
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 2.417382184196107,
+          "capture_minus_unrelated": 0.04722194127472384
+        }
+      ]
+    },
+    {
+      "position_index": 6,
+      "illegal_target": "C2",
+      "prefix_len": 19,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.4417065401287322,
+          "capture_minus_unrelated": -0.028552141485724058
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.9866934008965301,
+          "capture_minus_unrelated": -0.0008180958611316638
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 1.5149900708331046,
+          "capture_minus_unrelated": 0.030717884817119658
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 1.1874290430199326,
+          "capture_minus_unrelated": 0.020082384412346777
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 2.0406804208574654,
+          "capture_minus_unrelated": 0.11121808251940044
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 0.653263338342466,
+          "capture_minus_unrelated": -0.04851149955658979
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 1.7841895806184158,
+          "capture_minus_unrelated": 0.03404483359904503
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 1.681673408032236,
+          "capture_minus_unrelated": 0.01694330056461523
+        }
+      ]
+    },
+    {
+      "position_index": 7,
+      "illegal_target": "D8",
+      "prefix_len": 21,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.6599547655779222,
+          "capture_minus_unrelated": -0.03801272530798558
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 1.0404056341372179,
+          "capture_minus_unrelated": 0.0026835864685751804
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 0.8628070269731277,
+          "capture_minus_unrelated": -0.009181392096258977
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 1.8058586367509746,
+          "capture_minus_unrelated": 0.06153834066871139
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 1.4667530961270552,
+          "capture_minus_unrelated": 0.04310832957702655
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 3.288570275343206,
+          "capture_minus_unrelated": 0.2178922339446015
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 1.7330938120920387,
+          "capture_minus_unrelated": 0.020622489536698495
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 1.3892232951572132,
+          "capture_minus_unrelated": 0.009601901640632637
+        }
+      ]
+    },
+    {
+      "position_index": 8,
+      "illegal_target": "C1",
+      "prefix_len": 27,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.8961926494172318,
+          "capture_minus_unrelated": -0.006186885943429338
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.9516160842204548,
+          "capture_minus_unrelated": -0.006214395276167323
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 1.7396248821572957,
+          "capture_minus_unrelated": 0.07188769740776885
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 2.6240630159960325,
+          "capture_minus_unrelated": 0.17902459604872595
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 2.435258653174456,
+          "capture_minus_unrelated": 0.170480266271366
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 3.4832654593204637,
+          "capture_minus_unrelated": 0.276638482382728
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 1.7841852605192277,
+          "capture_minus_unrelated": 0.04382573340191609
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 3.517605190594124,
+          "capture_minus_unrelated": 0.0395111880151348
+        }
+      ]
+    },
+    {
+      "position_index": 9,
+      "illegal_target": "C1",
+      "prefix_len": 24,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 2.1136999651820245,
+          "capture_minus_unrelated": 0.04593181590446168
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 1.4448009918058227,
+          "capture_minus_unrelated": 0.037481566139117434
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 2.056149627064238,
+          "capture_minus_unrelated": 0.08906077602188345
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 2.204610303173398,
+          "capture_minus_unrelated": 0.1468996690103301
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 3.3226891258428655,
+          "capture_minus_unrelated": 0.2586176583336459
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 4.314190194991769,
+          "capture_minus_unrelated": 0.3244232754188555
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 2.7873415291503414,
+          "capture_minus_unrelated": 0.06825502752498896
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 2.3609761004972505,
+          "capture_minus_unrelated": 0.02734470728922773
+        }
+      ]
+    }
+  ],
+  "displayed_positions": [
+    {
+      "prefix_len": 25,
+      "prefix_token_ids": [
+        34,
+        28,
+        22,
+        42,
+        20,
+        14,
+        43,
+        19,
+        18,
+        10,
+        29,
+        23,
+        2,
+        12,
+        27,
+        33,
+        6,
+        15,
+        7,
+        35,
+        39,
+        1,
+        44,
+        9,
+        32
+      ],
+      "to_play": -1,
+      "board": [
+        -1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        -1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        -1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "H1",
+        "square_index": 7,
+        "token_id": 8,
+        "opponent_run_squares": 7,
+        "num_failed_lines": 2,
+        "capture_line_labels": [
+          [
+            "G1",
+            "F1"
+          ],
+          [
+            "G2",
+            "F3",
+            "E4",
+            "D5",
+            "C6"
+          ]
+        ],
+        "failed_runs": [
+          {
+            "line": [
+              "G1",
+              "F1"
+            ],
+            "failure_square": "E1",
+            "failure_kind": "empty"
+          },
+          {
+            "line": [
+              "G2",
+              "F3",
+              "E4",
+              "D5",
+              "C6"
+            ],
+            "failure_square": "B7",
+            "failure_kind": "empty"
+          }
+        ]
+      }
+    },
+    {
+      "prefix_len": 36,
+      "prefix_token_ids": [
+        41,
+        42,
+        43,
+        33,
+        27,
+        51,
+        38,
+        32,
+        37,
+        20,
+        59,
+        50,
+        21,
+        18,
+        49,
+        34,
+        35,
+        40,
+        13,
+        57,
+        39,
+        26,
+        48,
+        6,
+        9,
+        46,
+        28,
+        19,
+        25,
+        17,
+        55,
+        44,
+        5,
+        53,
+        10,
+        30
+      ],
+      "to_play": 1,
+      "board": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        0,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        0,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        -1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        0,
+        1,
+        0,
+        -1,
+        0,
+        1,
+        0
+      ],
+      "chosen_move": {
+        "label": "F2",
+        "square_index": 13,
+        "token_id": 14,
+        "opponent_run_squares": 1,
+        "num_failed_lines": 1,
+        "capture_line_labels": [
+          [
+            "F1"
+          ]
+        ],
+        "failed_runs": [
+          {
+            "line": [
+              "F1"
+            ],
+            "failure_square": null,
+            "failure_kind": "edge"
+          }
+        ]
+      }
+    },
+    {
+      "prefix_len": 37,
+      "prefix_token_ids": [
+        34,
+        28,
+        22,
+        40,
+        27,
+        35,
+        39,
+        21,
+        14,
+        15,
+        36,
+        13,
+        8,
+        38,
+        23,
+        42,
+        7,
+        16,
+        49,
+        50,
+        51,
+        26,
+        18,
+        58,
+        46,
+        33,
+        37,
+        30,
+        41,
+        19,
+        11,
+        10,
+        9,
+        3,
+        17,
+        52,
+        20
+      ],
+      "to_play": -1,
+      "board": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "A5",
+        "square_index": 32,
+        "token_id": 31,
+        "opponent_run_squares": 4,
+        "num_failed_lines": 3,
+        "capture_line_labels": [
+          [
+            "B4",
+            "C3"
+          ],
+          [
+            "A6"
+          ],
+          [
+            "B6"
+          ]
+        ],
+        "failed_runs": [
+          {
+            "line": [
+              "B4",
+              "C3"
+            ],
+            "failure_square": "D2",
+            "failure_kind": "empty"
+          },
+          {
+            "line": [
+              "A6"
+            ],
+            "failure_square": "A7",
+            "failure_kind": "empty"
+          },
+          {
+            "line": [
+              "B6"
+            ],
+            "failure_square": "C7",
+            "failure_kind": "empty"
+          }
+        ]
+      }
+    },
+    {
+      "prefix_len": 17,
+      "prefix_token_ids": [
+        20,
+        21,
+        34,
+        19,
+        11,
+        3,
+        10,
+        27,
+        13,
+        6,
+        12,
+        1,
+        5,
+        4,
+        33,
+        22,
+        9
+      ],
+      "to_play": -1,
+      "board": [
+        -1,
+        0,
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "B1",
+        "square_index": 1,
+        "token_id": 2,
+        "opponent_run_squares": 6,
+        "num_failed_lines": 3,
+        "capture_line_labels": [
+          [
+            "A2"
+          ],
+          [
+            "B2"
+          ],
+          [
+            "C2",
+            "D3",
+            "E4",
+            "F5"
+          ]
+        ],
+        "failed_runs": [
+          {
+            "line": [
+              "A2"
+            ],
+            "failure_square": null,
+            "failure_kind": "edge"
+          },
+          {
+            "line": [
+              "B2"
+            ],
+            "failure_square": "B3",
+            "failure_kind": "empty"
+          },
+          {
+            "line": [
+              "C2",
+              "D3",
+              "E4",
+              "F5"
+            ],
+            "failure_square": "G6",
+            "failure_kind": "empty"
+          }
+        ]
+      }
+    },
+    {
+      "prefix_len": 17,
+      "prefix_token_ids": [
+        34,
+        42,
+        41,
+        28,
+        29,
+        39,
+        50,
+        51,
+        43,
+        35,
+        60,
+        40,
+        22,
+        57,
+        49,
+        24,
+        27
+      ],
+      "to_play": -1,
+      "board": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        1
+      ],
+      "chosen_move": {
+        "label": "H7",
+        "square_index": 55,
+        "token_id": 52,
+        "opponent_run_squares": 4,
+        "num_failed_lines": 2,
+        "capture_line_labels": [
+          [
+            "G7",
+            "F7",
+            "E7"
+          ],
+          [
+            "H8"
+          ]
+        ],
+        "failed_runs": [
+          {
+            "line": [
+              "G7",
+              "F7",
+              "E7"
+            ],
+            "failure_square": "D7",
+            "failure_kind": "empty"
+          },
+          {
+            "line": [
+              "H8"
+            ],
+            "failure_square": null,
+            "failure_kind": "edge"
+          }
+        ]
+      }
+    },
+    {
+      "prefix_len": 12,
+      "prefix_token_ids": [
+        41,
+        40,
+        39,
+        48,
+        19,
+        28,
+        29,
+        21,
+        12,
+        20,
+        57,
+        50
+      ],
+      "to_play": 1,
+      "board": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "G8",
+        "square_index": 62,
+        "token_id": 59,
+        "opponent_run_squares": 3,
+        "num_failed_lines": 1,
+        "capture_line_labels": [
+          [
+            "F7",
+            "E6",
+            "D5"
+          ]
+        ],
+        "failed_runs": [
+          {
+            "line": [
+              "F7",
+              "E6",
+              "D5"
+            ],
+            "failure_square": "C4",
+            "failure_kind": "empty"
+          }
+        ]
+      }
+    },
+    {
+      "prefix_len": 19,
+      "prefix_token_ids": [
+        27,
+        19,
+        20,
+        33,
+        18,
+        9,
+        40,
+        49,
+        26,
+        21,
+        10,
+        25,
+        22,
+        13,
+        4,
+        2,
+        42,
+        34,
+        39
+      ],
+      "to_play": -1,
+      "board": [
+        0,
+        -1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "C2",
+        "square_index": 10,
+        "token_id": 11,
+        "opponent_run_squares": 5,
+        "num_failed_lines": 2,
+        "capture_line_labels": [
+          [
+            "D1"
+          ],
+          [
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ]
+        ],
+        "failed_runs": [
+          {
+            "line": [
+              "D1"
+            ],
+            "failure_square": null,
+            "failure_kind": "edge"
+          },
+          {
+            "line": [
+              "C3",
+              "C4",
+              "C5",
+              "C6"
+            ],
+            "failure_square": "C7",
+            "failure_kind": "empty"
+          }
+        ]
+      }
+    },
+    {
+      "prefix_len": 21,
+      "prefix_token_ids": [
+        27,
+        33,
+        40,
+        21,
+        26,
+        32,
+        38,
+        25,
+        34,
+        39,
+        18,
+        42,
+        20,
+        47,
+        41,
+        19,
+        43,
+        48,
+        31,
+        29,
+        55
+      ],
+      "to_play": -1,
+      "board": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        0,
+        -1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "D8",
+        "square_index": 59,
+        "token_id": 56,
+        "opponent_run_squares": 4,
+        "num_failed_lines": 2,
+        "capture_line_labels": [
+          [
+            "C7",
+            "B6",
+            "A5"
+          ],
+          [
+            "C8"
+          ]
+        ],
+        "failed_runs": [
+          {
+            "line": [
+              "C7",
+              "B6",
+              "A5"
+            ],
+            "failure_square": null,
+            "failure_kind": "edge"
+          },
+          {
+            "line": [
+              "C8"
+            ],
+            "failure_square": "B8",
+            "failure_kind": "empty"
+          }
+        ]
+      }
+    },
+    {
+      "prefix_len": 27,
+      "prefix_token_ids": [
+        41,
+        42,
+        34,
+        28,
+        23,
+        22,
+        20,
+        39,
+        27,
+        26,
+        15,
+        11,
+        29,
+        14,
+        43,
+        30,
+        6,
+        21,
+        12,
+        49,
+        2,
+        33,
+        48,
+        35,
+        32,
+        8,
+        7
+      ],
+      "to_play": -1,
+      "board": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        -1,
+        1,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        0,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "C1",
+        "square_index": 2,
+        "token_id": 3,
+        "opponent_run_squares": 6,
+        "num_failed_lines": 3,
+        "capture_line_labels": [
+          [
+            "B1"
+          ],
+          [
+            "C2"
+          ],
+          [
+            "D2",
+            "E3",
+            "F4",
+            "G5"
+          ]
+        ],
+        "failed_runs": [
+          {
+            "line": [
+              "B1"
+            ],
+            "failure_square": "A1",
+            "failure_kind": "empty"
+          },
+          {
+            "line": [
+              "C2"
+            ],
+            "failure_square": "C3",
+            "failure_kind": "empty"
+          },
+          {
+            "line": [
+              "D2",
+              "E3",
+              "F4",
+              "G5"
+            ],
+            "failure_square": "H6",
+            "failure_kind": "empty"
+          }
+        ]
+      }
+    },
+    {
+      "prefix_len": 24,
+      "prefix_token_ids": [
+        41,
+        28,
+        22,
+        42,
+        34,
+        40,
+        49,
+        35,
+        33,
+        21,
+        29,
+        30,
+        20,
+        39,
+        48,
+        12,
+        14,
+        6,
+        4,
+        32,
+        27,
+        19,
+        11,
+        5
+      ],
+      "to_play": 1,
+      "board": [
+        0,
+        0,
+        0,
+        1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        0,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "C1",
+        "square_index": 2,
+        "token_id": 3,
+        "opponent_run_squares": 4,
+        "num_failed_lines": 1,
+        "capture_line_labels": [
+          [
+            "D2",
+            "E3",
+            "F4",
+            "G5"
+          ]
+        ],
+        "failed_runs": [
+          {
+            "line": [
+              "D2",
+              "E3",
+              "F4",
+              "G5"
+            ],
+            "failure_square": "H6",
+            "failure_kind": "empty"
+          }
+        ]
+      }
+    }
+  ]
+}
