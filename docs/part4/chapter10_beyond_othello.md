@@ -83,6 +83,8 @@ This is not a universal taxonomy. Other projects will divide the rungs different
 
 Its purpose is not bureaucracy. Its purpose is to keep claims honest.
 
+Here "rescue" means a targeted recovery test. First we deliberately damage the behavior we think a mechanism supports, for example by ablating a candidate population or editing away a relevant semantic feature. Then we patch back the proposed intermediate activation, population, or path. If the original behavior returns selectively, that is stronger than showing that the component matters when removed. It suggests the proposed internal object is not just correlated with the behavior, but can restore the computation after a controlled disruption.
+
 If we have decodability, say decodability. If we have local causal relevance, say local causal relevance. If we have component importance, say component importance. If we do not have rescue, do not imply sufficiency. If we do not have path mediation, do not describe a complete circuit.
 
 ## Why Othello Was Special
