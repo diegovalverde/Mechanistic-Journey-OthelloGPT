@@ -14,6 +14,13 @@ The current research status is mixed by design: some findings are established, s
 - Students who want the math and experiments explained without losing the research details.
 - Contributors who need a maintainable record of what has been tested, what is known, and what remains open.
 
+## How to Read This Book
+
+- Intuition-first: 1 -> 2 -> 3 -> 4 -> 7 -> 8 -> 9 -> 10.
+- Full technical: read Chapters 1 through 10 in order.
+- Experiment reproduction: 2 -> 4 -> 5 -> 7 -> 8 -> 9 -> [Notebook Walkthrough](appendix/notebook_walkthrough.md).
+- Background-needed: use [Math Background](appendix/math_background.md) and [Transformer Background](appendix/transformer_background.md) as references when the notation or architecture becomes the bottleneck.
+
 ## What You Will Learn
 
 - How board state can be decoded from residual-stream activations.
