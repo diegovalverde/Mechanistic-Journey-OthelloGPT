@@ -343,6 +343,17 @@ Layer sweep from the executed notebook, section 17. Layer 7 has much stronger ca
 </figcaption>
 </figure>
 
+The aggregate plot is useful, but it hides the positions that produced the averages. The companion raster below reruns the same Chapter 7 scoring code across all eight layers and shows ten sampled valid-capture boards directly.
+
+<figure markdown>
+![Per-board capture-line layer sensitivity](../figures/chapter07_capture_line_layer_sensitivity.png)
+<figcaption>
+Ten sampled legal-capture positions with per-board layer sensitivity. In each board, the chosen legal move is blue, captured opponent discs are gold, and friendly terminators are green. The mini heatmap to the right of each board has one row per layer, from `L0` to `L7`; each number is that board's capture-supporting-square sensitivity ratio, not the dataset average. Colors share one global white-to-green scale across the displayed board-layer cells.
+</figcaption>
+</figure>
+
+This view is a useful check on what the aggregate means. It does not say every board has an identical trajectory through the layers. Some individual positions show secondary bumps before the final block. But the late-layer pattern is visible without averaging everything into one bar: for most displayed positions, layer 7 is among the strongest rows, and in several examples it is the strongest row by a large margin.
+
 | Layer | Probe validation accuracy | Capture-vs-unrelated ratio | Capture-minus-unrelated |
 | ---: | ---: | ---: | ---: |
 | 2 | 0.883759 | 1.076216 | -0.000256 |
@@ -585,7 +596,7 @@ Strong evidence is not perfect evidence. Several limitations remain.
 
 The sampled dataset had `50` positions. That is enough to see a clear effect here, but it is not a complete sweep over Othello. Game phase, move type, line length, corner structure, edge structure, and multi-direction captures could all matter.
 
-The layer sweep used only layers `2`, `4`, `6`, and `7`. It did not test every block. The result makes layer 7 stand out among the tested layers, but it does not tell us the full trajectory from layer 0 to layer 7.
+The original notebook layer sweep used only layers `2`, `4`, `6`, and `7`. It did not test every block in the reported table. The per-board raster above extends the same code path to all eight layers for visualization, but it is still a lightweight, small-sample run rather than a complete layer-by-layer probe study.
 
 The layer probes were lightweight probes trained for `8` epochs for runtime reasons. Their validation accuracies are useful diagnostics, but they are not optimized layer-by-layer probe studies. A different probe training setup might change the absolute accuracies. The layer-7 enrichment result is not simply a probe-accuracy result, but the semantic directions still depend on the trained probes.
 
@@ -646,4 +657,4 @@ That question belongs to Chapter 8.
 
 - Executed notebook: `demos/Othello_GPT_Jacobian_Lens.ipynb`, sections `11. A legality score instead of a raw move logit`, `12. Which board squares causally support legality?`, `15. Dataset-level legality relevance test`, `16. Path structure, not just square relevance`, `17. Which layer computes legality?`, and `19. Is the layer-7 legality enrichment real?`, on `diegovalverde/TransformerLens`, branch `othello-jspace-analysis`.
 - Project research memory: [research log](../research/research_log.md), [experiment index](../research/experiment_index.md), [findings snapshot](../research/findings_snapshot.md), [model architecture](../research/model_architecture.md), and [provenance](../research/provenance.md).
-- Chapter 7 measured figures: [chapter07_layer_sweep.svg](../figures/chapter07_layer_sweep.svg) and [chapter07_layer7_validation.svg](../figures/chapter07_layer7_validation.svg).
+- Chapter 7 measured figures: [chapter07_layer_sweep.svg](../figures/chapter07_layer_sweep.svg), [chapter07_layer7_validation.svg](../figures/chapter07_layer7_validation.svg), and [chapter07_capture_line_layer_sensitivity.png](../figures/chapter07_capture_line_layer_sensitivity.png).

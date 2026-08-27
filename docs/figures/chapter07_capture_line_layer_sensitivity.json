@@ -1,0 +1,1679 @@
+{
+  "source_notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "source_sections": [
+    "15. Dataset-level legality relevance test",
+    "17. Which layer computes legality?"
+  ],
+  "configuration": {
+    "num_positions": 50,
+    "num_boards": 10,
+    "layers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "probe_epochs": 8,
+    "probe_num_games": 150,
+    "legality_random_seed": 7,
+    "score": "Mean per-position absolute legality-gradient projection on capture-line opponent plus friendly terminator squares divided by unrelated occupied controls."
+  },
+  "layer_summary": [
+    {
+      "layer": 0,
+      "probe_val_accuracy": 0.7331364154815674,
+      "capture_vs_unrelated_ratio": 1.0265538223615747,
+      "capture_minus_unrelated": -0.0003483876639982328
+    },
+    {
+      "layer": 1,
+      "probe_val_accuracy": 0.8123094439506531,
+      "capture_vs_unrelated_ratio": 1.0883191666712384,
+      "capture_minus_unrelated": -0.00011022546791340026
+    },
+    {
+      "layer": 2,
+      "probe_val_accuracy": 0.8837175965309143,
+      "capture_vs_unrelated_ratio": 1.0865809521449992,
+      "capture_minus_unrelated": -0.00017014167583247354
+    },
+    {
+      "layer": 3,
+      "probe_val_accuracy": 0.9281154870986938,
+      "capture_vs_unrelated_ratio": 1.088543999394068,
+      "capture_minus_unrelated": -0.001032581460000604
+    },
+    {
+      "layer": 4,
+      "probe_val_accuracy": 0.9519817233085632,
+      "capture_vs_unrelated_ratio": 1.103776401014209,
+      "capture_minus_unrelated": -0.00033452349836105076
+    },
+    {
+      "layer": 5,
+      "probe_val_accuracy": 0.9428353905677795,
+      "capture_vs_unrelated_ratio": 1.0984811800737981,
+      "capture_minus_unrelated": 2.6977511436813983e-05
+    },
+    {
+      "layer": 6,
+      "probe_val_accuracy": 0.8919112086296082,
+      "capture_vs_unrelated_ratio": 1.0078040890936941,
+      "capture_minus_unrelated": -0.000708899258604139
+    },
+    {
+      "layer": 7,
+      "probe_val_accuracy": 0.8503239154815674,
+      "capture_vs_unrelated_ratio": 2.2447505166237374,
+      "capture_minus_unrelated": 0.027091408603564595
+    }
+  ],
+  "displayed_position_layer_scores": [
+    {
+      "position_index": 0,
+      "chosen_move": "H4",
+      "prefix_len": 25,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.9423787303657845,
+          "capture_minus_unrelated": -0.0006827787828764739
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 1.4559410721965582,
+          "capture_minus_unrelated": 0.005328998239045694
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 0.9768757520937953,
+          "capture_minus_unrelated": -0.00027572961823482504
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 1.3320164093306455,
+          "capture_minus_unrelated": 0.004858405315982445
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 1.5185244009748293,
+          "capture_minus_unrelated": 0.005220088718592055
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 1.5182899739990505,
+          "capture_minus_unrelated": 0.009791841698876983
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 1.0655342842102238,
+          "capture_minus_unrelated": 0.0005791515328123099
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 1.9176363200897335,
+          "capture_minus_unrelated": 0.01915456078547452
+        }
+      ]
+    },
+    {
+      "position_index": 1,
+      "chosen_move": "C7",
+      "prefix_len": 36,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.715067269524393,
+          "capture_minus_unrelated": -0.0037172485332121145
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.9077689699224064,
+          "capture_minus_unrelated": -0.001190472875896376
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 0.5562066937154299,
+          "capture_minus_unrelated": -0.007664187478076201
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 0.37717717611632734,
+          "capture_minus_unrelated": -0.013586475703050382
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 0.43934566549657494,
+          "capture_minus_unrelated": -0.012910190096590668
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 1.080565677496561,
+          "capture_minus_unrelated": 0.0024967946927063195
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 1.1343900171186414,
+          "capture_minus_unrelated": 0.0010967896159854718
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 2.6920355647432226,
+          "capture_minus_unrelated": 0.03290826989687048
+        }
+      ]
+    },
+    {
+      "position_index": 2,
+      "chosen_move": "C7",
+      "prefix_len": 37,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.9656073377218306,
+          "capture_minus_unrelated": -0.0005213852991194767
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.961404893063759,
+          "capture_minus_unrelated": -0.0007935363411282516
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 0.6873911026820655,
+          "capture_minus_unrelated": -0.0070162012629831835
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 0.7108271211629209,
+          "capture_minus_unrelated": -0.007403244749487687
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 0.7849730569933789,
+          "capture_minus_unrelated": -0.007487974044245976
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 1.2716260735660354,
+          "capture_minus_unrelated": 0.0065972871690367675
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 0.9052662111091192,
+          "capture_minus_unrelated": -0.001125804195180536
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 2.4062061895331035,
+          "capture_minus_unrelated": 0.028095543710514904
+        }
+      ]
+    },
+    {
+      "position_index": 3,
+      "chosen_move": "C6",
+      "prefix_len": 17,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.6445367203678164,
+          "capture_minus_unrelated": -0.007096952544419433
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.7284683087405546,
+          "capture_minus_unrelated": -0.0030295550704150537
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 0.7277123153644072,
+          "capture_minus_unrelated": -0.003313669643830508
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 0.7155859586188945,
+          "capture_minus_unrelated": -0.004444281364240767
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 0.6572147033595023,
+          "capture_minus_unrelated": -0.008478681160010059
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 1.6825348272474394,
+          "capture_minus_unrelated": 0.006473459419794381
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 0.5295431279724804,
+          "capture_minus_unrelated": -0.005245824508495967
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 1.898672699121889,
+          "capture_minus_unrelated": 0.018002353148238563
+        }
+      ]
+    },
+    {
+      "position_index": 4,
+      "chosen_move": "B4",
+      "prefix_len": 17,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 1.7716264668793065,
+          "capture_minus_unrelated": 0.003910679872413831
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 1.2909273724285089,
+          "capture_minus_unrelated": 0.0013361360644921659
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 0.9089199191754452,
+          "capture_minus_unrelated": -0.0005173628052164399
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 0.5865300959822207,
+          "capture_minus_unrelated": -0.0037653125589713456
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 0.6085107451808872,
+          "capture_minus_unrelated": -0.006334490102848837
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 0.9754018749135245,
+          "capture_minus_unrelated": -0.0004872232675552368
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 1.1625693306164864,
+          "capture_minus_unrelated": 0.001369590318894812
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 2.5850934803948427,
+          "capture_minus_unrelated": 0.03216107611411384
+        }
+      ]
+    },
+    {
+      "position_index": 5,
+      "chosen_move": "F6",
+      "prefix_len": 12,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.8366241440945936,
+          "capture_minus_unrelated": -0.0011114109753786279
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.594318269681795,
+          "capture_minus_unrelated": -0.002655205190725004
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 1.07990286841291,
+          "capture_minus_unrelated": 0.0005482411846363293
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 1.2492407431412953,
+          "capture_minus_unrelated": 0.0018352854434245582
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 1.167238224963562,
+          "capture_minus_unrelated": 0.002143442747183144
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 2.4203553852355544,
+          "capture_minus_unrelated": 0.010243540843172621
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 1.4452700950969743,
+          "capture_minus_unrelated": 0.002670217237512892
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 3.5705643731367824,
+          "capture_minus_unrelated": 0.03773119304484377
+        }
+      ]
+    },
+    {
+      "position_index": 6,
+      "chosen_move": "B5",
+      "prefix_len": 19,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 1.034657793589647,
+          "capture_minus_unrelated": 0.0002599290339276193
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.9529674421413564,
+          "capture_minus_unrelated": -0.00034275025536771846
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 1.550882019906365,
+          "capture_minus_unrelated": 0.0052378453954588615
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 0.7710616333489493,
+          "capture_minus_unrelated": -0.003771884372690692
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 1.101211211578185,
+          "capture_minus_unrelated": 0.0024093209824059166
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 0.7593815620959633,
+          "capture_minus_unrelated": -0.004683364130323752
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 2.043146122825637,
+          "capture_minus_unrelated": 0.007207674256642349
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 2.4793915235356714,
+          "capture_minus_unrelated": 0.044179641827940944
+        }
+      ]
+    },
+    {
+      "position_index": 7,
+      "chosen_move": "A6",
+      "prefix_len": 21,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.6518563796184269,
+          "capture_minus_unrelated": -0.003995433898775705
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.7173708432866931,
+          "capture_minus_unrelated": -0.0035787057464144057
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 0.8691666255024668,
+          "capture_minus_unrelated": -0.0015316094005746496
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 0.6913658540113864,
+          "capture_minus_unrelated": -0.004913964458475155
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 0.790207229992285,
+          "capture_minus_unrelated": -0.0026938781042450243
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 0.33673012215794007,
+          "capture_minus_unrelated": -0.01709231406649841
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 1.9124387860749386,
+          "capture_minus_unrelated": 0.0070454295824414915
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 1.77745736687365,
+          "capture_minus_unrelated": 0.02389069167631013
+        }
+      ]
+    },
+    {
+      "position_index": 8,
+      "chosen_move": "C3",
+      "prefix_len": 27,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.9399528959449617,
+          "capture_minus_unrelated": -0.0009418525702815927
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 1.789778167148817,
+          "capture_minus_unrelated": 0.009447192138230259
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 1.0936541169072795,
+          "capture_minus_unrelated": 0.0012739114886657753
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 0.9955511365764756,
+          "capture_minus_unrelated": -6.043457111658268e-05
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 0.8456534202504737,
+          "capture_minus_unrelated": -0.004069398650173823
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 0.7150764467620098,
+          "capture_minus_unrelated": -0.007102525015905886
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 0.6494498462279467,
+          "capture_minus_unrelated": -0.004313678562326671
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 1.394411955033558,
+          "capture_minus_unrelated": 0.011578703828325324
+        }
+      ]
+    },
+    {
+      "position_index": 9,
+      "chosen_move": "G3",
+      "prefix_len": 24,
+      "layers": [
+        {
+          "layer": 0,
+          "capture_vs_unrelated_ratio": 0.6389463201467106,
+          "capture_minus_unrelated": -0.0031702734260378694
+        },
+        {
+          "layer": 1,
+          "capture_vs_unrelated_ratio": 0.8963875641429032,
+          "capture_minus_unrelated": -0.0010513414735007168
+        },
+        {
+          "layer": 2,
+          "capture_vs_unrelated_ratio": 0.9220104035117718,
+          "capture_minus_unrelated": -0.0009620749358937412
+        },
+        {
+          "layer": 3,
+          "capture_vs_unrelated_ratio": 1.029930042801873,
+          "capture_minus_unrelated": 0.00045030068181324545
+        },
+        {
+          "layer": 4,
+          "capture_vs_unrelated_ratio": 0.8913111668518432,
+          "capture_minus_unrelated": -0.0017975639641742442
+        },
+        {
+          "layer": 5,
+          "capture_vs_unrelated_ratio": 2.3706939873280897,
+          "capture_minus_unrelated": 0.02511657207076879
+        },
+        {
+          "layer": 6,
+          "capture_vs_unrelated_ratio": 2.292551736713755,
+          "capture_minus_unrelated": 0.009244662452195036
+        },
+        {
+          "layer": 7,
+          "capture_vs_unrelated_ratio": 2.6569052946338183,
+          "capture_minus_unrelated": 0.037421135738361304
+        }
+      ]
+    }
+  ],
+  "displayed_positions": [
+    {
+      "prefix_len": 25,
+      "prefix_token_ids": [
+        34,
+        28,
+        22,
+        42,
+        20,
+        14,
+        43,
+        19,
+        18,
+        10,
+        29,
+        23,
+        2,
+        12,
+        27,
+        33,
+        6,
+        15,
+        7,
+        35,
+        39,
+        1,
+        44,
+        9,
+        32
+      ],
+      "to_play": -1,
+      "board": [
+        -1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        -1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        -1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "H4",
+        "square_index": 31,
+        "token_id": 30,
+        "num_flipped": 5,
+        "num_capture_lines": 2,
+        "capture_line_labels": [
+          [
+            "G4",
+            "F4",
+            "E4",
+            "D4"
+          ],
+          [
+            "G5"
+          ]
+        ]
+      }
+    },
+    {
+      "prefix_len": 36,
+      "prefix_token_ids": [
+        41,
+        42,
+        43,
+        33,
+        27,
+        51,
+        38,
+        32,
+        37,
+        20,
+        59,
+        50,
+        21,
+        18,
+        49,
+        34,
+        35,
+        40,
+        13,
+        57,
+        39,
+        26,
+        48,
+        6,
+        9,
+        46,
+        28,
+        19,
+        25,
+        17,
+        55,
+        44,
+        5,
+        53,
+        10,
+        30
+      ],
+      "to_play": 1,
+      "board": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        0,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        0,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        -1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        0,
+        1,
+        0,
+        -1,
+        0,
+        1,
+        0
+      ],
+      "chosen_move": {
+        "label": "C7",
+        "square_index": 50,
+        "token_id": 47,
+        "num_flipped": 3,
+        "num_capture_lines": 2,
+        "capture_line_labels": [
+          [
+            "C6",
+            "C5"
+          ],
+          [
+            "D6"
+          ]
+        ]
+      }
+    },
+    {
+      "prefix_len": 37,
+      "prefix_token_ids": [
+        34,
+        28,
+        22,
+        40,
+        27,
+        35,
+        39,
+        21,
+        14,
+        15,
+        36,
+        13,
+        8,
+        38,
+        23,
+        42,
+        7,
+        16,
+        49,
+        50,
+        51,
+        26,
+        18,
+        58,
+        46,
+        33,
+        37,
+        30,
+        41,
+        19,
+        11,
+        10,
+        9,
+        3,
+        17,
+        52,
+        20
+      ],
+      "to_play": -1,
+      "board": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "C7",
+        "square_index": 50,
+        "token_id": 47,
+        "num_flipped": 6,
+        "num_capture_lines": 2,
+        "capture_line_labels": [
+          [
+            "C6",
+            "C5",
+            "C4",
+            "C3"
+          ],
+          [
+            "D6",
+            "E5"
+          ]
+        ]
+      }
+    },
+    {
+      "prefix_len": 17,
+      "prefix_token_ids": [
+        20,
+        21,
+        34,
+        19,
+        11,
+        3,
+        10,
+        27,
+        13,
+        6,
+        12,
+        1,
+        5,
+        4,
+        33,
+        22,
+        9
+      ],
+      "to_play": -1,
+      "board": [
+        -1,
+        0,
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "C6",
+        "square_index": 42,
+        "token_id": 39,
+        "num_flipped": 6,
+        "num_capture_lines": 2,
+        "capture_line_labels": [
+          [
+            "C5",
+            "C4",
+            "C3",
+            "C2"
+          ],
+          [
+            "D5",
+            "E4"
+          ]
+        ]
+      }
+    },
+    {
+      "prefix_len": 17,
+      "prefix_token_ids": [
+        34,
+        42,
+        41,
+        28,
+        29,
+        39,
+        50,
+        51,
+        43,
+        35,
+        60,
+        40,
+        22,
+        57,
+        49,
+        24,
+        27
+      ],
+      "to_play": -1,
+      "board": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        1
+      ],
+      "chosen_move": {
+        "label": "B4",
+        "square_index": 25,
+        "token_id": 26,
+        "num_flipped": 4,
+        "num_capture_lines": 1,
+        "capture_line_labels": [
+          [
+            "C4",
+            "D4",
+            "E4",
+            "F4"
+          ]
+        ]
+      }
+    },
+    {
+      "prefix_len": 12,
+      "prefix_token_ids": [
+        41,
+        40,
+        39,
+        48,
+        19,
+        28,
+        29,
+        21,
+        12,
+        20,
+        57,
+        50
+      ],
+      "to_play": 1,
+      "board": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "F6",
+        "square_index": 45,
+        "token_id": 42,
+        "num_flipped": 4,
+        "num_capture_lines": 2,
+        "capture_line_labels": [
+          [
+            "E5",
+            "D4"
+          ],
+          [
+            "E6",
+            "D6"
+          ]
+        ]
+      }
+    },
+    {
+      "prefix_len": 19,
+      "prefix_token_ids": [
+        27,
+        19,
+        20,
+        33,
+        18,
+        9,
+        40,
+        49,
+        26,
+        21,
+        10,
+        25,
+        22,
+        13,
+        4,
+        2,
+        42,
+        34,
+        39
+      ],
+      "to_play": -1,
+      "board": [
+        0,
+        -1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "B5",
+        "square_index": 33,
+        "token_id": 32,
+        "num_flipped": 3,
+        "num_capture_lines": 2,
+        "capture_line_labels": [
+          [
+            "C4"
+          ],
+          [
+            "C5",
+            "D5"
+          ]
+        ]
+      }
+    },
+    {
+      "prefix_len": 21,
+      "prefix_token_ids": [
+        27,
+        33,
+        40,
+        21,
+        26,
+        32,
+        38,
+        25,
+        34,
+        39,
+        18,
+        42,
+        20,
+        47,
+        41,
+        19,
+        43,
+        48,
+        31,
+        29,
+        55
+      ],
+      "to_play": -1,
+      "board": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        0,
+        -1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "A6",
+        "square_index": 40,
+        "token_id": 37,
+        "num_flipped": 4,
+        "num_capture_lines": 3,
+        "capture_line_labels": [
+          [
+            "A5"
+          ],
+          [
+            "B5"
+          ],
+          [
+            "B6",
+            "C6"
+          ]
+        ]
+      }
+    },
+    {
+      "prefix_len": 27,
+      "prefix_token_ids": [
+        41,
+        42,
+        34,
+        28,
+        23,
+        22,
+        20,
+        39,
+        27,
+        26,
+        15,
+        11,
+        29,
+        14,
+        43,
+        30,
+        6,
+        21,
+        12,
+        49,
+        2,
+        33,
+        48,
+        35,
+        32,
+        8,
+        7
+      ],
+      "to_play": -1,
+      "board": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        -1,
+        1,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        0,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "C3",
+        "square_index": 18,
+        "token_id": 19,
+        "num_flipped": 4,
+        "num_capture_lines": 3,
+        "capture_line_labels": [
+          [
+            "D3",
+            "E3"
+          ],
+          [
+            "C4"
+          ],
+          [
+            "D4"
+          ]
+        ]
+      }
+    },
+    {
+      "prefix_len": 24,
+      "prefix_token_ids": [
+        41,
+        28,
+        22,
+        42,
+        34,
+        40,
+        49,
+        35,
+        33,
+        21,
+        29,
+        30,
+        20,
+        39,
+        48,
+        12,
+        14,
+        6,
+        4,
+        32,
+        27,
+        19,
+        11,
+        5
+      ],
+      "to_play": 1,
+      "board": [
+        0,
+        0,
+        0,
+        1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        0,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        -1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "chosen_move": {
+        "label": "G3",
+        "square_index": 22,
+        "token_id": 23,
+        "num_flipped": 4,
+        "num_capture_lines": 2,
+        "capture_line_labels": [
+          [
+            "F3",
+            "E3"
+          ],
+          [
+            "F4",
+            "E5"
+          ]
+        ]
+      }
+    }
+  ]
+}
