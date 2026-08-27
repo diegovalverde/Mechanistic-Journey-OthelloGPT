@@ -48,6 +48,13 @@ $$
 
 Each row corresponds to one token position. Each row contains a 512-dimensional residual state. If the prefix has 28 moves, the main residual tensor for one batch element has 28 rows, one for each observed move token.
 
+<figure markdown>
+![Residual tensor rows for a 28-move prefix](../figures/residual_tensor_rows.svg)
+<figcaption>
+A table-style view of the residual stream for one batch element. The prefix contributes one row per observed move token, and each row is a 512-dimensional residual vector.
+</figcaption>
+</figure>
+
 A useful analogy is a shared working surface. Components read from it, compute updates, and write those updates back to the same surface. But the analogy needs restraint. There is no literal memory table with human-readable variables such as `D3_is_mine` or `E3_is_legal`. The residual stream is a learned vector space. Information can be distributed across directions, subspaces, and interactions among components.
 
 The operational definition is:

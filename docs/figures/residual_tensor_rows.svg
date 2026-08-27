@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" aria-labelledby="title desc">
+  <title id="title">Residual tensor rows for a 28-move Othello prefix</title>
+  <desc id="desc">A table-style diagram showing one batch element with 28 token-position rows. Example tokens C4, C3, D3, E3, B2, ellipsis, and row 28 each map to a 512-dimensional residual vector.</desc>
+  <style>
+    .title { fill: #0f172a; font: 21px sans-serif; font-weight: 700; }
+    .subtitle { fill: #475569; font: 13px sans-serif; }
+    .header { fill: #e2e8f0; stroke: #94a3b8; stroke-width: 1; }
+    .cell { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1; }
+    .rowalt { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1; }
+    .vector { fill: #dbeafe; stroke: #60a5fa; stroke-width: 1; }
+    .vector-final { fill: #fee2e2; stroke: #f87171; stroke-width: 1; }
+    .text { fill: #0f172a; font: 14px sans-serif; }
+    .small { fill: #475569; font: 12px sans-serif; }
+    .mono { fill: #0f172a; font: 13px monospace; }
+    .axis { stroke: #334155; stroke-width: 1.5; marker-end: url(#arrow); }
+    .brace { stroke: #64748b; stroke-width: 1.5; fill: none; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="430" fill="none"/>
+  <text x="48" y="38" class="title">One Residual Row per Observed Move</text>
+  <text x="48" y="62" class="subtitle">For one batch element, a 28-token prefix gives a residual tensor with shape [28, 512].</text>
+
+  <rect x="70" y="92" width="92" height="38" class="header"/>
+  <rect x="162" y="92" width="108" height="38" class="header"/>
+  <rect x="270" y="92" width="500" height="38" class="header"/>
+  <text x="93" y="116" class="text">row</text>
+  <text x="184" y="116" class="text">token</text>
+  <text x="445" y="116" class="text">512-dimensional residual state</text>
+
+  <g>
+    <rect x="70" y="130" width="92" height="36" class="cell"/>
+    <rect x="162" y="130" width="108" height="36" class="cell"/>
+    <rect x="270" y="130" width="500" height="36" class="cell"/>
+    <text x="101" y="153" class="mono">1</text>
+    <text x="199" y="153" class="mono">C4</text>
+    <rect x="294" y="142" width="26" height="12" class="vector"/>
+    <rect x="326" y="142" width="26" height="12" class="vector"/>
+    <rect x="358" y="142" width="26" height="12" class="vector"/>
+    <text x="398" y="153" class="small">...</text>
+    <rect x="444" y="142" width="26" height="12" class="vector"/>
+    <rect x="476" y="142" width="26" height="12" class="vector"/>
+    <text x="530" y="153" class="mono">r[1] in R^512</text>
+  </g>
+
+  <g>
+    <rect x="70" y="166" width="92" height="36" class="rowalt"/>
+    <rect x="162" y="166" width="108" height="36" class="rowalt"/>
+    <rect x="270" y="166" width="500" height="36" class="rowalt"/>
+    <text x="101" y="189" class="mono">2</text>
+    <text x="199" y="189" class="mono">C3</text>
+    <rect x="294" y="178" width="26" height="12" class="vector"/>
+    <rect x="326" y="178" width="26" height="12" class="vector"/>
+    <rect x="358" y="178" width="26" height="12" class="vector"/>
+    <text x="398" y="189" class="small">...</text>
+    <rect x="444" y="178" width="26" height="12" class="vector"/>
+    <rect x="476" y="178" width="26" height="12" class="vector"/>
+    <text x="530" y="189" class="mono">r[2] in R^512</text>
+  </g>
+
+  <g>
+    <rect x="70" y="202" width="92" height="36" class="cell"/>
+    <rect x="162" y="202" width="108" height="36" class="cell"/>
+    <rect x="270" y="202" width="500" height="36" class="cell"/>
+    <text x="101" y="225" class="mono">3</text>
+    <text x="199" y="225" class="mono">D3</text>
+    <rect x="294" y="214" width="26" height="12" class="vector"/>
+    <rect x="326" y="214" width="26" height="12" class="vector"/>
+    <rect x="358" y="214" width="26" height="12" class="vector"/>
+    <text x="398" y="225" class="small">...</text>
+    <rect x="444" y="214" width="26" height="12" class="vector"/>
+    <rect x="476" y="214" width="26" height="12" class="vector"/>
+    <text x="530" y="225" class="mono">r[3] in R^512</text>
+  </g>
+
+  <g>
+    <rect x="70" y="238" width="92" height="36" class="rowalt"/>
+    <rect x="162" y="238" width="108" height="36" class="rowalt"/>
+    <rect x="270" y="238" width="500" height="36" class="rowalt"/>
+    <text x="101" y="261" class="mono">4</text>
+    <text x="199" y="261" class="mono">E3</text>
+    <rect x="294" y="250" width="26" height="12" class="vector"/>
+    <rect x="326" y="250" width="26" height="12" class="vector"/>
+    <rect x="358" y="250" width="26" height="12" class="vector"/>
+    <text x="398" y="261" class="small">...</text>
+    <rect x="444" y="250" width="26" height="12" class="vector"/>
+    <rect x="476" y="250" width="26" height="12" class="vector"/>
+    <text x="530" y="261" class="mono">r[4] in R^512</text>
+  </g>
+
+  <g>
+    <rect x="70" y="274" width="92" height="36" class="cell"/>
+    <rect x="162" y="274" width="108" height="36" class="cell"/>
+    <rect x="270" y="274" width="500" height="36" class="cell"/>
+    <text x="101" y="297" class="mono">5</text>
+    <text x="199" y="297" class="mono">B2</text>
+    <rect x="294" y="286" width="26" height="12" class="vector"/>
+    <rect x="326" y="286" width="26" height="12" class="vector"/>
+    <rect x="358" y="286" width="26" height="12" class="vector"/>
+    <text x="398" y="297" class="small">...</text>
+    <rect x="444" y="286" width="26" height="12" class="vector"/>
+    <rect x="476" y="286" width="26" height="12" class="vector"/>
+    <text x="530" y="297" class="mono">r[5] in R^512</text>
+  </g>
+
+  <g>
+    <rect x="70" y="310" width="92" height="28" class="rowalt"/>
+    <rect x="162" y="310" width="108" height="28" class="rowalt"/>
+    <rect x="270" y="310" width="500" height="28" class="rowalt"/>
+    <text x="101" y="329" class="mono">...</text>
+    <text x="199" y="329" class="mono">...</text>
+    <text x="431" y="329" class="small">one row per later observed move</text>
+  </g>
+
+  <g>
+    <rect x="70" y="338" width="92" height="36" class="cell"/>
+    <rect x="162" y="338" width="108" height="36" class="cell"/>
+    <rect x="270" y="338" width="500" height="36" class="cell"/>
+    <text x="96" y="361" class="mono">28</text>
+    <text x="196" y="361" class="mono">...</text>
+    <rect x="294" y="350" width="26" height="12" class="vector-final"/>
+    <rect x="326" y="350" width="26" height="12" class="vector-final"/>
+    <rect x="358" y="350" width="26" height="12" class="vector-final"/>
+    <text x="398" y="361" class="small">...</text>
+    <rect x="444" y="350" width="26" height="12" class="vector-final"/>
+    <rect x="476" y="350" width="26" height="12" class="vector-final"/>
+    <text x="530" y="361" class="mono">r[28] in R^512</text>
+  </g>
+
+  <line x1="294" y1="394" x2="502" y2="394" class="axis"/>
+  <text x="320" y="416" class="small">512 residual coordinates</text>
+  <path d="M786 130 C810 130 810 374 786 374" class="brace"/>
+  <text x="805" y="255" class="small">28 rows</text>
+</svg>
