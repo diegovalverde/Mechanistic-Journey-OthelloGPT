@@ -79,6 +79,23 @@ $$
 r_\text{post}^{(l)} = r_\text{pre}^{(l+1)}.
 $$
 
+The word "block" means one repeated processing stage in the Transformer. It is not one neuron, one attention head, or one mathematical operation. In this model, a block is the standard pair:
+
+```text
+attention sublayer
+    then
+MLP sublayer
+```
+
+with residual additions around both. The whole model is eight of these stages stacked in sequence. Each stage receives the residual stream produced by the previous stage, reads it, writes updates into it, and passes the updated stream onward.
+
+<figure markdown>
+![Eight transformer blocks as repeated processing stages](../figures/transformer_block_stack.svg)
+<figcaption>
+A transformer block is one repeated attention-plus-MLP processing stage. Othello-GPT has eight such blocks, indexed `0` through `7`, and each block updates the residual stream before the next block reads it.
+</figcaption>
+</figure>
+
 Layer numbers in this project are zero-based. Othello-GPT has eight transformer blocks:
 
 ```text
@@ -231,6 +248,10 @@ Attention is the part of a standard decoder-only Transformer block that can dire
 
 MLPs do not directly look at other token positions. They act separately on each row of the residual stream. Attention can look across previous rows, subject to the causal mask.
 
+An attention head is one learned routing-and-writing mechanism inside the attention sublayer. At the current token position, a head assigns weights to earlier token positions, takes a weighted mixture of their value vectors, and writes a result back toward the current residual row. In Othello terms, one head might be able to route information from an earlier move token such as `C3` or `D3` into the current position. That sentence describes an architectural possibility, not a discovered head function.
+
+Why have several heads? Because a single attention pattern is only one way to look back through the sequence. A block with several heads can run several routing patterns in parallel. One head could attend mostly to recent moves, another to a square that was just flipped, another to a recurring positional marker, and another to something we do not yet understand. The model is not forced to assign these roles cleanly, but multiple heads give the layer multiple chances to retrieve different kinds of information before their outputs are combined into one 512-dimensional attention update.
+
 Architecturally, the current position can do something like:
 
 ```text
@@ -245,6 +266,13 @@ The phrase "can do" matters. We are describing what the architecture permits, no
 ![Attention can move information from earlier moves](../figures/attention_moves_information.svg)
 <figcaption>
 Attention can route information from earlier move positions into the current position. The arrows show an architectural possibility, not a discovered Othello circuit.
+</figcaption>
+</figure>
+
+<figure markdown>
+![Multiple attention heads as parallel routing patterns](../figures/multi_head_attention_routes.svg)
+<figcaption>
+Several attention heads run in parallel inside one block. Each head can use a different learned attention pattern over earlier token positions, then the head outputs are combined into one 512-dimensional attention update.
 </figcaption>
 </figure>
 

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="470" viewBox="0 0 900 470" role="img" aria-labelledby="title desc">
+  <title id="title">Multiple attention heads as parallel routing patterns</title>
+  <desc id="desc">A conceptual diagram showing eight attention heads in one block. Several heads attend from the current token to different earlier move tokens such as C4, C3, D3, and E3, then combine their writes into one 512-dimensional attention update.</desc>
+  <style>
+    .title { fill: #0f172a; font: 21px sans-serif; font-weight: 700; }
+    .subtitle { fill: #475569; font: 13px sans-serif; }
+    .token { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.2; rx: 6; }
+    .current { fill: #fee2e2; stroke: #f87171; stroke-width: 1.5; rx: 6; }
+    .head { fill: #dbeafe; stroke: #60a5fa; stroke-width: 1.2; rx: 7; }
+    .write { fill: #dcfce7; stroke: #4ade80; stroke-width: 1.2; rx: 7; }
+    .label { fill: #0f172a; font: 14px sans-serif; }
+    .small { fill: #475569; font: 12px sans-serif; }
+    .mono { fill: #0f172a; font: 13px monospace; }
+    .route1 { stroke: #2563eb; stroke-width: 2; fill: none; marker-end: url(#arrowBlue); }
+    .route2 { stroke: #7c3aed; stroke-width: 2; fill: none; marker-end: url(#arrowPurple); }
+    .route3 { stroke: #059669; stroke-width: 2; fill: none; marker-end: url(#arrowGreen); }
+    .route4 { stroke: #dc2626; stroke-width: 2; fill: none; marker-end: url(#arrowRed); }
+    .combine { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrowDark); }
+  </style>
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 Z" fill="#2563eb"/></marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 Z" fill="#7c3aed"/></marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 Z" fill="#059669"/></marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 Z" fill="#dc2626"/></marker>
+    <marker id="arrowDark" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,4 L0,8 Z" fill="#334155"/></marker>
+  </defs>
+
+  <rect width="900" height="470" fill="none"/>
+  <text x="48" y="38" class="title">One Attention Layer Contains Several Heads</text>
+  <text x="48" y="62" class="subtitle">Heads run in parallel. Each head can use its own routing pattern, then all head writes are combined into one residual update.</text>
+
+  <text x="80" y="105" class="label">move-token rows</text>
+  <g transform="translate(72 122)">
+    <rect x="0" y="0" width="72" height="34" class="token"/><text x="25" y="22" class="mono">C4</text>
+    <rect x="0" y="44" width="72" height="34" class="token"/><text x="25" y="66" class="mono">C3</text>
+    <rect x="0" y="88" width="72" height="34" class="token"/><text x="25" y="110" class="mono">D3</text>
+    <rect x="0" y="132" width="72" height="34" class="token"/><text x="25" y="154" class="mono">E3</text>
+    <rect x="0" y="176" width="72" height="34" class="token"/><text x="25" y="198" class="mono">...</text>
+    <rect x="0" y="220" width="72" height="34" class="current"/><text x="19" y="242" class="mono">now</text>
+  </g>
+
+  <text x="304" y="105" class="label">8 heads in this block</text>
+  <g transform="translate(272 128)">
+    <rect x="0" y="0" width="94" height="34" class="head"/><text x="20" y="22" class="mono">head 0</text>
+    <rect x="116" y="0" width="94" height="34" class="head"/><text x="136" y="22" class="mono">head 1</text>
+    <rect x="232" y="0" width="94" height="34" class="head"/><text x="252" y="22" class="mono">head 2</text>
+    <rect x="348" y="0" width="94" height="34" class="head"/><text x="368" y="22" class="mono">head 3</text>
+    <rect x="0" y="64" width="94" height="34" class="head"/><text x="20" y="86" class="mono">head 4</text>
+    <rect x="116" y="64" width="94" height="34" class="head"/><text x="136" y="86" class="mono">head 5</text>
+    <rect x="232" y="64" width="94" height="34" class="head"/><text x="252" y="86" class="mono">head 6</text>
+    <rect x="348" y="64" width="94" height="34" class="head"/><text x="368" y="86" class="mono">head 7</text>
+  </g>
+
+  <path d="M144 359 C198 310 224 156 272 145" class="route1"/>
+  <path d="M144 359 C204 326 338 200 388 145" class="route2"/>
+  <path d="M144 359 C204 350 456 252 504 209" class="route3"/>
+  <path d="M144 359 C214 372 570 248 620 209" class="route4"/>
+  <text x="166" y="314" class="small">different heads can look at different earlier rows</text>
+
+  <g transform="translate(716 178)">
+    <rect width="116" height="70" class="write"/>
+    <text x="20" y="28" class="label">combined</text>
+    <text x="16" y="51" class="small">512-D write</text>
+  </g>
+  <path d="M366 145 C492 112 666 124 716 190" class="combine"/>
+  <path d="M482 145 C570 132 666 142 716 202" class="combine"/>
+  <path d="M598 209 C656 208 682 213 716 218" class="combine"/>
+  <path d="M714 209 C728 209 722 214 716 226" class="combine"/>
+
+  <g transform="translate(228 318)">
+    <rect width="452" height="72" fill="#fff7ed" stroke="#fb923c" stroke-width="1.2" rx="7"/>
+    <text x="18" y="28" class="label">Why several heads?</text>
+    <text x="18" y="52" class="small">One head is one learned way to route and write information. Several heads give the block several parallel routes at the same layer.</text>
+  </g>
+</svg>
