@@ -64,6 +64,10 @@ Keep these claims distinct:
 
 The distinctions matter. A model that predicts legal moves behaves as if it has useful board information. A probe that recovers the board shows decodability. A residual intervention that changes logits in the predicted direction gives local causal evidence. A component ablation shows component importance. None of these, by itself, establishes a complete mechanism.
 
+Relational decodability is distinct from rule-sensitive causal use. A probe may recover a multi-square relation such as a directional capture predicate before the evidence shows that the model uses that probe direction to compute legality.
+
+A later layer can be computationally important even when linear decodability does not improve. Downstream computation may transform, route, mix, or decision-align an already-decodable relation rather than making it easier for the same kind of probe to read.
+
 Use "represents" only when supported by evidence. Use "uses" only when causal evidence supports it.
 
 Never describe a neuron as implementing a symbolic rule unless experiments actually establish that claim. Current evidence supports candidate-neuron participation in a distributed legality computation, not a clean single-neuron Othello rule implementation.

@@ -66,6 +66,7 @@ nav:
       - "6. Information Flow Through a Transformer": part2/chapter06_information_flow.md
   - Part III - From Representation to Reasoning:
       - "7. The Mystery of Layer 7": part3/chapter07_layer7.md
+      - "7½. Seeing the Hidden Capture Rays": part3/chapter07b_capture_rays.md
       - "8. MLP7": part3/chapter08_mlp7.md
       - "9. Hunting Rule Circuits": part3/chapter09_rule_circuits.md
   - Part IV - Bigger Picture:

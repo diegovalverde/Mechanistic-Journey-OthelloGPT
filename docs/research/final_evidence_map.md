@@ -18,6 +18,8 @@ This page records the state of the Othello-GPT investigation at book completion.
 - Local Jacobians accurately predicted small residual interventions in the Chapter 4 setup. The G6 mine-vs-theirs semantic intervention had maximum absolute E3 logit prediction error `0.000067` across alphas from `-0.1` to `0.1`.
 - Capture-line semantic geometry is strongly enriched at layer 7 among the tested layers. In the layer sweep, layer 7 had capture-vs-unrelated ratio `2.251362` and capture-minus-unrelated `0.026569`, while layers 2, 4, and 6 were near one.
 - The validated layer-7 capture-opponent enrichment was strong: capture mean `0.063157`, unrelated occupied mean `0.022995`, ratio `2.746573`, difference `0.040162`, difference 95% CI `[0.035965, 0.044268]`, ratio 95% CI `[2.524081, 2.971348]`, shuffled mean ratio `1.046078`, shuffled 95th percentile `1.176336`, and empirical permutation p-value `0.003322`.
+- Directional capture relations are linearly decodable from upstream residual states, including before layer 6. Across `13,701` held-out valid targets, post4 top-1/top-2/top-3 true-direction accuracies were `0.9829209547`, `0.9975914167`, and `0.9994161010`; post5 values were `0.9837968032`, `0.9971534924`, and `0.9989781768`.
+- The hard valid-capture versus no-friendly-terminator contrast sharpens strongly by post5: hard AUROC rises from `0.9600865639` at post4 to `0.9905437983` at post5, and the mean valid-minus-no-terminator probability gap rises from `0.2661360229` to `0.3829065047`.
 - MLP7 is the strongest tested layer-7 component under both attribution and mean-replacement ablation.
 - Over 30 positions, MLP7 had mean absolute component attribution `0.267666`, ahead of L7H0 `0.201140`, L7H2 `0.186625`, and L7H7 `0.180907`.
 - Whole-component ablation over 30 positions gave MLP7 mean signed legality effect `-0.105164` and mean absolute effect `0.262614`, larger in absolute effect than L7H7 `0.109719`, L7H2 `0.094140`, and L7H0 `0.090048`.
@@ -45,6 +47,8 @@ This page records the state of the Othello-GPT investigation at book completion.
 
 - Othello-GPT uses a board-like internal representation to support legal-move prediction, but the precise internal representation may not match the probe basis exactly.
 - Some late computation transforms board-state information into capture-line-sensitive legality evidence.
+- Upstream computation produces a linearly decodable directional capture relation before the final layer-7 legality enrichment.
+- MLP5 may sharpen or reorganize an already-emerging relational capture representation, especially for the no-terminator near miss, but current evidence does not show that MLP5 computes the complete rule.
 - MLP7 participates in a distributed legality computation that combines board-state features with capture-line structure.
 - Some candidate MLP7 neurons may be better understood by output/write geometry than by input-side detector semantics. Neuron 399 is the central current example.
 - The meaningful neuron-level object may be a low-dimensional MLP7 subspace or distributed population rather than a single monosemantic neuron.
@@ -55,6 +59,11 @@ This page records the state of the Othello-GPT investigation at book completion.
 - Does a small neuron group mediate a meaningful fraction of the MLP7 legality effect, or are current top-k ablations only identifying a tail of a broader distributed computation?
 - Can activation patching rescue legality after ablating candidate neurons or editing semantic board-state features?
 - Which layer-7 attention heads supply board or ray information used by MLP7?
+- What computation produces the capture-predicate geometry already visible by post4?
+- Why does MLP5 sharpen the no-terminator contrast?
+- Does MLP6 transform or use the capture relation despite no AUROC gain?
+- Is the learned directional capture relation causally aligned with the model's native computation?
+- How does the upstream relation become layer-7 legality-aligned geometry?
 - Are important variables represented in individual neurons, a low-dimensional MLP subspace, or a distributed pattern across many neurons?
 - Can the rule circuit be described algorithmically as target-empty plus opponent-line plus friendly-terminator, or is the model using correlated shortcuts?
 - Do observed effects generalize across sampled positions, game phases, capture directions, line lengths, and multiple-capture positions?

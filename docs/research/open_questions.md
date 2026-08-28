@@ -7,6 +7,8 @@ These questions should be answered from executed experiments before becoming str
 - **Layer-4 capture enrichment.** The first dataset-level layer-4 aggregate was inconclusive: mean(capture - unrelated occupied) `-0.000499`, bootstrap 95% CI `[-0.003646, 0.002784]`. This weak result motivated the later layer sweep.
 - **Where capture-line enrichment appears among tested layers.** The layer sweep over layers 2, 4, 6, and 7 found layer 7 strongest, with capture-vs-unrelated ratio `2.251362` and capture-minus-unrelated `0.026569`.
 - **Whether layer-7 enrichment survives validation controls.** The layer-7 capture-opponent validation found observed ratio `2.746573`, ratio 95% CI `[2.524081, 2.971348]`, shuffled 95th percentile `1.176336`, and empirical permutation p-value `0.003322`.
+- **Whether directional capture relations are linearly decodable.** A linear directional capture probe recovered \(C(q,d)\) strongly on held-out data. Across `13,701` held-out valid targets, post4 top-1 true-direction accuracy was `0.9829209547` and macro AUROC was `0.9957207226`; post5 top-1 was `0.9837968032` and macro AUROC was `0.9985151889`.
+- **Whether MLP5 sharpens the no-terminator distinction.** The hard valid-vs-no-terminator AUROC improved from `0.9600865639` at post4 to `0.9905437983` at post5, and the mean valid-minus-no-terminator probability gap improved from `0.2661360229` to `0.3829065047`. This constrains MLP5 as an interesting transformation site but does not establish a complete rule mechanism.
 - **Which tested layer-7 component is strongest.** MLP7 ranked first under both mean absolute component attribution `0.267666` and mean absolute component-ablation effect `0.262614`.
 - **Whether fixed attribution-ranked neurons are clean valid-capture detectors under current tests.** Current evidence is weak and mixed. Unpaired selectivity values are small, matched medians are `0.0`, and neuron 399 is negative under valid-vs-invalid activation comparisons.
 - **Whether simple single-neuron conjunction regressions explain candidate activations.** Current interaction-regression gains are tiny, with maximum delta \(R^2\) `0.002291`.
@@ -21,6 +23,11 @@ These questions should be answered from executed experiments before becoming str
 
 ## Relational Conjunctions and Population Structure
 
+- What computation produces the capture-predicate geometry already visible by post4?
+- Why does MLP5 sharpen the no-terminator contrast?
+- Does MLP6 transform or use the capture relation despite no AUROC gain?
+- Is the learned directional capture relation causally aligned with the model's native computation?
+- How does the upstream directional relation become layer-7 legality-aligned geometry?
 - Do any MLP7 neurons detect relational conjunctions rather than additive board features under a better feature model?
 - Is the important object a low-dimensional MLP7 subspace rather than individual neurons?
 - Can population directions predict target-empty, opponent-line, and friendly-terminator structure on held-out positions?

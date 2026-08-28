@@ -652,7 +652,7 @@ The next question is therefore more localized:
 within layer 7, which components actually matter for the legality contrast?
 ```
 
-That question belongs to Chapter 8.
+Before opening layer 7 into components, the next interlude looks at a different measurement: whether the directional capture relation itself is already linearly decodable upstream. That will sharpen what Chapter 8 is really asking.
 
 ## Try It Yourself
 

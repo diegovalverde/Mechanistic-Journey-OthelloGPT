@@ -2,6 +2,89 @@
 
 Every new experiment should be recorded here before it becomes polished book prose. Entries should preserve the question, method, result, interpretation, confidence, notebook location, and figure/table references.
 
+## 2026-08-28 - Directional capture relations are linearly decodable
+
+### Question
+
+Can a linear decoder recover not merely square occupancy, but the directional Othello capture relation:
+
+```text
+C(q,d) = "target q has a valid capture ray in direction d"?
+```
+
+### Experimental setup
+
+Notebook sections `47. Where does a capture ray become an internal feature?` and `48. Visualizing decoded capture rays` trained and visualized a linear directional probe for the binary capture predicate over target-square/direction pairs. For an empty target square \(q\) and direction \(d\), \(C(q,d)=1\) when the ray from \(q\) contains one or more opponent pieces followed by a friendly terminator.
+
+The probe used held-out game-level test data and predicted independent binary labels for the eight Othello directions. The visualization examples were selected deterministically as the first held-out test example in each named category, before inspecting decoded probabilities.
+
+Relevant visualization sites:
+
+| Hook | Label |
+| --- | --- |
+| `blocks.4.hook_resid_post` | post4 |
+| `blocks.5.hook_resid_post` | post5 |
+| `blocks.6.hook_resid_mid` | mid6 |
+| `blocks.6.hook_resid_post` | post6 |
+| `blocks.7.hook_resid_post` | post7 |
+
+Primary display site for the hero figures: `blocks.5.hook_resid_post`.
+
+### Key held-out results
+
+For all held-out valid targets, `n_targets_with_valid_direction = 13701`.
+
+| Site | Top-1 true-direction accuracy | Top-2 | Top-3 | Macro AUROC | Hard valid-vs-no-terminator AUROC |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| post4 | 0.9829209547 | 0.9975914167 | 0.9994161010 | 0.9957207226 | 0.9600865639 |
+| post5 | 0.9837968032 | 0.9971534924 | 0.9989781768 | 0.9985151889 | 0.9905437983 |
+| mid6 | 0.9825560178 | 0.9973724546 | 0.9989781768 | 0.9983874094 | 0.9896910253 |
+| post6 | 0.9387635939 | 0.9935771112 | 0.9983212904 | 0.9972399046 | 0.9811240573 |
+| post7 | 0.9187650536 | 0.9908765784 | 0.9972264798 | 0.9974116697 | 0.9797869301 |
+
+The hard contrast compared valid capture directions with opponent runs that lacked a friendly terminator. The no-terminator class had `n = 27798` direction examples at each site; the valid-capture class had `n = 18529`.
+
+| Site | Mean valid probability | Mean no-terminator probability | Mean valid minus no-terminator probability |
+| --- | ---: | ---: | ---: |
+| post4 | 0.9471895269 | 0.6810535039 | 0.2661360229 |
+| post5 | 0.9729266445 | 0.5900201398 | 0.3829065047 |
+| mid6 | 0.9724616930 | 0.5908260356 | 0.3816356573 |
+| post6 | 0.9671435112 | 0.5708823211 | 0.3962611901 |
+| post7 | 0.9654093235 | 0.5792380653 | 0.3861712582 |
+
+### Suppression diagnostic
+
+Section 48 also visualized finite edits along the learned capture direction at the primary display site. For held-out target `B2`, direction `SE`, at `blocks.5.hook_resid_post`, a negative probe-direction edit with `alpha = 2.0` changed the decoded probability for the suppressed direction from `0.9950110912` to `0.9235469103` (`delta = -0.0714641809`). The same edit changed the selected legality contrast from `11.1585502625` to `10.9237470627` (`delta = -0.2348031998`).
+
+This is a magnitude-dependent diagnostic, not clean proof that the learned probe direction is the model's native causal coordinate. Small-alpha edits did not provide robust local causal evidence in the same sense as the earlier Jacobian finite-difference checks; larger finite edits showed stronger expected-sign effects but carry more off-manifold risk.
+
+### Most important interpretation
+
+The directional capture relation is already highly linearly decodable by layer 4. The clearest improvement in the difficult valid-capture versus opponent-run-without-friendly-terminator contrast occurs across MLP5: hard AUROC rises from `0.9600865639` at post4 to `0.9905437983` at post5, and the mean valid-minus-no-terminator probability gap rises from `0.2661360229` to `0.3829065047`.
+
+The representation does not become monotonically easier to decode at every later layer. Top-1 directional accuracy declines after MLP6/7, from `0.9837968032` at post5 to `0.9387635939` at post6 and `0.9187650536` at post7, while macro AUROC remains extremely high.
+
+### Claim boundary
+
+This establishes strong linear decodability of a relational capture predicate. It does not establish that the learned probe direction is the model's causal basis, that MLP5 implements the complete capture rule, that MLP6 is irrelevant, that Chapter 7's layer-7 legality-sensitivity result is contradicted, or that we have found a complete legality circuit.
+
+Chapter 7 measured capture-line semantic sensitivity to legality. Sections 47-48 measure decodability of directional capture relations. These are different quantities.
+
+### Related notebook sections
+
+- `47. Where does a capture ray become an internal feature?`
+- `48. Visualizing decoded capture rays`
+
+### Source and figures
+
+- Source repository: `https://github.com/diegovalverde/TransformerLens`
+- Branch: `othello-jspace-analysis`
+- Exact visualization commit: `b4b529fec329dc318755c579c58af65950143323`
+- Notebook: `demos/Othello_GPT_Jacobian_Lens.ipynb`
+- Output directory: `demos/othello_jacobian_lens_outputs/capture_ray_visualization_20260828_193735/`
+- TransformerLens notes: `docs/research/section48_capture_ray_visualization_notes.md`
+- Book figure directory: `docs/figures/capture_rays/`
+
 ## 2026-08-27 - Localizing capture-line legality geometry to layer 7
 
 ### Question

@@ -245,7 +245,36 @@ The chapter supports layer 7 as the strongest tested site for capture-line legal
 
 ### Transition
 
-Chapter 8 opens layer 7 and asks which components inside the final block matter most for the legality contrast.
+Interlude 7½ asks a different question before opening layer 7: whether the directional capture relation itself is already linearly decodable upstream.
+
+## Interlude 7½ - Seeing the Hidden Capture Rays
+
+### Core question
+
+Can a linear decoder recover not merely square occupancy, but the directional Othello capture relation \(C(q,d)\): target square \(q\) has a valid capture ray in direction \(d\)?
+
+### Concepts introduced
+
+- Directional capture predicate \(C(q,d)\).
+- Multi-label directional decoding over the eight Othello directions.
+- Near-miss controls, especially opponent runs without friendly terminators.
+- Probe-reconstructed capture field over the board.
+- The distinction between relational decodability and rule-sensitive causal use.
+- The distinction between upstream availability of a relation and later decision-aligned legality geometry.
+
+### Experimental result
+
+Sections 47-48 trained and visualized a linear directional capture probe on held-out game-level test data. Across `13,701` held-out valid targets, post4 top-1/top-2/top-3 true-direction accuracies were `0.9829209547`, `0.9975914167`, and `0.9994161010`; post5 values were `0.9837968032`, `0.9971534924`, and `0.9989781768`. Macro AUROC was `0.9957207226` at post4, `0.9985151889` at post5, `0.9983874094` at mid6, `0.9972399046` at post6, and `0.9974116697` at post7.
+
+The hard valid-vs-no-terminator AUROC improved most clearly from post4 to post5: `0.9600865639` to `0.9905437983`. The mean valid-minus-no-terminator probability gap also increased from `0.2661360229` to `0.3829065047`. Top-1 true-direction accuracy later declined to `0.9387635939` at post6 and `0.9187650536` at post7 while AUROC stayed high.
+
+### Evidence boundary
+
+The interlude supports strong linear decodability of directional capture relations, including before layer 6. It does not establish that the learned probe direction is the model's causal basis, that MLP5 computes the full capture rule, that MLP6 is irrelevant, or that Chapter 7's layer-7 legality-sensitivity result is contradicted.
+
+### Transition
+
+The interlude reframes Chapter 8: layer 7 may not need to discover the capture relation from scratch. It may transform an already-rich upstream relational representation into decision-aligned legality evidence.
 
 ## Chapter 8 - MLP7
 

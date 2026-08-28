@@ -2,6 +2,8 @@
 
 Chapter 7 narrowed the search.
 
+Before opening layer 7 into components, the interlude showed that directional capture relations are already strongly decodable upstream. So the question here is not whether layer 7 invents the capture relation from nothing, but which part of layer 7 most strongly aligns available structure with the legality contrast.
+
 We began Part III with the whole eight-block network. The board was decodable in the middle of the model, but the clearest rule-relevant geometry did not appear there. When the notebook swept layers `2`, `4`, `6`, and `7`, layer 7 stood out: capture-supporting square directions were much more aligned with the legality contrast than unrelated occupied controls.
 
 That was progress, but it was still coarse.
