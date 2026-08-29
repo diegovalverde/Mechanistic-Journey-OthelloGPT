@@ -7,10 +7,17 @@ These PNGs are measured experimental figures, not conceptual illustrations.
 - Source repository: `https://github.com/diegovalverde/TransformerLens`
 - Source branch: `othello-jspace-analysis`
 - Exact visualization commit: `b4b529fec329dc318755c579c58af65950143323`
+- Exact legal-mask reconstruction commit: `97ecdbc`
 - Notebook: `demos/Othello_GPT_Jacobian_Lens.ipynb`
 - Notebook sections: `47. Where does a capture ray become an internal feature?` and `48. Visualizing decoded capture rays`
 - Source directory: `demos/othello_jacobian_lens_outputs/capture_ray_visualization_20260828_193735/`
 - Primary display site: `blocks.5.hook_resid_post`
+
+Legal-mask reconstruction figures were copied from:
+
+- Notebook section: `49. Can decoded capture rays reconstruct the legal-move mask?`
+- Source directory: `demos/othello_jacobian_lens_outputs/legal_mask_reconstruction_20260829_204725/`
+- Best validation-selected site: `blocks.7.hook_resid_post`
 
 ## Copied Files
 
@@ -27,5 +34,6 @@ These PNGs are measured experimental figures, not conceptual illustrations.
 - `hard_nearmiss_site_summary.png`
 - `site_metric_summary.png`
 - `capture_direction_suppression_example_01.png`
+- `legal_mask_10_board_side_by_side.png`
 
 The files were copied unchanged from the source directory.

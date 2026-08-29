@@ -394,6 +394,89 @@ therefore capture-valid
 
 That is the qualitative step: from objects and properties to relations among objects.
 
+## From Rays to the Whole Legal-Move Mask
+
+There is a sharper version of the board-wide question.
+
+Othello legality is not merely related to the capture predicate. It is exactly the disjunction of the eight directional capture predicates:
+
+$$
+\text{Legal}(q)=\bigvee_d C(q,d).
+$$
+
+So after training the directional capture probes in Section 47, we can ask a direct sufficiency question:
+
+```text
+Can the decoded rays reconstruct the simulator's complete legal-move mask?
+```
+
+The test is deliberately simple. For each held-out board position and each of the 64 board squares, the existing Section 47 probe emits eight directional probabilities. I did not train a new legal-move probe. I reused the same directional capture probes and the same held-out game-level split.
+
+For a square \(q\), define:
+
+$$
+s(q)=\max_d p(C(q,d)=1).
+$$
+
+This is a decoded legality score, not a calibrated legal-move probability. The max is important: it matches the logical fact that one valid capture direction is enough. I did not treat the eight outputs as independent and did not use a noisy-OR probability as the primary score.
+
+Then, for each residual site, I chose one threshold on validation positions:
+
+$$
+\hat{y}(q)=1 \quad \text{iff} \quad s(q)\ge \tau.
+$$
+
+The threshold \(\tau\) was selected independently per site to maximize square-level F1 on validation data, then frozen before evaluating held-out TEST positions. The mask convention is also fixed: 64 board squares only, pass excluded. Occupied squares are ordinary negative examples because a legal placement must be empty.
+
+<figure markdown>
+![Ten held-out legal-move masks reconstructed from decoded capture rays](../figures/capture_rays/legal_mask_10_board_side_by_side.png)
+<figcaption>
+Ten deterministic held-out TEST boards for the best validation-selected site, `blocks.7.hook_resid_post`. Each row compares the simulator legal-move mask with the mask reconstructed from decoded directional capture rays. Filled dark-green squares are legal squares according to that panel's mask. Orange outlines mark simulator-legal squares on the left. Green outlines on the right are true positives; red `FP` and blue dashed `FN` markers would show false positives and false negatives.
+</figcaption>
+</figure>
+
+The picture is intentionally mundane. It is not a cherry-picked hero board. It is the first ten held-out TEST boards under a deterministic ordering for the best validation-selected site. The point is that the reconstructed mask is usually not merely close in a heatmap sense. It often gets the entire legal set exactly right.
+
+The compact result is:
+
+| Site | Validation threshold | Square AUROC | Square F1 | Exact mask accuracy | Mean Jaccard | Mean FP / board | Mean FN / board |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| post4 | 0.9033 | 0.9947 | 0.9172 | 27.68% | 0.8554 | 1.0215 | 0.5461 |
+| post5 | 0.9122 | 0.9992 | 0.9785 | 68.35% | 0.9574 | 0.3017 | 0.0990 |
+| mid6 | 0.9062 | 0.9993 | 0.9796 | 70.24% | 0.9593 | 0.2970 | 0.0835 |
+| post6 | 0.9082 | 0.9999 | 0.9961 | 94.48% | 0.9914 | 0.0458 | 0.0269 |
+| post7 | 0.8941 | 0.9998 | 0.9961 | 93.94% | 0.9893 | 0.0646 | 0.0074 |
+
+By validation-selected square F1, the best site was post7. On held-out TEST, post7 reached square AUROC `0.9998`, square F1 `0.9961`, exact-mask accuracy `93.94%`, and mean Jaccard `0.9893`. The average board had only `0.0646` false positives and `0.0074` false negatives.
+
+Post6 was slightly better on exact-mask accuracy, at `94.48%`, even though post7 was the validation-selected best site. That is useful rather than awkward. It reinforces the earlier warning that the later trajectory is not a clean monotonic story. The relation can stay extremely available while the representation is being reshaped for downstream use.
+
+There is a crucial control. I also compared against a simpler baseline using only the existing square-state probe's decoded target emptiness. That baseline asks:
+
+```text
+Is q empty?
+```
+
+and pretends that emptiness alone is enough for legality. It is not. The emptiness-only baseline reached square F1 `0.4648` and exact-mask accuracy `2.63%`, with about `20.91` false positives per board. That is exactly what should happen if the new result is about capture-rule structure rather than mere board occupancy. Knowing where the empty squares are is not enough. The model state must also contain information about which empty squares are connected to opponent runs and friendly terminators.
+
+This is why the experiment matters. The earlier compass plots showed that individual capture directions are decodable. The legal-mask reconstruction asks whether those decoded directional facts are sufficient to rebuild the whole legal action set. They are. From one residual vector, a linear directional decoder plus a fixed max-over-rays rule can recover almost every square of the simulator's legal mask on held-out games.
+
+That supports a precise claim:
+
+```text
+the residual state contains linearly decodable relational rule information
+sufficient to reconstruct the board's legal moves
+```
+
+It still does not support a stronger causal claim:
+
+```text
+the model literally applies this probe, this threshold, and this OR rule
+inside its own computation
+```
+
+The distinction is the spine of the book. This is stronger than "the board is in the model." It is not yet "we have found the model's algorithm." It shows that the hidden state contains enough rule-shaped information for a very simple external decoder to reconstruct legal moves. Chapter 8 can then ask which later components align that available structure with the model's actual next-move logits.
+
 ## The Causal Question Is Still Open
 
 Section 47 also tried a more intervention-like diagnostic: suppress the learned capture direction and observe what changes.
@@ -486,7 +569,9 @@ Next: Chapter 8 - MLP7.
 
 ## References
 
-- Executed notebook: `demos/Othello_GPT_Jacobian_Lens.ipynb`, sections `47. Where does a capture ray become an internal feature?` and `48. Visualizing decoded capture rays`, on `diegovalverde/TransformerLens`, branch `othello-jspace-analysis`, commit `b4b529fec329dc318755c579c58af65950143323`.
-- TransformerLens source notes: `docs/research/section48_capture_ray_visualization_notes.md`.
-- Source output directory: `demos/othello_jacobian_lens_outputs/capture_ray_visualization_20260828_193735/`.
+- Executed notebook: `demos/Othello_GPT_Jacobian_Lens.ipynb`, sections `47. Where does a capture ray become an internal feature?`, `48. Visualizing decoded capture rays`, and `49. Can decoded capture rays reconstruct the legal-move mask?`, on `diegovalverde/TransformerLens`, branch `othello-jspace-analysis`.
+- Capture-ray visualization source commit: `b4b529fec329dc318755c579c58af65950143323`.
+- Legal-mask reconstruction source commit: `97ecdbc`.
+- TransformerLens source notes: `docs/research/section48_capture_ray_visualization_notes.md` and `docs/research/section49_legal_mask_reconstruction_notes.md`.
+- Source output directories: `demos/othello_jacobian_lens_outputs/capture_ray_visualization_20260828_193735/` and `demos/othello_jacobian_lens_outputs/legal_mask_reconstruction_20260829_204725/`.
 - Project research memory: [research log](../research/research_log.md), [experiment index](../research/experiment_index.md), [findings snapshot](../research/findings_snapshot.md), [final evidence map](../research/final_evidence_map.md), and [open questions](../research/open_questions.md).
