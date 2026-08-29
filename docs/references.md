@@ -42,6 +42,10 @@ Why it matters for this book: this is the public reference implementation for fi
 
 Why it matters for this book: the executed notebook uses PyTorch autograd to compute gradients and Jacobian-vector products for residual interventions.
 
+**Receiver operating characteristic.** Wikipedia contributors. [*Receiver operating characteristic*](https://en.wikipedia.org/wiki/Receiver_operating_characteristic).
+
+Why it matters for this book: this page provides the background definition of ROC curves and AUROC used when interpreting directional-capture probe results.
+
 ## Project Research Memory
 
 The following pages are internal project records. They are not external citations, but they are the authoritative source for what this book currently claims from its own executed experiments.

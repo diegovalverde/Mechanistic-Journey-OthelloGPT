@@ -345,6 +345,29 @@ Why we needed this: many notebook results are dataset summaries. Means show cent
 
 A mean can be persuasive and still incomplete. In the MLP7 component ablation result, the mean absolute effect identifies MLP7 as the strongest tested component. It does not say every position depends on MLP7 in the same way. Likewise, weak mean selectivity for individual neurons does not prove those neurons never matter. It says the tested aggregate did not support a clean detector story.
 
+## Interpreting AUROC
+
+AUROC means area under the receiver operating characteristic curve. It summarizes how well a scoring rule separates positive examples from negative examples as the classification threshold is swept. The ROC curve plots true positive rate against false positive rate across thresholds, so AUROC is threshold-independent in a way that a single accuracy number is not.
+
+The most useful interpretation in this book is the ranking interpretation:
+
+```text
+AUROC = probability that a randomly chosen positive example receives
+a higher score than a randomly chosen negative example
+```
+
+An AUROC of `0.5` means the score is no better than random ranking. An AUROC of `1.0` means every positive example is ranked above every negative example. Values below `0.5` mean the score is systematically reversed: the same information may be present, but with the sign flipped.
+
+Why we needed this: Chapter 7½ reports macro AUROC and hard valid-vs-no-terminator AUROC for directional capture probes. Those numbers ask whether the probe score ranks true capture-ray labels above non-capture labels. A high AUROC therefore supports a decodability claim: the relation is linearly readable from the residual representation.
+
+That is not the same as top-1 direction accuracy. Top-1 asks whether the highest-scoring direction for one target square is truly valid. AUROC instead pools positive-negative ranking comparisons. A representation can have very high AUROC while occasionally assigning the single highest score to a wrong direction in a particular board context.
+
+It is also not the same as calibration or precision. AUROC does not say that a score of `0.9` is a 90% probability. It does not say how many predicted positives will be correct at a chosen threshold. Those quantities depend on the score calibration, the threshold, and the base rate of positives and negatives.
+
+So the book reads AUROC as strong evidence about separability, not as proof of mechanism. When hard AUROC rises from `0.9601` at post4 to `0.9905` at post5, the cautious interpretation is that the valid-capture versus no-friendly-terminator distinction became easier for this linear readout to rank. It does not by itself prove that MLP5 implements the Othello capture rule.
+
+For a general reference on ROC curves, threshold tradeoffs, and AUC, see Wikipedia's [Receiver operating characteristic](https://en.wikipedia.org/wiki/Receiver_operating_characteristic).
+
 ## Bootstrap Intuition
 
 Bootstrapping estimates uncertainty by resampling the observed data. Suppose we have sensitivity measurements over positions. A bootstrap sample draws positions with replacement until it has the same number of positions as the original set. We compute the statistic again, repeat many times, and inspect the distribution of bootstrap statistics.
