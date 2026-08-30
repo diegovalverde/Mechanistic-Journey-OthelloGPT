@@ -2,6 +2,97 @@
 
 Every new experiment should be recorded here before it becomes polished book prose. Entries should preserve the question, method, result, interpretation, confidence, notebook location, and figure/table references.
 
+## 2026-08-30 - MLP6 makes direct legal-square identity linearly explicit
+
+### Question
+
+After Section 49 showed that directional capture probes plus an external max over directions reconstruct the legal-move mask, can legality itself be decoded directly?
+
+```text
+h_site in R^512 -> 64 legal-square logits
+```
+
+This asks whether legal-square identity becomes a direct linear variable, not merely recoverable through nonlinear composition of eight directional ray predicates.
+
+### Experimental setup
+
+Notebook section `50. Does MLP6 make legal-square identity linearly explicit?` trained one multi-output linear probe per residual site. Each probe was `Linear(512, 64)`, with independent binary outputs for the 64 board squares. There was no hidden layer, no attention, no nonlinear feature extractor, and no max over ray directions. The only output nonlinearity was the sigmoid link used for binary classification.
+
+The experiment reused the exact Section 47 random seed, game-level TRAIN/VALIDATION/TEST split, prefix lengths, and board-square convention. Labels were 64 board squares only, pass excluded. `Legal(q)=1` iff the compact simulator listed square `q` as a legal move after the prefix. Occupied squares, including starting-center squares when occupied, were negatives.
+
+Positive class weights were computed from TRAIN labels only and reused across all sites. Thresholds were selected independently per site on VALIDATION by maximizing square-level F1, then frozen for held-out TEST.
+
+Sites:
+
+| Hook | Label |
+| --- | --- |
+| `blocks.4.hook_resid_post` | post4 |
+| `blocks.5.hook_resid_post` | post5 |
+| `blocks.6.hook_resid_mid` | mid6 |
+| `blocks.6.hook_resid_post` | post6 |
+| `blocks.7.hook_resid_post` | post7 |
+
+### Key held-out results
+
+| Site | Threshold | Square AUROC | Square F1 | Exact mask accuracy | Mean Jaccard |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| post4 | 0.842455 | 0.987196 | 0.847678 | 0.108418 | 0.746961 |
+| post5 | 0.924403 | 0.999701 | 0.985108 | 0.768350 | 0.967973 |
+| mid6 | 0.930229 | 0.999704 | 0.986410 | 0.785859 | 0.970335 |
+| post6 | 0.996921 | 0.999967 | 0.997628 | 0.972391 | 0.994700 |
+| post7 | 0.998635 | 0.999901 | 0.997228 | 0.966330 | 0.992553 |
+
+The preregistered MLP6 comparison was mid6 to post6. Exact whole-board reconstruction jumped from `0.7858585859` to `0.9723905724`, a gain of `0.1865319865`. The paired board bootstrap 95% CI was `[0.1666498316, 0.2057407407]`. Square F1 rose from `0.9864098837` to `0.9976278238`.
+
+Compared to Section 49 ray+max:
+
+| Site | Direct exact mask | Ray+max exact mask | Gap ray+max minus direct |
+| --- | ---: | ---: | ---: |
+| post4 | 0.108418 | 0.276768 | 0.168350 |
+| post5 | 0.768350 | 0.683502 | -0.084848 |
+| mid6 | 0.785859 | 0.702357 | -0.083502 |
+| post6 | 0.972391 | 0.944781 | -0.027609 |
+| post7 | 0.966330 | 0.939394 | -0.026936 |
+
+By post6, the direct linear legality probe slightly exceeded the nonlinear ray+max decoder on exact-mask accuracy.
+
+### Geometry
+
+For each square, Section 50 compared the direct legality direction \(w_\text{legal}(q)\) with the span of the eight corresponding directional ray-probe directions \(w_\text{ray}(q,d)\).
+
+The mean projection fraction onto the ray span was `0.8654756129` at mid6 and `0.7256727815` at post6. The mean cosine between the mid6 and post6 direct legality directions for the same square was `0.8208040440`.
+
+This suggests a representational reorganization across MLP6: direct legal-square decoding sharply improves even though the direct directions become less dominated by the fitted ray-probe span.
+
+### Visual figure
+
+The book figure `docs/figures/capture_rays/direct_legality_post6_10_board_reconstructions.png` shows ten deterministic held-out TEST boards, one exact direct-post6 reconstruction per prefix length from 5 through 50. Each row shows the board, the simulator legal-move mask, and the thresholded direct post6 probe reconstruction.
+
+### Most important interpretation
+
+This is strong evidence that MLP6 makes legal-square identity substantially more linearly explicit. The directional capture relation was already richly available upstream, but after MLP6 a single linear readout can recover the whole legal-move mask with `97.24%` exact held-out board accuracy.
+
+### Claim boundary
+
+Supported: legal-square identity is directly linearly decodable after MLP6, and direct decodability improves sharply from mid6 to post6.
+
+Not supported: MLP6 literally computes a symbolic OR over ray predicates, the direct probe weights are native model variables, the ray directions are the exact causal basis, or this completes the legality circuit.
+
+### Related notebook sections
+
+- `49. Can decoded capture rays reconstruct the legal-move mask?`
+- `50. Does MLP6 make legal-square identity linearly explicit?`
+
+### Source and figures
+
+- Source repository: `https://github.com/diegovalverde/TransformerLens`
+- Branch: `othello-jspace-analysis`
+- Exact direct-legality commit: `c6e32d6`
+- Notebook: `demos/Othello_GPT_Jacobian_Lens.ipynb`
+- Output directory: `demos/othello_jacobian_lens_outputs/direct_legality_probe_20260830_011103/`
+- TransformerLens notes: `docs/research/section50_direct_legality_probe_notes.md`
+- Book figure: `docs/figures/capture_rays/direct_legality_post6_10_board_reconstructions.png`
+
 ## 2026-08-28 - Directional capture relations are linearly decodable
 
 ### Question

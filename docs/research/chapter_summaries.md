@@ -268,9 +268,11 @@ Sections 47-48 trained and visualized a linear directional capture probe on held
 
 The hard valid-vs-no-terminator AUROC improved most clearly from post4 to post5: `0.9600865639` to `0.9905437983`. The mean valid-minus-no-terminator probability gap also increased from `0.2661360229` to `0.3829065047`. Top-1 true-direction accuracy later declined to `0.9387635939` at post6 and `0.9187650536` at post7 while AUROC stayed high.
 
+Section 50 then asked a stricter question: can a single direct linear probe decode the 64 legal-square mask without the external max over directions? The answer is yes, especially across MLP6. Direct exact-mask accuracy jumped from `0.7858585859` at mid6 to `0.9723905724` at post6, with paired bootstrap 95% CI `[0.1666498316, 0.2057407407]` for the gain. Post6 square F1 was `0.9976278238`, and post6 direct exact-mask accuracy slightly exceeded the Section 49 ray+max decoder, `0.9723905724` versus `0.9447811448`.
+
 ### Evidence boundary
 
-The interlude supports strong linear decodability of directional capture relations, including before layer 6. It does not establish that the learned probe direction is the model's causal basis, that MLP5 computes the full capture rule, that MLP6 is irrelevant, or that Chapter 7's layer-7 legality-sensitivity result is contradicted.
+The interlude supports strong linear decodability of directional capture relations, including before layer 6, and strong direct linear decodability of legal-square identity after MLP6. It does not establish that the learned probe direction is the model's causal basis, that MLP5 computes the full capture rule, that MLP6 literally computes a symbolic OR, or that Chapter 7's layer-7 legality-sensitivity result is contradicted.
 
 ### Transition
 

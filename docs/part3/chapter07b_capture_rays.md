@@ -308,21 +308,23 @@ So the late-layer top-1 drop does not mean the model forgot Othello. It means th
 
     No. Chapter 7 measured legality-gradient enrichment of square-semantic directions. This interlude measures linear decodability of a directional capture predicate. A relation can be decodable before it becomes aligned with the final decision geometry.
 
-## No Decodability Gain Is Not No Computation
+## Directional Rays and Direct Legality Diverge at MLP6
 
-The MLP6 result is subtle enough to name directly.
+The directional-capture MLP6 result is subtle enough to name directly.
 
 The preregistered Section 47 question asked whether directional-capture AUROC increases from `blocks.6.hook_resid_mid` to `blocks.6.hook_resid_post`. On the primary AUROC metric, it does not. Macro AUROC goes from `0.9984` at mid6 to `0.9972` at post6. Hard AUROC goes from `0.9897` to `0.9811`.
 
 That negative result should constrain the story. We should not claim that MLP6 improves this directional linear readout.
 
-But it also should not be converted into the opposite overclaim. MLP6 may transform or use an already-decodable relation without improving the probe metric. It may trade linear readout cleanliness for downstream decision utility. It may affect different examples, signs, or subspaces than the aggregate AUROC exposes.
+But Section 50 now shows why that negative directional-AUROC result was not evidence against MLP6. When the target is not eight ray predicates but the direct 64-square legal mask, MLP6 is the dominant transition: exact-mask accuracy rises from `78.59%` at mid6 to `97.24%` at post6.
+
+So the right lesson is narrower and sharper. MLP6 does not make the directional ray probe's AUROC better. It makes legal-square identity itself much more directly linearly decodable. That is exactly the kind of transformation a downstream computation could need: not better access to every separate ray, but a cleaner variable for which squares are legal moves.
 
 The useful rule is:
 
 $$
 \boxed{
-\text{no decodability gain} \ne \text{no computation}
+\text{no directional-ray AUROC gain} \ne \text{no MLP6 computation}
 }
 $$
 
@@ -477,6 +479,85 @@ inside its own computation
 
 The distinction is the spine of the book. This is stronger than "the board is in the model." It is not yet "we have found the model's algorithm." It shows that the hidden state contains enough rule-shaped information for a very simple external decoder to reconstruct legal moves. Chapter 8 can then ask which later components align that available structure with the model's actual next-move logits.
 
+## MLP6 Makes Legal Squares Linearly Explicit
+
+The ray result left one major ambiguity.
+
+The decoded legal-mask rule above still uses an external nonlinear operation:
+
+$$
+s(q)=\max_d p(C(q,d)=1).
+$$
+
+That is not a linear legal-square decoder. It is eight directional linear readouts followed by a max over directions.
+
+So the next test asked a stricter question:
+
+```text
+Can one linear map from the residual stream directly predict all 64 legal squares?
+```
+
+The direct probe was deliberately simple. For each residual site, it used one learned linear layer:
+
+$$
+h \in \mathbb{R}^{512}
+\quad\longmapsto\quad
+\text{64 independent legal-square logits}.
+$$
+
+There was no hidden layer, no attention, no nonlinear feature extractor, and no max over directions. The only nonlinearity was the sigmoid output link used for binary classification. Positive class weights were computed from the Section 47 TRAIN split only, because legal squares are sparse. Thresholds were selected on VALIDATION by square-level F1, then frozen for held-out TEST.
+
+The MLP6 result is strong:
+
+| Site | Threshold | Square AUROC | Square F1 | Exact mask accuracy | Mean Jaccard |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| post4 | 0.8425 | 0.9872 | 0.8477 | 10.84% | 0.7470 |
+| post5 | 0.9244 | 0.9997 | 0.9851 | 76.84% | 0.9680 |
+| mid6 | 0.9302 | 0.9997 | 0.9864 | 78.59% | 0.9703 |
+| post6 | 0.9969 | 1.0000 | 0.9976 | 97.24% | 0.9947 |
+| post7 | 0.9986 | 0.9999 | 0.9972 | 96.63% | 0.9926 |
+
+The preregistered comparison is `blocks.6.hook_resid_mid` to `blocks.6.hook_resid_post`. Exact whole-board reconstruction jumps from `78.59%` to `97.24%`, a gain of `18.65` percentage points. The paired board bootstrap 95% CI for that gain is `[16.66, 20.57]` percentage points. Square F1 rises from `0.9864` to `0.9976`.
+
+<figure markdown>
+![Ten held-out legal-move masks reconstructed by the direct post6 linear legality probe](../figures/capture_rays/direct_legality_post6_10_board_reconstructions.png)
+<figcaption>
+Ten deterministic held-out TEST boards, one exact post6 reconstruction per prefix length from 5 through 50. The left column shows the board in the relative mine/theirs convention. The middle column is the simulator legal-move mask. The right column is the direct `blocks.6.hook_resid_post` linear legality probe after thresholding. All ten displayed masks are exact reconstructions.
+</figcaption>
+</figure>
+
+This is stronger than the earlier ray+max result in one important sense: by post6, legality itself is linearly accessible. The probe does not need to decode eight rays and compose them externally. It reads the legal-square mask directly.
+
+The comparison to ray+max makes the point sharper:
+
+| Site | Direct exact mask | Ray+max exact mask | Direct minus ray+max |
+| --- | ---: | ---: | ---: |
+| post4 | 10.84% | 27.68% | -16.84 pp |
+| post5 | 76.84% | 68.35% | +8.48 pp |
+| mid6 | 78.59% | 70.24% | +8.35 pp |
+| post6 | 97.24% | 94.48% | +2.76 pp |
+| post7 | 96.63% | 93.94% | +2.69 pp |
+
+Post4 is still easier for ray+max. But after the post5/mid6 region, and especially after MLP6, the direct legal-square probe is no longer weaker. At post6 it slightly exceeds the Section 49 ray+max decoder: `97.24%` exact masks versus `94.48%`.
+
+That makes MLP6 a major representational transition. The most precise claim is:
+
+```text
+MLP6 makes legal-square identity substantially more linearly explicit.
+```
+
+The exact unsupported claim is also important:
+
+```text
+MLP6 literally computes a symbolic OR over rays.
+```
+
+The experiment does not prove that. It proves that after MLP6, a single linear readout can recover the whole legal-move mask with very high held-out accuracy. The internal computation that creates this accessibility may involve distributed transformations, calibration, routing, or composition that this probe does not isolate.
+
+The geometry result adds one more clue. At mid6, the direct legal-square directions project strongly into the corresponding directional-ray span: mean projection fraction `0.8655`. At post6 that mean falls to `0.7257`, even while direct legal-mask accuracy sharply improves. So post6 is not merely "the same ray subspace, read out harder." The direct legality representation is being reorganized into a geometry that is extremely easy for a direct linear decoder to read, while becoming less dominated by the eight fitted ray directions.
+
+This is a very strong result for MLP6. It says that the relation was already richly available, but MLP6 makes the identity of legal squares almost explicit as a direct linear variable.
+
 ## The Causal Question Is Still Open
 
 Section 47 also tried a more intervention-like diagnostic: suppress the learned capture direction and observe what changes.
@@ -541,9 +622,11 @@ A linear probe can decode this relation from held-out residual states with high 
 
 The hard no-terminator contrast sharpened most clearly by post5. Hard AUROC rose from `0.9601` at post4 to `0.9905` at post5, and the mean valid-minus-no-terminator probability gap rose from `0.2661` to `0.3829`.
 
-The result is not monotonic. Later layers keep very high AUROC but lower top-1 direction accuracy. That should make us less simplistic about "where the information is." Probe-readable structure can be transformed, mixed, or repurposed downstream.
+The directional result is not monotonic. Later layers keep very high AUROC but lower top-1 direction accuracy. That should make us less simplistic about "where the information is." Probe-readable structure can be transformed, mixed, or repurposed downstream.
 
-The evidence boundary remains firm. We have strong evidence for linear decodability of a relational capture predicate. We do not yet have proof that the probe direction is the model's causal basis, that MLP5 computes the full capture rule, that MLP6 is irrelevant, or that the legality circuit is complete.
+The direct legal-square result changes the MLP6 story. A single `Linear(512, 64)` probe reconstructs the whole legal-move mask exactly on `78.59%` of held-out boards at mid6 and `97.24%` at post6. The paired bootstrap 95% CI for that gain is `[16.66, 20.57]` percentage points. That is strong evidence that MLP6 makes legal-square identity substantially more linearly explicit.
+
+The evidence boundary remains firm. We have strong evidence for linear decodability of a relational capture predicate and direct legal-square identity after MLP6. We do not yet have proof that the probe direction is the model's causal basis, that MLP5 computes the full capture rule, that MLP6 literally computes an OR over rays, or that the legality circuit is complete.
 
 What we now know is richer than the Chapter 2 board map. From a single residual vector, a simple linear decoder can reconstruct which rays around a target satisfy the capture relation, and it can extend that readout into a board-wide probe-reconstructed capture field.
 
@@ -569,9 +652,10 @@ Next: Chapter 8 - MLP7.
 
 ## References
 
-- Executed notebook: `demos/Othello_GPT_Jacobian_Lens.ipynb`, sections `47. Where does a capture ray become an internal feature?`, `48. Visualizing decoded capture rays`, and `49. Can decoded capture rays reconstruct the legal-move mask?`, on `diegovalverde/TransformerLens`, branch `othello-jspace-analysis`.
+- Executed notebook: `demos/Othello_GPT_Jacobian_Lens.ipynb`, sections `47. Where does a capture ray become an internal feature?`, `48. Visualizing decoded capture rays`, `49. Can decoded capture rays reconstruct the legal-move mask?`, and `50. Does MLP6 make legal-square identity linearly explicit?`, on `diegovalverde/TransformerLens`, branch `othello-jspace-analysis`.
 - Capture-ray visualization source commit: `b4b529fec329dc318755c579c58af65950143323`.
 - Legal-mask reconstruction source commit: `97ecdbc`.
-- TransformerLens source notes: `docs/research/section48_capture_ray_visualization_notes.md` and `docs/research/section49_legal_mask_reconstruction_notes.md`.
-- Source output directories: `demos/othello_jacobian_lens_outputs/capture_ray_visualization_20260828_193735/` and `demos/othello_jacobian_lens_outputs/legal_mask_reconstruction_20260829_204725/`.
+- Direct legal-square reconstruction source commit: `c6e32d6`.
+- TransformerLens source notes: `docs/research/section48_capture_ray_visualization_notes.md`, `docs/research/section49_legal_mask_reconstruction_notes.md`, and `docs/research/section50_direct_legality_probe_notes.md`.
+- Source output directories: `demos/othello_jacobian_lens_outputs/capture_ray_visualization_20260828_193735/`, `demos/othello_jacobian_lens_outputs/legal_mask_reconstruction_20260829_204725/`, and `demos/othello_jacobian_lens_outputs/direct_legality_probe_20260830_011103/`.
 - Project research memory: [research log](../research/research_log.md), [experiment index](../research/experiment_index.md), [findings snapshot](../research/findings_snapshot.md), [final evidence map](../research/final_evidence_map.md), and [open questions](../research/open_questions.md).
