@@ -1,0 +1,11 @@
+{
+  "figure": "docs/figures/legal_move_preference/l7_preference_probe_example.png",
+  "source_repository": "https://github.com/diegovalverde/TransformerLens",
+  "source_branch": "othello-jspace-analysis",
+  "source_commit": "cd6f523",
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "notebook_section": "52. Does Layer 7 linearly encode preference among legal moves?",
+  "output_directory": "demos/othello_jacobian_lens_outputs/l7_legal_move_preference_20260830_223054/",
+  "selection": "first held-out TEST board with at least four legal moves and top-two final legal-logit gap above the validation-defined medium-gap threshold",
+  "post6_pre7_note": "pre7 is numerically identical to post6 at the measured final prefix position; maximum absolute difference was 0"
+}

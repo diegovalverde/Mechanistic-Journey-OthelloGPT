@@ -1,0 +1,20 @@
+{
+  "figure": "docs/figures/legal_move_preference/l7_preference_probe_site_progression.png",
+  "source_repository": "https://github.com/diegovalverde/TransformerLens",
+  "source_branch": "othello-jspace-analysis",
+  "source_commit": "cd6f523",
+  "notebook": "demos/Othello_GPT_Jacobian_Lens.ipynb",
+  "notebook_section": "52. Does Layer 7 linearly encode preference among legal moves?",
+  "output_directory": "demos/othello_jacobian_lens_outputs/l7_legal_move_preference_20260830_223054/",
+  "metric": "legal-vs-legal model-preference linear-probe site progression",
+  "post6_pre7_max_abs_diff": 0.0,
+  "test_boards_ge2_legal": 1474,
+  "test_legal_pairs": 66036,
+  "primary_results": [
+    {"site": "post5", "pairwise_acc": 0.795622, "top1_acc": 0.540706, "kendall_tau": 0.591243, "mean_regret": 0.019843},
+    {"site": "mid6", "pairwise_acc": 0.797657, "top1_acc": 0.546811, "kendall_tau": 0.595314, "mean_regret": 0.018162},
+    {"site": "post6/pre7", "pairwise_acc": 0.840032, "top1_acc": 0.637720, "kendall_tau": 0.680063, "mean_regret": 0.014438},
+    {"site": "mid7", "pairwise_acc": 0.842970, "top1_acc": 0.637720, "kendall_tau": 0.685940, "mean_regret": 0.014277},
+    {"site": "post7", "pairwise_acc": 0.844220, "top1_acc": 0.641113, "kendall_tau": 0.688440, "mean_regret": 0.014008}
+  ]
+}

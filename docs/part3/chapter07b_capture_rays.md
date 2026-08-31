@@ -558,6 +558,142 @@ The geometry result adds one more clue. At mid6, the direct legal-square directi
 
 This is a very strong result for MLP6. It says that the relation was already richly available, but MLP6 makes the identity of legal squares almost explicit as a direct linear variable.
 
+## Legal-Move Preference Is Already Visible Before Layer 7
+
+The legality result raises a sharper question.
+
+By post6, the model's residual stream already contains a nearly complete linear description of the legal-move mask. But a mask only says:
+
+```text
+which moves are legal?
+```
+
+The model still has to assign different final logits to different legal moves. So the next experiment held legality fixed and asked a narrower policy-geometry question:
+
+```text
+among the moves that are legal, which legal move will the model itself prefer?
+```
+
+This is not an engine-supervised move-quality target. The label is internal to Othello-GPT. For each board position, the simulator first supplies the legal move set \(\mathcal{L}(x)\). The model then runs normally, and the target move is:
+
+$$
+q_\star = \arg\max_{q \in \mathcal{L}(x)} z_{\mathrm{final}}(q).
+$$
+
+For every pair of distinct legal moves \(q_i, q_j\), the pairwise label is:
+
+$$
+y_{ij}=+1
+\quad\text{iff}\quad
+z_{\mathrm{final}}(q_i)>z_{\mathrm{final}}(q_j).
+$$
+
+The probe input never sees those final logits. It sees only an intermediate residual activation \(h\), and learns one linear score per board square:
+
+$$
+s(q \mid h)=w_q^\top h+b_q.
+$$
+
+Training uses legal move vs legal move pairs only. Illegal squares are not used as negatives. That matters: the probe gets no credit for rediscovering legality. It has to recover the model's preference ordering inside the already-legal set.
+
+The result confirms the important point:
+
+```text
+model-preferred legal-move ordering is already strongly linearly decodable
+before Layer 7
+```
+
+On held-out TEST boards with at least two legal moves, the probe reached:
+
+| Site | Mean board pairwise accuracy | Top-1 model-preferred move | Mean Kendall tau | Mean final-logit regret |
+| --- | ---: | ---: | ---: | ---: |
+| post5 | 0.7956 | 0.5407 | 0.5912 | 0.0198 |
+| mid6 | 0.7977 | 0.5468 | 0.5953 | 0.0182 |
+| post6/pre7 | 0.8400 | 0.6377 | 0.6801 | 0.0144 |
+| mid7 | 0.8430 | 0.6377 | 0.6859 | 0.0143 |
+| post7 | 0.8442 | 0.6411 | 0.6884 | 0.0140 |
+
+<figure markdown>
+![Legal-vs-legal preference probe metrics from post5 through post7](../figures/legal_move_preference/l7_preference_probe_site_progression.png)
+<figcaption>
+Section 52 legal-vs-legal preference probe. The key pre-Layer-7 result is the jump from mid6 to post6/pre7: mean-board pairwise accuracy rises from `0.7977` to `0.8400`, top-1 model-preferred move accuracy rises from `0.5468` to `0.6377`, and Kendall tau rises from `0.5953` to `0.6801`. The maximum measured difference between `blocks.6.hook_resid_post` and `blocks.7.hook_resid_pre` was exactly `0`, so post6 and pre7 are the same residual state for this comparison.
+</figcaption>
+</figure>
+
+This is the confirmation the previous section set up. Legal-square identity becomes nearly explicit at post6, and model-preferred legal-move ordering also becomes much easier to linearly decode at the same boundary. The jump from mid6 to post6/pre7 is much larger than the later changes inside Layer 7.
+
+The paired Layer-7 deltas were small:
+
+| Interval | Pairwise accuracy delta | Top-1 delta | Kendall tau delta | Regret delta |
+| --- | ---: | ---: | ---: | ---: |
+| pre7 -> mid7 | +0.0027 | -0.0014 | +0.0054 | -0.0003 |
+| mid7 -> post7 | +0.0013 | +0.0034 | +0.0025 | -0.0003 |
+| post6/pre7 -> post7 | +0.0042 | +0.0034 | +0.0084 | -0.0004 |
+
+So Layer 7 refines the linear preference geometry, but the main discovery in this experiment is not "post7 predicts the final logits." That would be too easy, because post7 is immediately upstream of the final normalization and unembedding. The more interesting result is that the preference among legal moves is already strong at post6/pre7, before Layer 7 has done any work.
+
+A position-only square-bias baseline reached only `0.6686` pairwise accuracy and `0.3141` top-1 accuracy. That baseline can learn static board-coordinate tendencies: corners, edges, common move tokens, and frequency effects. The post6/pre7 probe is far above it. That means the result is not just "the model often likes the same coordinates." The residual state contains board-context-dependent information about which legal move the model will rank highest.
+
+The native readout baseline makes the point from the other direction. If we take an intermediate residual state and pass it through the model's own final layer norm and unembedding, the legal-vs-legal ranking is weak before post7:
+
+| Site | Native readout pairwise accuracy | Native top-1 |
+| --- | ---: | ---: |
+| post5 | 0.5139 | 0.1452 |
+| mid6 | 0.5118 | 0.1391 |
+| post6/pre7 | 0.5065 | 0.1262 |
+| mid7 | 0.4982 | 0.1384 |
+| post7 | 1.0000 | 1.0000 |
+
+That comparison is not a linear-probe baseline, because final layer norm makes the complete map nonlinear. But it is still useful. A newly trained linear decoder can read the model's future legal-move preference from post6/pre7, while the model's own final readout does not expose that ranking until the actual final residual state.
+
+The board examples show what "carried forward" means operationally.
+
+<figure markdown>
+![Held-out large-gap legal-move preference example](../figures/legal_move_preference/l7_preference_probe_example.png)
+<figcaption>
+Held-out TEST board with at least four legal moves and a non-small top-two final-logit gap. The table orders moves by final model logit and compares probe scores/ranks at pre7, mid7, and post7. Because pre7 is identical to post6 in this experiment, the first probe-score column is also the post6/pre7 preference readout. The model-preferred legal move `F6` is already rank 1 at post6/pre7 and remains rank 1 through mid7, post7, and the final logits.
+</figcaption>
+</figure>
+
+In this example, the final-logit ranking is not created suddenly at post7. The probe already gives `F6` rank 1 at post6/pre7. It remains rank 1 at mid7 and post7, and it is also the final-logit top legal move. Several lower-ranked legal moves move around slightly, but the top model-preferred legal move is stable across the displayed path.
+
+The near-tie case is more demanding:
+
+<figure markdown>
+![Held-out near-tie legal-move preference example](../figures/legal_move_preference/l7_preference_neartie_example.png)
+<figcaption>
+Held-out TEST board whose top two final legal moves fall in the validation-defined small-gap bin. Even here, the post6/pre7 probe ranking already matches the final top two legal moves: `B4` rank 1 and `G6` rank 2. The lower tail is less exact, which is expected when several final legal logits are close.
+</figcaption>
+</figure>
+
+This second board is important because the final top legal moves are close together. The probe still recovers the top of the final legal-logit ranking at post6/pre7. Across all TEST small-gap legal pairs, post7 pairwise accuracy was `0.6580`, lower than the overall post7 pairwise accuracy but still above chance. That is the expected shape: near-ties are harder, but the preference signal does not disappear.
+
+The cleanest summary is:
+
+```text
+MLP6 makes legal-square identity almost directly linearly explicit.
+At the same post6/pre7 state, the model's eventual preference among legal
+moves is already strongly linearly decodable.
+Layer 7 then makes only a small additional refinement in this probe.
+```
+
+That changes how we should read the Layer 7 story. Chapter 7 found that layer-7 capture-line geometry is strongly aligned with a legality contrast. Chapter 8 found that MLP7 is causally important for that legality contrast. But Section 52 says Layer 7 is not starting from a blank slate. By the time information reaches Layer 7, the residual stream already contains a strong linear readout of the model's own legal-move preference.
+
+So the better hypothesis is not:
+
+```text
+Layer 7 discovers which legal move the model will prefer.
+```
+
+It is closer to:
+
+```text
+Layer 7 receives a strongly decodable legal-move preference geometry and
+slightly sharpens or aligns it with the final output computation.
+```
+
+That is still not a complete mechanism. The probe does not prove that the model internally uses the learned \(w_q\) directions. It does not show engine-labeled move quality. It does not identify which attention heads or MLP neurons carry the preference margin. It does, however, confirm that the preference among legal moves is already strongly present before Layer 7, especially after the mid6-to-post6 transition.
+
 ## The Causal Question Is Still Open
 
 Section 47 also tried a more intervention-like diagnostic: suppress the learned capture direction and observe what changes.
@@ -625,6 +761,8 @@ The hard no-terminator contrast sharpened most clearly by post5. Hard AUROC rose
 The directional result is not monotonic. Later layers keep very high AUROC but lower top-1 direction accuracy. That should make us less simplistic about "where the information is." Probe-readable structure can be transformed, mixed, or repurposed downstream.
 
 The direct legal-square result changes the MLP6 story. A single `Linear(512, 64)` probe reconstructs the whole legal-move mask exactly on `78.59%` of held-out boards at mid6 and `97.24%` at post6. The paired bootstrap 95% CI for that gain is `[16.66, 20.57]` percentage points. That is strong evidence that MLP6 makes legal-square identity substantially more linearly explicit.
+
+The legal-move preference result extends that story. When legality is held fixed and the probe must rank legal moves against other legal moves, mean-board pairwise accuracy rises from `0.7977` at mid6 to `0.8400` at post6/pre7. Top-1 model-preferred move accuracy rises from `0.5468` to `0.6377`. Since post6 and pre7 were numerically identical in the executed section, this confirms that the model's eventual preference among legal moves is already strongly linearly decodable before Layer 7.
 
 The evidence boundary remains firm. We have strong evidence for linear decodability of a relational capture predicate and direct legal-square identity after MLP6. We do not yet have proof that the probe direction is the model's causal basis, that MLP5 computes the full capture rule, that MLP6 literally computes an OR over rays, or that the legality circuit is complete.
 

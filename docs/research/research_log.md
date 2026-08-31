@@ -2,6 +2,108 @@
 
 Every new experiment should be recorded here before it becomes polished book prose. Entries should preserve the question, method, result, interpretation, confidence, notebook location, and figure/table references.
 
+## 2026-08-31 - Legal-move preference is strongly decodable before Layer 7
+
+### Question
+
+Once legality is held fixed, can a linear probe recover which legal move Othello-GPT itself will prefer?
+
+The target is not engine-labeled move quality. For each board position, the simulator supplies the legal move set. The model then runs normally, and the label is the legal square with the highest final model logit. Pairwise labels compare only legal move vs legal move:
+
+```text
+y_ij = +1 iff z_final(q_i) > z_final(q_j)
+```
+
+### Experimental setup
+
+Notebook section `52. Does Layer 7 linearly encode preference among legal moves?` trained one linear scoring function per board square:
+
+```text
+s(q | h) = w_q^T h + b_q
+```
+
+The probe was `Linear(512, 64)`. It used a pairwise Bradley-Terry-style softplus loss on legal-vs-legal pairs only. Illegal squares were not negatives, so the primary probe received no credit for legal-vs-illegal discrimination.
+
+The experiment reused the exact Section 47 game-level TRAIN/VALIDATION/TEST split and simulator. TEST was not used for training, hyperparameter selection, or final-logit gap-bin selection. TRAIN used capped deterministic pair sampling with at most 32 legal pairs per board; TEST used all legal pairs. Residual coordinates were standardized from TRAIN only.
+
+Sites:
+
+| Hook | Label |
+| --- | --- |
+| `blocks.5.hook_resid_post` | post5 |
+| `blocks.6.hook_resid_mid` | mid6 |
+| `blocks.6.hook_resid_post` | post6 |
+| `blocks.7.hook_resid_pre` | pre7 |
+| `blocks.7.hook_resid_mid` | mid7 |
+| `blocks.7.hook_resid_post` | post7 |
+
+The measured maximum absolute difference between `blocks.6.hook_resid_post` and `blocks.7.hook_resid_pre` was `0`, so post6 and pre7 are the same residual state for this comparison.
+
+### Key held-out results
+
+Held-out TEST contained `1474` boards with at least two legal moves, `1405` boards with at least four legal moves, and `66036` legal-vs-legal test pairs.
+
+| Site | Mean board pairwise accuracy | Top-1 model-preferred move | Mean Kendall tau | Mean final-logit regret |
+| --- | ---: | ---: | ---: | ---: |
+| post5 | 0.795622 | 0.540706 | 0.591243 | 0.019843 |
+| mid6 | 0.797657 | 0.546811 | 0.595314 | 0.018162 |
+| post6/pre7 | 0.840032 | 0.637720 | 0.680063 | 0.014438 |
+| mid7 | 0.842970 | 0.637720 | 0.685940 | 0.014277 |
+| post7 | 0.844220 | 0.641113 | 0.688440 | 0.014008 |
+
+The main transition is before Layer 7. From mid6 to post6/pre7, mean-board pairwise accuracy rises from `0.797657` to `0.840032`; top-1 model-preferred move accuracy rises from `0.546811` to `0.637720`; mean Kendall tau rises from `0.595314` to `0.680063`.
+
+Layer 7 adds only a small refinement under this probe:
+
+| Interval | Pairwise accuracy delta | Top-1 delta | Kendall tau delta | Regret delta |
+| --- | ---: | ---: | ---: | ---: |
+| pre7 -> mid7 | 0.002686 | -0.001357 | 0.005372 | -0.000285 |
+| mid7 -> post7 | 0.001250 | 0.003392 | 0.002500 | -0.000269 |
+| post6/pre7 -> post7 | 0.004188 | 0.003392 | 0.008376 | -0.000430 |
+
+### Baselines and controls
+
+The position-only square-bias baseline reached pairwise accuracy `0.668645` and top-1 accuracy `0.314111`, well below the residual probes. This controls for static coordinate, edge, corner, token-frequency, and board-square priors.
+
+The native/logit-lens readout baseline was weak before post7: pairwise accuracy was `0.513919` at post5, `0.511780` at mid6, `0.506506` at post6/pre7, and `0.498195` at mid7. At post7 it is `1.000000` by construction of the target. This shows that a trained linear decoder exposes the model's future legal-move preference earlier than the model's own final readout.
+
+Final-logit gap bins were defined on VALIDATION only. Post7 small-gap TEST pairwise accuracy was `0.658011`, so near-tied legal moves are harder but still above chance.
+
+### Visual figures
+
+The book copies three measured PNGs into `docs/figures/legal_move_preference/`:
+
+- `l7_preference_probe_site_progression.png`
+- `l7_preference_probe_example.png`
+- `l7_preference_neartie_example.png`
+
+In the board examples, the `pre7` column is also the post6/pre7 readout because post6 and pre7 were numerically identical. The large-gap example shows `F6` as rank 1 at post6/pre7, mid7, post7, and in the final legal logits. The near-tie example shows the final top two legal moves already ranked first and second at post6/pre7.
+
+### Most important interpretation
+
+This confirms that legal-vs-legal model-preference geometry is already strongly linearly decodable before Layer 7, especially after the mid6-to-post6 transition. Layer 7 slightly sharpens that geometry, but the larger jump occurs at MLP6's output boundary.
+
+### Claim boundary
+
+Supported: the model's eventual preference among legal moves is linearly decodable from post6/pre7 residual states, and this readout is much stronger than a position-only bias baseline.
+
+Not supported: engine-labeled move quality, a complete move-selection circuit, causal necessity of the learned probe directions, or proof that Layer 7 independently creates the preference representation from scratch.
+
+### Related notebook sections
+
+- `50. Does MLP6 make legal-square identity linearly explicit?`
+- `52. Does Layer 7 linearly encode preference among legal moves?`
+
+### Source and figures
+
+- Source repository: `https://github.com/diegovalverde/TransformerLens`
+- Branch: `othello-jspace-analysis`
+- Exact preference-probe commit: `cd6f523`
+- Notebook: `demos/Othello_GPT_Jacobian_Lens.ipynb`
+- Output directory: `demos/othello_jacobian_lens_outputs/l7_legal_move_preference_20260830_223054/`
+- TransformerLens notes: `docs/research/section52_l7_legal_move_preference_notes.md`
+- Book figure directory: `docs/figures/legal_move_preference/`
+
 ## 2026-08-30 - MLP6 makes direct legal-square identity linearly explicit
 
 ### Question
